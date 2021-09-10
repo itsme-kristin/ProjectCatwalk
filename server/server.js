@@ -10,12 +10,13 @@ const port = 3000;
 
 // app.all call for -everything-
 // https://app-hrsei-api.herokuapp.com/api/fec2/hr-atx/*
-app.all('/*', (req, res) => {
-  console.log(`recieving a ${req.method} request for ${req.url}`);
+// request /review /api/review
+app.all('/api/*', (req, res) => {
+  console.log(`recieving a ${req.method} request for ${req.url.slice(4)}`);
 
   config = {
     method: req.method,
-    url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-atx${req.url}`,
+    url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-atx${req.url.slice(4)}`,
     headers: {
       Authorization: AUTH.TOKEN
     }
@@ -43,7 +44,7 @@ app.all('/*', (req, res) => {
   .then((response) => {
     res.send(response.data)
   }).catch((err) => {
-    console.log('Error occurred');
+    console.log('Error occurred making the request');
     res.send(err);
   })
 });
