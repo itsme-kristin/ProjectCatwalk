@@ -23,7 +23,6 @@ app.all('/api/*', (req, res) => {
   }
 
   if (req.body) {
-    console.log(req.body);
     config['data'] = req.body;
   }
 
