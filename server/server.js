@@ -10,21 +10,8 @@ const port = 3000;
 
 // app.all call for -everything-
 // https://app-hrsei-api.herokuapp.com/api/fec2/hr-atx/*
-// request /review /api/review
 app.all('/api/*', (req, res) => {
   console.log(`recieving a ${req.method} request for ${req.url.slice(4)}`);
-
-  config = {
-    method: req.method,
-    url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-atx${req.url.slice(4)}`,
-    headers: {
-      Authorization: AUTH.TOKEN
-    }
-  }
-
-  if (req.body) {
-    config['data'] = req.body;
-  }
 
   // SAMPLE BODY DATA:
   // {
@@ -39,7 +26,14 @@ app.all('/api/*', (req, res) => {
   //   "characteristics": {}
   // }
 
-  axios(config)
+  axios({
+    method: req.method,
+    url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-atx${req.url.slice(4)}`,
+    data: req.body,
+    headers: {
+      Authorization: AUTH.TOKEN
+    }
+  })
   .then((response) => {
     res.send(response.data)
   }).catch((err) => {
