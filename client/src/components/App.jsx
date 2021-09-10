@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import RelatedProducts from './RelatedProducts.jsx';
 
 const App = () => {
   const [product, setProduct] = useState(null);
@@ -12,7 +13,12 @@ const App = () => {
   }, []);
 
   if (product) {
-    return <h1>{product.name}</h1>;
+    return (
+    <React.Fragment>
+      <h1>{product.name}</h1>
+      <RelatedProducts currentProduct={product}/>
+    </React.Fragment>
+    );
   }
   else {
     return <h1>Hi</h1>
