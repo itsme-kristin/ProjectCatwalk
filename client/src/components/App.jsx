@@ -3,7 +3,6 @@ import axios from 'axios';
 import RelatedProducts from './RelatedProducts.jsx';
 import YourOutfit from './YourOutfit.jsx';
 
-import Container from '@material-ui/core/Container';
 import Overview from './Overview.jsx';
 
 const App = () => {
