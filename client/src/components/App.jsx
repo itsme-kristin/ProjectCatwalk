@@ -3,6 +3,8 @@ import axios from 'axios';
 import RelatedProducts from './RelatedProducts.jsx';
 import YourOutfit from './YourOutfit.jsx';
 
+import Overview from './Overview.jsx';
+
 const App = () => {
   const [product, setProduct] = useState(null);
 
@@ -17,6 +19,7 @@ const App = () => {
     return (
     <React.Fragment>
       <h1>{product.name}</h1>
+      <Overview productInfo={product}/>
       <RelatedProducts currentProduct={product}/>
       <YourOutfit currentProduct={product}/>
     </React.Fragment>
