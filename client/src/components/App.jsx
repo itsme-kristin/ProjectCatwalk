@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import RelatedProducts from './RelatedProducts.jsx';
+import YourOutfit from './YourOutfit.jsx';
 
 import Container from '@material-ui/core/Container';
 import Overview from './Overview.jsx';
@@ -16,10 +18,12 @@ const App = () => {
 
   if (product) {
     return (
-      <div>
-        <h1>{product.name}</h1>
-        <Overview productInfo={product}/>
-      </div>
+    <React.Fragment>
+      <h1>{product.name}</h1>
+      <Overview productInfo={product}/>
+      <RelatedProducts currentProduct={product}/>
+      <YourOutfit currentProduct={product}/>
+    </React.Fragment>
     );
   }
   else {
