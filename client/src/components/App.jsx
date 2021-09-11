@@ -18,7 +18,7 @@ const App = () => {
     return (
       <div>
         <h1>{product.name}</h1>
-        <Overview />
+        <Overview productInfo={product}/>
       </div>
     );
   }

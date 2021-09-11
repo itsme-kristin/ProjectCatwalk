@@ -7,7 +7,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Button from '@material-ui/core/Button';
 
 const ProductDetails = () => {
-
+  // TEMPORARY STYLING
   var styles = {
     flexGrow: "1",
     border: "solid 1px black",
@@ -28,6 +28,7 @@ const ProductDetails = () => {
     height: "50px",
     border: "solid 1px black",
     borderRadius: "25px",
+    textAlign: "center",
   }
 
   return (
