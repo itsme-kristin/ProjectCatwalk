@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import RelatedProducts from './RelatedProducts.jsx';
-import ReviewTile from './ReviewTile.jsx';
+import ReviewList from './ReviewList.jsx';
 import YourOutfit from './YourOutfit.jsx';
 import Overview from './Overview.jsx';
 
@@ -26,7 +26,7 @@ const App = () => {
       <div>
         <br />
         Ratings & Reviews
-        <ReviewTile />
+        <ReviewList />
         <br />
       </div>
     </React.Fragment>
