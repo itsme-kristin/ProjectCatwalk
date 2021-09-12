@@ -26,7 +26,7 @@ const App = () => {
       <div>
         <br />
         Ratings & Reviews
-        <ReviewList />
+        <ReviewList currentProduct={product} />
         <br />
       </div>
     </React.Fragment>
