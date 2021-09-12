@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import RelatedProducts from './RelatedProducts.jsx';
+import ReviewTile from './ReviewTile.jsx';
 import YourOutfit from './YourOutfit.jsx';
-
 import Overview from './Overview.jsx';
+
 
 const App = () => {
   const [product, setProduct] = useState(null);
@@ -22,6 +23,12 @@ const App = () => {
       <Overview productInfo={product}/>
       <RelatedProducts currentProduct={product}/>
       <YourOutfit currentProduct={product}/>
+      <div>
+        <br />
+        Ratings & Reviews
+        <ReviewTile />
+        <br />
+      </div>
     </React.Fragment>
     );
   }
