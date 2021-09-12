@@ -22,13 +22,13 @@ const App = () => {
       <h1>{product.name}</h1>
       <Overview productInfo={product}/>
       <RelatedProducts currentProduct={product}/>
+      <YourOutfit currentProduct={product}/>
       <div>
         <br />
         Ratings & Reviews
         <ReviewTile />
         <br />
       </div>
-      <YourOutfit currentProduct={product}/>
     </React.Fragment>
     );
   }
