@@ -15,23 +15,24 @@ const useStyles = makeStyles((theme) => ({
 const ReviewTile = ({ review }) => {
 
   const classes = useStyles();
+  const recommend = review.recommend ? 'I recommend this product' : 'I do not recommend this product';
 
   return (
     <Grid className={classes.root} container spacing={3} direction="column">
       <Grid item xs={12} container justifyContent="space-between">
         <Grid item xs={6}>
-          <Rating name="quarter-rating-read" precision={0.25} readOnly />
+          <Rating name="read-only" value={review.rating} precision={0.25} readOnly />
         </Grid>
-        <Grid className={classes.user} item xs={6}>Username, Date</Grid>
+        <Grid className={classes.user} item xs={6}>{review.reviewer_name}, {review.date}</Grid>
       </Grid>
-      <Grid item xs={2}>
-        Summary
+      <Grid item xs={12}>
+        {review.summary}
       </Grid>
-      <Grid item xs={2}>
-        Body
+      <Grid item xs={12}>
+        {review.body}
       </Grid>
-      <Grid item xs={2}>
-        Recommend
+      <Grid item xs={12}>
+        {recommend}
       </Grid>
       <Grid item xs={12}>
         <Divider />
