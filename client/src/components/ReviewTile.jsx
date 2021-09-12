@@ -1,26 +1,41 @@
 import React from 'react';
-import { Grid } from '@material-ui/core';
+import { Grid, Divider} from '@material-ui/core';
+import Rating from '@material-ui/lab/Rating';
+import { makeStyles } from '@material-ui/core/styles';
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    maxWidth: '50%'
+  },
+  user: {
+    'text-align': 'right'
+  }
+}));
 
 const ReviewTile = ({ review }) => {
+
+  const classes = useStyles();
+
   return (
-    <Grid container spacing={3}>
-      <Grid item xs={3}>
-        Rating
-        <Grid item xs={12} sm container>
-          <Grid item xs container direction="column" spacing={2}>
-            <Grid item xs>
-              Summary
-            </Grid>
-            <Grid item xs>
-              Body
-            </Grid>
-            <Grid item xs>
-              Recommend
-            </Grid>
-          </Grid>
+    <Grid className={classes.root} container spacing={3} direction="column">
+      <Grid item xs={12} container justifyContent="space-between">
+        <Grid item xs={6}>
+          <Rating name="quarter-rating-read" precision={0.25} readOnly />
         </Grid>
-        </Grid>
-      <Grid item xs={3}>Username, Date</Grid>
+        <Grid className={classes.user} item xs={6}>Username, Date</Grid>
+      </Grid>
+      <Grid item xs={2}>
+        Summary
+      </Grid>
+      <Grid item xs={2}>
+        Body
+      </Grid>
+      <Grid item xs={2}>
+        Recommend
+      </Grid>
+      <Grid item xs={12}>
+        <Divider />
+      </Grid>
     </Grid>
   );
 };
