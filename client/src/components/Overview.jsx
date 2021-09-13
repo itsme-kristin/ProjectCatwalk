@@ -1,15 +1,17 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 
 import ProductDetails from './ProductDetails.jsx'
 import ImageGallery from './ImageGallery.jsx'
 
 import { makeStyles } from '@material-ui/core/styles';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 
 const useStyles = makeStyles({
   root: {
-    border: "dotted 1px grey",
+    // border: "dotted 1px grey", //component outline
   },
 
   prodOverview: {
@@ -17,25 +19,69 @@ const useStyles = makeStyles({
   }
 });
 
-const Overview = (props) => {
-  const classes = useStyles();
 
-  return (
-      <Grid className={classes.root} container direction="row" justifyContent="flex-start" alignItems="flex-start" >
-        <Grid item xs={7}>
-          <ImageGallery />
-        </Grid>
-        <Grid item xs={5}>
-          <ProductDetails />
-        </Grid>
+const Overview = ({ currentProduct }) => {
+  const classes = useStyles();
+  const [productStyles, setProductStyles] = useState([]);
+  const [styleIndex, setStyleIndex] = useState(0);
+
+  let productId = currentProduct.id
+
+  useEffect(() => {
+    axios.get(`/api/products/${productId}/styles`)
+    .then(({ data }) => {
+      setProductStyles(data.results)
+    }).catch((err) => {
+      console.log('Unable to retireve product overview details')
+    });
+  }, [productId])
+
+
+  if (productStyles.length === 0) {
+    return <CircularProgress />
+  }
+
+  const showDetails = () => {
+    let slogan = currentProduct.slogan;
+    let desc = currentProduct.description
+    if (!!slogan || !!desc) {
+      return (
         <Grid item xs={12} className={classes.prodOverview}>
           <Typography variant="h5" gutterBottom>
-            Product Overview/Description
+            {currentProduct.slogan}
           </Typography>
           <Typography variant="body1">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. A pellentesque sit amet porttitor eget. Commodo elit at imperdiet dui accumsan. Et leo duis ut diam quam nulla. Vitae ultricies leo integer malesuada. Diam volutpat commodo sed egestas egestas fringilla phasellus. Consectetur adipiscing elit duis tristique sollicitudin nibh sit amet. Nunc mattis enim ut tellus elementum sagittis vitae et. Vel turpis nunc eget lorem dolor sed viverra. Et malesuada fames ac turpis egestas maecenas pharetra convallis. Lorem sed risus ultricies tristique nulla aliquet enim tortor at. Ultricies mi quis hendrerit dolor magna eget est lorem.
+            {currentProduct.description}
           </Typography>
         </Grid>
+      )
+    } else {
+      return null
+    }
+  };
+
+  // console.log('index:', styleIndex, 'style:', productStyles[styleIndex]);
+
+  return (
+      <Grid
+        className={classes.root}
+        container
+        direction="row"
+        justifyContent="flex-start"
+        alignItems="flex-start"
+      >
+        <Grid item xs={7}>
+          <ImageGallery selectedStyle={productStyles[styleIndex].photos}/>
+        </Grid>
+        <Grid item xs={5}>
+          <ProductDetails
+            currentProduct={currentProduct}
+            productStyles={productStyles}
+            styleIndex={styleIndex}
+            changeStyle={setStyleIndex}
+          />
+        </Grid>
+        {showDetails()}
       </Grid>
   )
 }
