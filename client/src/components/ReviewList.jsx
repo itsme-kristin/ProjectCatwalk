@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { Button } from '@material-ui/core';
 import ReviewTile from './ReviewTile.jsx';
 
 // Will eventually map through reviews from API and render a review tile for each
@@ -21,6 +22,8 @@ const ReviewList = ({ currentProduct }) => {
   return (
     <div>
       {renderedReviews}
+      <br/>
+      <Button variant="outlined">More Reviews</Button>
     </div>
   );
 };
