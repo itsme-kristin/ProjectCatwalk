@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import moment from 'moment';
-import { Grid, Divider} from '@material-ui/core';
+import { Grid, Divider, Button } from '@material-ui/core';
 import Rating from '@material-ui/lab/Rating';
 import { makeStyles } from '@material-ui/core/styles';
 
@@ -10,15 +10,28 @@ const useStyles = makeStyles((theme) => ({
   },
   user: {
     'text-align': 'right'
+  },
+  response: {
+    'background-color': 'grey'
+  },
+  feedback: {
+    'padding': '9px 0px'
   }
 }));
 
 const ReviewTile = ({ review }) => {
+  const [feedback, setFeedback] = useState({ 'yes': 0, 'no': 0 });
 
   const classes = useStyles();
   const recommend = review.recommend ? 'I recommend this product' : null;
   const date = review.date.substring(0, 10);
   const formattedDate = moment(date, 'YYYY-MM-DD').format('MMMM D, YYYY');
+  const response = review.response ?
+    <div className={classes.response}>
+      <Grid item xs={12}>Response from seller:</Grid>
+      <Grid item xs={12}>{review.response}</Grid>
+    </div> :
+    null
 
   return (
     <Grid className={classes.root} container spacing={3} direction="column">
@@ -36,6 +49,16 @@ const ReviewTile = ({ review }) => {
       </Grid>
       <Grid item xs={12}>
         {recommend}
+      </Grid>
+      <Grid item xs={12} container direction="column" >
+        {response}
+      </Grid>
+      <Grid item xs={12} container>
+        <Grid className={classes.feedback} item xs={4}>
+          Was this helpful?
+        </Grid>
+        <Button>Yes ({feedback.yes})</Button>
+        <Button>No ({feedback.no})</Button>
       </Grid>
       <Grid item xs={12}>
         <Divider />
