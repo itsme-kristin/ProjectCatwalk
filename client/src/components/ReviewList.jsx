@@ -20,20 +20,20 @@ const ReviewList = ({ currentProduct }) => {
     return <ReviewTile key={index} review={review} />
   });
 
+  const showButton = renderedReviews.length < reviews.length ?
+    <Button
+      variant="outlined"
+      onClick={() => setNumOfReviews(numOfReviews + 2)}
+    >
+      More Reviews
+    </Button> :
+    null;
+
   return (
     <div>
       {renderedReviews}
       <br/>
-      <Button
-        variant="outlined"
-        onClick={() => {
-          if (renderedReviews.length < reviews.length) {
-            setNumOfReviews(numOfReviews + 2);
-          }
-        }}
-      >
-        More Reviews
-      </Button>
+      {showButton}
     </div>
   );
 };
