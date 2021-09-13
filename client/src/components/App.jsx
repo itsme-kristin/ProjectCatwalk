@@ -20,7 +20,7 @@ const App = () => {
     return (
     <React.Fragment>
       <h1>{product.name}</h1>
-      <Overview productInfo={product}/>
+      <Overview productId={product.id}/>
       <RelatedProducts currentProduct={product}/>
       <YourOutfit currentProduct={product}/>
       <div>
