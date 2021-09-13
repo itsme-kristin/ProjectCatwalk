@@ -27,10 +27,10 @@ const ReviewTile = ({ review }) => {
   const date = review.date.substring(0, 10);
   const formattedDate = moment(date, 'YYYY-MM-DD').format('MMMM D, YYYY');
   const response = review.response ?
-    <div className={classes.response}>
+    <Grid className={classes.response} item xs={12} container direction="column" >
       <Grid item xs={12}>Response from seller:</Grid>
       <Grid item xs={12}>{review.response}</Grid>
-    </div> :
+    </Grid> :
     null
 
   return (
@@ -50,9 +50,7 @@ const ReviewTile = ({ review }) => {
       <Grid item xs={12}>
         {recommend}
       </Grid>
-      <Grid item xs={12} container direction="column" >
-        {response}
-      </Grid>
+      {response}
       <Grid item xs={12} container>
         <Grid className={classes.feedback} item xs={4}>
           Was this helpful?
