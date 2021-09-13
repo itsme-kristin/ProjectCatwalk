@@ -14,16 +14,21 @@ const useStyles = makeStyles({
 });
 
 const StyleSelector = () => {
-const classes = useStyles();
+  const classes = useStyles();
 
-return (
-  <Grid container alignItems="center" className={classes.root} justifyContent="center">
-    <Typography variant="overline">
-      Styles Select Component
-    </Typography>
-  </Grid>
-)
+  return (
+    <Grid container alignItems="center" className={classes.root} justifyContent="center">
+      {
 
+      }
+      <Grid item xs={3}>
+
+      </Grid>
+      {/* <Typography variant="overline">
+        Styles Select Component
+      </Typography> */}
+    </Grid>
+  )
 }
 
 
