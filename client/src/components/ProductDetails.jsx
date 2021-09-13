@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
+import StyleSelector from './StyleSelector.jsx';
+
 import { makeStyles } from '@material-ui/core/styles';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Grid from '@material-ui/core/Grid';
@@ -85,7 +87,7 @@ const ProductDetails = ({currentProduct, productStyles, styleIndex, changeStyle}
     if (productStyles[styleIndex]["sale_price"]) {
       console.log('sale!')
       return (
-        <Grid container direction="row">
+        <Grid container>
           <Grid item xs={12}>
             <Typography className={classes.salePrice} variant="h6">
               {productStyles[styleIndex]["sale_price"]}
@@ -110,8 +112,8 @@ const ProductDetails = ({currentProduct, productStyles, styleIndex, changeStyle}
 
 
   return (
-    <Grid container className={classes.root} direction="column" justifyContent="flex-start" alignItems="stretch">
-      <Grid container direction="row" alignItems="center">
+    <Grid container className={classes.root} direction="column" alignItems="stretch">
+      <Grid container alignItems="center">
         <Rating name="avgProductRating" value={ratingsInfo.avgProductRating}  precision={0.25} readOnly />
         <Typography variant="caption" className={classes.reviewsLink}>
            Read all {ratingsInfo.totalRatings} reviews
@@ -124,12 +126,8 @@ const ProductDetails = ({currentProduct, productStyles, styleIndex, changeStyle}
         {currentProduct.name}
       </Typography>
       {displayPrice()}
-      <Grid container alignItems="center" className={classes.temp} justifyContent="center">
-        <Typography variant="overline">
-          Styles Select Component
-        </Typography>
-      </Grid>
-      <Grid container direction="row" justifyContent="flex-start" spacing={1}>
+       <StyleSelector productStyles={productStyles} styleIndex={styleIndex} changeStyle={changeStyle} />
+      <Grid container spacing={1}>
         <Grid item xs={8}>
           <TextField variant="outlined" defaultValue="Select Size" fullWidth></TextField>
         </Grid>
