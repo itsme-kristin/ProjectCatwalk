@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme) => ({
 const ReviewTile = ({ review }) => {
 
   const classes = useStyles();
-  const recommend = review.recommend ? 'I recommend this product' : 'I do not recommend this product';
+  const recommend = review.recommend ? 'I recommend this product' : null;
   const date = review.date.substring(0, 10);
   const formattedDate = moment(date, 'YYYY-MM-DD').format('MMMM D, YYYY');
 
