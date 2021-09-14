@@ -65,8 +65,6 @@ const getRatingInfo = (ratings) => {
   }
 };
 
-
-
 const ProductDetails = ({currentProduct, productStyles, styleIndex, changeStyle}) => {
   const classes = useStyles();
   const [ratingsInfo, setRatingsInfo] = useState(null)
