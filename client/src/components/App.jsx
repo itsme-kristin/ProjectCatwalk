@@ -5,7 +5,6 @@ import ReviewList from './ReviewList.jsx';
 import YourOutfit from './YourOutfit.jsx';
 import Overview from './Overview.jsx';
 
-
 const App = () => {
   const [product, setProduct] = useState(null);
 
@@ -18,7 +17,7 @@ const App = () => {
 
   if (product) {
     return (
-    <React.Fragment>
+      <React.Fragment>
       <h1>{product.name}</h1>
       <Overview productId={product.id}/>
       <RelatedProducts currentProduct={product}/>
@@ -29,7 +28,7 @@ const App = () => {
         <ReviewList currentProduct={product} />
         <br />
       </div>
-    </React.Fragment>
+      </React.Fragment>
     );
   }
   else {
