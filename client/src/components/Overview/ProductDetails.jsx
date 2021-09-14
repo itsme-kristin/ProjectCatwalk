@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
 import StyleSelector from './StyleSelector.jsx';
+import SocialMediaShare from './SocialMediaShare.jsx';
 
 import { makeStyles } from '@material-ui/core/styles';
 import CircularProgress from '@material-ui/core/CircularProgress';
@@ -131,13 +132,19 @@ const ProductDetails = ({currentProduct, productStyles, styleIndex, changeStyle}
         <Grid item xs={8}>
           <TextField variant="outlined" defaultValue="Select Size" fullWidth></TextField>
         </Grid>
-        <Grid item xs={2}>
-          <Select variant="outlined" label="Qty">
+        <Grid item xs={4}>
+          <Select variant="outlined" fullWidth>
             <MenuItem>1</MenuItem>
           </Select>
         </Grid>
-        <Grid item xs={12}>
-          <Button variant="contained" color="primary">Add to Cart</Button>
+        <Grid item xs={8}>
+          <Button variant="contained" color="primary" fullWidth>Add to Cart</Button>
+        </Grid>
+        <Grid item xs={3}>
+          <SocialMediaShare
+            currentProduct={currentProduct}
+            photoUrl={productStyles[styleIndex]["photos"][0]["thumbnail_url"]}
+          />
         </Grid>
       </Grid>
     </Grid>
