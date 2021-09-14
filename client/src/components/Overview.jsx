@@ -86,8 +86,6 @@ const Overview = ({ productId }) => {
     }
   };
 
-  // console.log('index:', styleIndex, 'style:', productStyles[styleIndex]);
-
   return (
       <Grid
         container
