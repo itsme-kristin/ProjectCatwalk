@@ -7,7 +7,7 @@ import FeedbackButton from './FeedbackButton.jsx';
 
 const useStyles = makeStyles(theme => ({
   root: {
-    maxWidth: '50%'
+    maxWidth: '75%'
   },
   user: {
     'text-align': 'right'

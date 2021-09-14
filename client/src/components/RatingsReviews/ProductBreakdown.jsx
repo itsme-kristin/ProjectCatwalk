@@ -7,7 +7,7 @@ const ProductBreakdown = ({ reviewData }) => {
 
     return (
       <Grid container spacing={1} direction="column">
-        <Grid item xs={6}>
+        <Grid item xs={12}>
           <Typography>
             Comfort
           </Typography>
@@ -19,7 +19,7 @@ const ProductBreakdown = ({ reviewData }) => {
             disabled
           />
         </Grid>
-        <Grid item xs={6}>
+        <Grid item xs={12}>
           <Typography>
             Fit
           </Typography>
@@ -31,7 +31,7 @@ const ProductBreakdown = ({ reviewData }) => {
             disabled
           />
         </Grid>
-        <Grid item xs={6}>
+        <Grid item xs={12}>
           <Typography>
             Length
           </Typography>
@@ -43,7 +43,7 @@ const ProductBreakdown = ({ reviewData }) => {
             disabled
           />
         </Grid>
-        <Grid item xs={6}>
+        <Grid item xs={12}>
           <Typography>
             Quality
           </Typography>

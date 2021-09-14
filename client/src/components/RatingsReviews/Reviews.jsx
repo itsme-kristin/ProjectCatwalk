@@ -20,11 +20,11 @@ const Reviews = ({ currentProduct }) => {
   return (
     <div>
       Ratings & Reviews
-      <Grid container spacing={0}>
-        <Grid item xs={4}>
+      <Grid container spacing={2}>
+        <Grid item xs={3}>
           <ProductBreakdown reviewData={reviewData} />
         </Grid>
-        <Grid item xs={8}>
+        <Grid item xs={9}>
           <ReviewList currentProduct={currentProduct} />
         </Grid>
       </Grid>
