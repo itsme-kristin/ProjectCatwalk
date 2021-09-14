@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import RelatedProducts from './RelatedProducts.jsx';
+import RelatedProducts from './RelatedProducts/RelatedProducts.jsx';
 import ReviewList from './RatingsReviews/ReviewList.jsx';
-import YourOutfit from './YourOutfit.jsx';
+import YourOutfit from './YourOutfit/YourOutfit.jsx';
 import Overview from './Overview/Overview.jsx';
 
 const App = () => {
