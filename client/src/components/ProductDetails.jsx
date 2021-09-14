@@ -28,6 +28,10 @@ const useStyles = makeStyles({
     textDecoration: "underline"
   },
 
+  price: {
+    minHeight: "63px"
+  },
+
   salePrice: {
     color: "red"
   },
@@ -36,9 +40,7 @@ const useStyles = makeStyles({
     textDecoration: "line-through",
   },
 
-  temp: {
-    minHeight: "200px",
-    border: "dotted 1px grey",
+  rating: {
     marginBottom: "20px"
   }
 })
@@ -53,9 +55,6 @@ const getRatingInfo = (ratings) => {
     total += ratingInt * ratingVal
     count += ratingVal
   }
-
-  console.log('avgRating:', (total / (count * 5)) * count);
-  console.log('totRatings:', count);
 
   return {
     avgProductRating: (total / (count * 5)) * count,
@@ -76,7 +75,7 @@ const ProductDetails = ({currentProduct, productStyles, styleIndex, changeStyle}
     }).catch((err) => {
       console.log('Unable to retrieve ratings info', err);
     })
-  }, [productId])
+  }, [currentProduct])
 
 
   if (ratingsInfo === null) {
@@ -85,9 +84,8 @@ const ProductDetails = ({currentProduct, productStyles, styleIndex, changeStyle}
 
   const displayPrice = () => {
     if (productStyles[styleIndex]["sale_price"]) {
-      console.log('sale!')
       return (
-        <Grid container>
+        <React.Fragment>
           <Grid item xs={12}>
             <Typography className={classes.salePrice} variant="h6">
               {productStyles[styleIndex]["sale_price"]}
@@ -98,22 +96,22 @@ const ProductDetails = ({currentProduct, productStyles, styleIndex, changeStyle}
             Original Price: <span className={classes.lineThrough}>{productStyles[styleIndex]["original_price"]}</span>
             </Typography>
           </Grid>
-        </Grid>
+        </React.Fragment>
       )
     } else {
       return (
-        <Typography variant="h6" gutterBottom>
-          {productStyles[styleIndex]["original_price"]}
-        </Typography>
+        <React.Fragment>
+          <Typography variant="h6" gutterBottom>
+            {productStyles[styleIndex]["original_price"]}
+          </Typography>
+        </React.Fragment>
       )
     }
   }
 
-
-
   return (
     <Grid container className={classes.root} direction="column" alignItems="stretch">
-      <Grid container alignItems="center">
+      <Grid container alignItems="center" className={classes.rating}>
         <Rating name="avgProductRating" value={ratingsInfo.avgProductRating}  precision={0.25} readOnly />
         <Typography variant="caption" className={classes.reviewsLink}>
            Read all {ratingsInfo.totalRatings} reviews
@@ -125,7 +123,9 @@ const ProductDetails = ({currentProduct, productStyles, styleIndex, changeStyle}
       <Typography className={classes.category} variant="h3" gutterBottom>
         {currentProduct.name}
       </Typography>
-      {displayPrice()}
+      <Grid container className={classes.price}>
+        {displayPrice()}
+      </Grid>
        <StyleSelector productStyles={productStyles} styleIndex={styleIndex} changeStyle={changeStyle} />
       <Grid container spacing={1}>
         <Grid item xs={8}>

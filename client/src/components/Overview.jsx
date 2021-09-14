@@ -28,10 +28,7 @@ const useStyles = makeStyles({
 
 const Overview = ({ productId }) => {
   const classes = useStyles();
-  const [productDetails, setProductDetails] = useState({
-    productInfo: {},
-    productStyles: [],
-  })
+  const [productDetails, setProductDetails] = useState(null)
   const [styleIndex, setStyleIndex] = useState(0);
 
   useEffect(() => {
@@ -39,19 +36,17 @@ const Overview = ({ productId }) => {
     axios.get(`/api/products/${productId}`)
     .then(({ data }) => {
       currentProductDetails["productInfo"] = data;
-      console.log('info', currentProductDetails["productInfo"])
       return axios.get(`/api/products/${productId}/styles`);
     }).then(({ data }) => {
       currentProductDetails["productStyles"] = data.results;
-      console.log('style', currentProductDetails["productStyles"])
       setProductDetails(currentProductDetails);
     }).catch((err) => {
-      console.log('Unable to retireve product details', err)
+      console.log('Unable to retireve product details')
     });
   }, [productId])
 
 
-  if (productDetails.productStyles.length === 0) {
+  if (productDetails === null) {
     return <CircularProgress />
   }
 
@@ -90,8 +85,6 @@ const Overview = ({ productId }) => {
       return null
     }
   };
-
-  // console.log('index:', styleIndex, 'style:', productStyles[styleIndex]);
 
   return (
       <Grid
