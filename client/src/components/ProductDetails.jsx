@@ -56,9 +56,6 @@ const getRatingInfo = (ratings) => {
     count += ratingVal
   }
 
-  console.log('avgRating:', (total / (count * 5)) * count);
-  console.log('totRatings:', count);
-
   return {
     avgProductRating: (total / (count * 5)) * count,
     totalRatings: count

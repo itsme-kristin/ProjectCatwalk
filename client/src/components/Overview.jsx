@@ -39,14 +39,12 @@ const Overview = ({ productId }) => {
     axios.get(`/api/products/${productId}`)
     .then(({ data }) => {
       currentProductDetails["productInfo"] = data;
-      console.log('info', currentProductDetails["productInfo"])
       return axios.get(`/api/products/${productId}/styles`);
     }).then(({ data }) => {
       currentProductDetails["productStyles"] = data.results;
-      console.log('style', currentProductDetails["productStyles"])
       setProductDetails(currentProductDetails);
     }).catch((err) => {
-      console.log('Unable to retireve product details', err)
+      console.log('Unable to retireve product details')
     });
   }, [productId])
 
