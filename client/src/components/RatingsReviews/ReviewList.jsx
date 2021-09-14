@@ -9,29 +9,33 @@ const ReviewList = ({ currentProduct }) => {
   const [numOfReviews, setNumOfReviews] = useState(2);
 
   useEffect(() => {
-    axios.get(`/api/reviews?product_id=${currentProduct.id}`)
+    axios
+      .get(`/api/reviews?product_id=${currentProduct.id}`)
       .then(({ data }) => {
         setReviews(data.results);
       });
-  }, [])
+  }, []);
 
-  const renderedReviews = [...reviews].slice(0, numOfReviews).map((review, index) => {
-    return <ReviewTile key={index} review={review} />
-  });
+  const renderedReviews = [...reviews]
+    .slice(0, numOfReviews)
+    .map((review, index) => {
+      return <ReviewTile key={index} review={review} />;
+    });
 
-  const showButton = renderedReviews.length < reviews.length ?
-    <Button
-      variant="outlined"
-      onClick={() => setNumOfReviews(numOfReviews + 2)}
-    >
-      More Reviews
-    </Button> :
-    null;
+  const showButton =
+    renderedReviews.length < reviews.length ? (
+      <Button
+        variant='outlined'
+        onClick={() => setNumOfReviews(numOfReviews + 2)}
+      >
+        More Reviews
+      </Button>
+    ) : null;
 
   return (
     <div>
       {renderedReviews}
-      <br/>
+      <br />
       {showButton}
     </div>
   );

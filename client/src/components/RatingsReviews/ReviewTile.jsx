@@ -42,7 +42,6 @@ const ReviewTile = ({ review }) => {
     </Grid>
   ) : null;
 
-
   return (
     <Grid className={classes.root} container spacing={3} direction='column'>
       <Grid item xs={12} container justifyContent='space-between'>
@@ -72,7 +71,10 @@ const ReviewTile = ({ review }) => {
         <Grid className={classes.feedback} item xs={4}>
           Was this helpful?
         </Grid>
-        <FeedbackButton helpfulness={review.helpfulness} id={review.review_id} />
+        <FeedbackButton
+          helpfulness={review.helpfulness}
+          id={review.review_id}
+        />
       </Grid>
       <Grid item xs={12}>
         <Divider />

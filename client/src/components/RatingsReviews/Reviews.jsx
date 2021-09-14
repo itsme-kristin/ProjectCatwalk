@@ -5,15 +5,16 @@ import ReviewList from './ReviewList.jsx';
 import ProductBreakdown from './ProductBreakdown.jsx';
 
 const Reviews = ({ currentProduct }) => {
-  const [reviewData, setReviewData] = useState(null)
+  const [reviewData, setReviewData] = useState(null);
 
   useEffect(() => {
-    axios.get(`/api/reviews/meta?product_id=${currentProduct.id}`)
+    axios
+      .get(`/api/reviews/meta?product_id=${currentProduct.id}`)
       .then(({ data }) => {
         setReviewData(data);
       })
       .catch(() => {
-        console.log('error getting review metadata')
+        console.log('error getting review metadata');
       });
   }, []);
 
@@ -29,7 +30,7 @@ const Reviews = ({ currentProduct }) => {
         </Grid>
       </Grid>
     </div>
-  )
-}
+  );
+};
 
 export default Reviews;
