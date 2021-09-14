@@ -28,7 +28,7 @@ const AddOutfitButton = () => {
       <Card className={classes.root} variant="outlined">
         <CardContent>
           <Typography className={classes.title} gutterBottom>
-            I am an Outfit Button! I will have a button attached!
+            I am an Outfit Button! I will have a button!
           </Typography>
         </CardContent>
       </Card>
