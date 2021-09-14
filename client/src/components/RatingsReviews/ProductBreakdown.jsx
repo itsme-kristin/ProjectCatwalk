@@ -12,7 +12,7 @@ const ProductBreakdown = ({ reviewData }) => {
             Comfort
           </Typography>
           <Slider
-            value={Comfort.value}
+            value={Number(Comfort.value)}
             marks
             min={1}
             max={5}
@@ -24,7 +24,7 @@ const ProductBreakdown = ({ reviewData }) => {
             Fit
           </Typography>
           <Slider
-            value={Fit.value}
+            value={Number(Fit.value)}
             marks
             min={1}
             max={5}
@@ -36,7 +36,7 @@ const ProductBreakdown = ({ reviewData }) => {
             Length
           </Typography>
           <Slider
-            value={Length.value}
+            value={Number(Length.value)}
             marks
             min={1}
             max={5}
@@ -48,7 +48,7 @@ const ProductBreakdown = ({ reviewData }) => {
             Quality
           </Typography>
           <Slider
-            value={Quality.value}
+            value={Number(Quality.value)}
             marks
             min={1}
             max={5}
