@@ -26,7 +26,7 @@ const getRatingInfo = (ratings) => {
 
 /** READ ME **
  *  you need to set a useState constant on the Componenet where you're calling
- *  AverageRating From: like so:
+ *  AverageRating from... like so:
  *
  *  const [ratingsInfo, setRatingsInfo] = useState({
  *    avgProductRating: 0,
