@@ -28,10 +28,7 @@ const useStyles = makeStyles({
 
 const Overview = ({ productId }) => {
   const classes = useStyles();
-  const [productDetails, setProductDetails] = useState({
-    productInfo: {},
-    productStyles: [],
-  })
+  const [productDetails, setProductDetails] = useState(null)
   const [styleIndex, setStyleIndex] = useState(0);
 
   useEffect(() => {
@@ -49,7 +46,7 @@ const Overview = ({ productId }) => {
   }, [productId])
 
 
-  if (productDetails.productStyles.length === 0) {
+  if (productDetails === null) {
     return <CircularProgress />
   }
 
