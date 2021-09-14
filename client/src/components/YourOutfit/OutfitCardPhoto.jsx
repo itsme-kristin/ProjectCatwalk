@@ -14,7 +14,7 @@ const OutfitCardPhoto = (props) => {
   const classes = useStyles();
 
   return (
-    <div>I am an outfit photo! Yay!</div>
+    <div>I am an outfit photo!</div>
   )
 }
 
