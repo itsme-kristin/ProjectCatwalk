@@ -4,23 +4,28 @@ import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions'
 import CardContent from '@material-ui/core/CardContent';
-import Button from '@material-ui/core/Button';
+import Icon from '@material-ui/core/Icon';
 import Typography from '@material-ui/core/Typography';
+import OutfitCard from './OutfitCard.jsx';
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   root: {
-    minWidth: 275,
+    '& > span': {
+      margin: theme.spacing(2),
+    },
+    maxWidth: 230,
+    maxHeight: 350,
   },
   title: {
-    fontSize: 14,
+    fontSize: 30,
   },
   pos: {
     marginBottom: 12,
   }
-});
+}));
 
 
-const AddOutfitButton = () => {
+const AddOutfitButton = (props) => {
   const classes = useStyles();
 
   return (
@@ -28,8 +33,11 @@ const AddOutfitButton = () => {
       <Card className={classes.root} variant="outlined">
         <CardContent>
           <Typography className={classes.title} gutterBottom>
-            I am an Outfit Button! I will have a button!
+            Add to Your Outfit
           </Typography>
+          <div className={classes.root}>
+            <Icon style={{ fontSize: 50}}>add_circle</Icon>
+          </div>
         </CardContent>
       </Card>
     </React.Fragment>
