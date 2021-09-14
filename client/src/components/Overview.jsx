@@ -28,7 +28,10 @@ const useStyles = makeStyles({
 
 const Overview = ({ productId }) => {
   const classes = useStyles();
-  const [productDetails, setProductDetails] = useState(null)
+  const [productDetails, setProductDetails] = useState({
+    productInfo: {},
+    productStyles: [],
+  })
   const [styleIndex, setStyleIndex] = useState(0);
 
   useEffect(() => {
