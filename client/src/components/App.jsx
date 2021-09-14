@@ -3,7 +3,7 @@ import axios from 'axios';
 import RelatedProducts from './RelatedProducts.jsx';
 import ReviewList from './ReviewList.jsx';
 import YourOutfit from './YourOutfit.jsx';
-import Overview from './Overview.jsx';
+import Overview from './Overview/Overview.jsx';
 
 const App = () => {
   const [product, setProduct] = useState(null);
