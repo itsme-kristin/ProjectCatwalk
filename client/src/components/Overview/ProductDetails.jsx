@@ -137,10 +137,10 @@ const ProductDetails = ({currentProduct, productStyles, styleIndex, changeStyle}
             <MenuItem>1</MenuItem>
           </Select>
         </Grid>
-        <Grid item xs={8}>
+        <Grid item xs={12} md={8}>
           <Button variant="contained" color="primary" fullWidth>Add to Cart</Button>
         </Grid>
-        <Grid item xs={3}>
+        <Grid item xs={12} md={3}>
           <SocialMediaShare
             currentProduct={currentProduct}
             photoUrl={productStyles[styleIndex]["photos"][0]["thumbnail_url"]}
