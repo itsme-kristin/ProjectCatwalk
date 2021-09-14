@@ -13,7 +13,6 @@ const ReviewList = ({ currentProduct }) => {
       .then(({ data }) => {
         setReviews(data.results);
       });
-
   }, [])
 
   const renderedReviews = [...reviews].slice(0, numOfReviews).map((review, index) => {
