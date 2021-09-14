@@ -75,7 +75,7 @@ const ProductDetails = ({currentProduct, productStyles, styleIndex, changeStyle}
     }).catch((err) => {
       console.log('Unable to retrieve ratings info', err);
     })
-  }, [productId])
+  }, [currentProduct])
 
 
   if (ratingsInfo === null) {
@@ -84,7 +84,6 @@ const ProductDetails = ({currentProduct, productStyles, styleIndex, changeStyle}
 
   const displayPrice = () => {
     if (productStyles[styleIndex]["sale_price"]) {
-      console.log('sale!')
       return (
         <React.Fragment>
           <Grid item xs={12}>
