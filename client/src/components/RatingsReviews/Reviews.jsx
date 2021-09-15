@@ -44,7 +44,6 @@ const Reviews = ({ currentProduct }) => {
 
   const filterReviews = rating => {
     const ratingIndex = filters.indexOf(rating);
-    console.log(ratingIndex);
     if (ratingIndex >= 0) {
       const updatedFilters = [...filters]
       updatedFilters.splice(ratingIndex, 1)
