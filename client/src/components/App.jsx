@@ -7,6 +7,7 @@ import Overview from './Overview/Overview.jsx';
 
 const App = () => {
   const [product, setProduct] = useState(null);
+  var hardCode = {"id":38322,"campus":"hr-atx","name":"Camo Onesie","slogan":"Blend in to your crowd","description":"The So Fatigues will wake you up and fit you in. This high energy camo will have you blending in to even the wildest surroundings.","category":"Jackets","default_price":"140.00","created_at":"2021-08-13T14:38:00.907Z","updated_at":"2021-08-13T14:38:00.907Z"};
   const [outfitList, setOutfitList] = useState([]);
 
   useEffect(() => {
