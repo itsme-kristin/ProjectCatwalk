@@ -3,6 +3,7 @@ import axios from 'axios';
 import { Grid } from '@material-ui/core';
 import ReviewList from './ReviewList.jsx';
 import ProductBreakdown from './ProductBreakdown.jsx';
+import RatingsBreakdown from './RatingsBreakdown.jsx';
 
 const Reviews = ({ currentProduct }) => {
   const [reviewData, setReviewData] = useState(null);
@@ -22,8 +23,13 @@ const Reviews = ({ currentProduct }) => {
     <div>
       Ratings & Reviews
       <Grid container spacing={2}>
-        <Grid item xs={3}>
-          <ProductBreakdown reviewData={reviewData} />
+        <Grid item xs={3} container>
+          <Grid item xs={12}>
+            <RatingsBreakdown currentProduct={currentProduct} reviewData={reviewData} />
+          </Grid>
+          <Grid item xs={12}>
+            <ProductBreakdown reviewData={reviewData} />
+          </Grid>
         </Grid>
         <Grid item xs={9}>
           <ReviewList currentProduct={currentProduct} />
