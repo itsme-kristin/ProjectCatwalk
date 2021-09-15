@@ -3,6 +3,7 @@ import axios from 'axios';
 
 import StyleSelector from './StyleSelector.jsx';
 import SocialMediaShare from './SocialMediaShare.jsx';
+import AverageRating from '../AverageRating.jsx';
 
 import { makeStyles } from '@material-ui/core/styles';
 import CircularProgress from '@material-ui/core/CircularProgress';
@@ -46,42 +47,13 @@ const useStyles = makeStyles({
   }
 })
 
-const getRatingInfo = (ratings) => {
-  let total = 0;
-  let count = 0;
-
-  for (let rating in ratings) {
-    let ratingInt = parseInt(rating)
-    let ratingVal = parseInt(ratings[rating])
-    total += ratingInt * ratingVal
-    count += ratingVal
-  }
-
-  return {
-    avgProductRating: (total / (count * 5)) * count,
-    totalRatings: count
-  }
-};
-
 const ProductDetails = ({currentProduct, productStyles, styleIndex, changeStyle}) => {
   const classes = useStyles();
-  const [ratingsInfo, setRatingsInfo] = useState(null)
+  const [ratingsInfo, setRatingsInfo] = useState({
+    avgProductRating: 0,
+    totalRatings: 0
+  })
 
-  let productId = currentProduct.id;
-
-  useEffect(() => {
-    axios.get(`api/reviews/meta?product_id=${productId}`)
-    .then(({ data }) => {
-      setRatingsInfo(getRatingInfo(data.ratings))
-    }).catch((err) => {
-      console.log('Unable to retrieve ratings info', err);
-    })
-  }, [currentProduct])
-
-
-  if (ratingsInfo === null) {
-    return <CircularProgress />
-  }
 
   const displayPrice = () => {
     if (productStyles[styleIndex]["sale_price"]) {
@@ -113,7 +85,11 @@ const ProductDetails = ({currentProduct, productStyles, styleIndex, changeStyle}
   return (
     <Grid container className={classes.root} direction="column" alignItems="stretch">
       <Grid container alignItems="center" className={classes.rating}>
-        <Rating name="avgProductRating" value={ratingsInfo.avgProductRating}  precision={0.25} readOnly />
+        <AverageRating
+          productId={currentProduct.id}
+          avgProductRating={ratingsInfo.avgProductRating}
+          setRatingsInfo={setRatingsInfo}
+        />
         <Typography variant="caption" className={classes.reviewsLink}>
            Read all {ratingsInfo.totalRatings} reviews
         </Typography>

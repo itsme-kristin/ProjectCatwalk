@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
+import CardMedia from '@material-ui/core/CardMedia';
 import CardContent from '@material-ui/core/CardContent';
-import axios from 'axios';
-import OutfitCardPhoto from './OutfitCardPhoto.jsx';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -20,11 +20,20 @@ const useStyles = makeStyles((theme) => ({
 
 const OutfitCard = (props) => {
   const [outfitCardInfo, setOutfitCardInfo] = useState(null);
+  const [outfitCardPhoto, setOutfitCardPhoto] = useState(null);
   const classes = useStyles();
 
+  const getPhoto = () => {
+    axios.get(`/api/products/${props.productId}/styles`)
+      .then(stylesInfo => {
+        setOutfitCardPhoto(stylesInfo.data.results[0]);
+      })
+      .catch(err => {
+        console.info('There was an error getting product photo from the server.');
+      });
+  }
 
-
-  const getOutfitInfo = () => {
+  const getProductInfo = () => {
     axios.get(`/api/products/${props.productId}`)
       .then(productInfo => {
         setOutfitCardInfo(productInfo.data);
@@ -35,15 +44,24 @@ const OutfitCard = (props) => {
   }
 
   useEffect(() => {
-    getOutfitInfo();
+    getPhoto();
+    getProductInfo();
   }, []);
 
 
-  return productCardInfo && (
+  return outfitCardPhoto && outfitCardInfo && (
     <React.Fragment>
       <Card className={classes.root}>
+        <CardMedia
+          component='div'
+          className={classes.media}
+          image={outfitCardPhoto.photos[0].thumbnail_url || ''}
+          title={outfitCardInfo.name}
+        />
         <CardContent>
-          <div>I am an Outfit card!</div>
+          <div>{outfitCardInfo.category}</div>
+          <h3>{outfitCardInfo.name}</h3>
+          <div>${outfitCardInfo.default_price}</div>
           <div>Star Rating</div>
         </CardContent>
       </Card>
