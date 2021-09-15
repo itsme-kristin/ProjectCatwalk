@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
 import StyleSelector from './StyleSelector.jsx';
+import SocialMediaShare from './SocialMediaShare.jsx';
+import AverageRating from '../AverageRating.jsx';
 
 import { makeStyles } from '@material-ui/core/styles';
 import CircularProgress from '@material-ui/core/CircularProgress';
@@ -45,42 +47,13 @@ const useStyles = makeStyles({
   }
 })
 
-const getRatingInfo = (ratings) => {
-  let total = 0;
-  let count = 0;
-
-  for (let rating in ratings) {
-    let ratingInt = parseInt(rating)
-    let ratingVal = parseInt(ratings[rating])
-    total += ratingInt * ratingVal
-    count += ratingVal
-  }
-
-  return {
-    avgProductRating: (total / (count * 5)) * count,
-    totalRatings: count
-  }
-};
-
 const ProductDetails = ({currentProduct, productStyles, styleIndex, changeStyle}) => {
   const classes = useStyles();
-  const [ratingsInfo, setRatingsInfo] = useState(null)
+  const [ratingsInfo, setRatingsInfo] = useState({
+    avgProductRating: 0,
+    totalRatings: 0
+  })
 
-  let productId = currentProduct.id;
-
-  useEffect(() => {
-    axios.get(`api/reviews/meta?product_id=${productId}`)
-    .then(({ data }) => {
-      setRatingsInfo(getRatingInfo(data.ratings))
-    }).catch((err) => {
-      console.log('Unable to retrieve ratings info', err);
-    })
-  }, [currentProduct])
-
-
-  if (ratingsInfo === null) {
-    return <CircularProgress />
-  }
 
   const displayPrice = () => {
     if (productStyles[styleIndex]["sale_price"]) {
@@ -112,7 +85,11 @@ const ProductDetails = ({currentProduct, productStyles, styleIndex, changeStyle}
   return (
     <Grid container className={classes.root} direction="column" alignItems="stretch">
       <Grid container alignItems="center" className={classes.rating}>
-        <Rating name="avgProductRating" value={ratingsInfo.avgProductRating}  precision={0.25} readOnly />
+        <AverageRating
+          productId={currentProduct.id}
+          avgProductRating={ratingsInfo.avgProductRating}
+          setRatingsInfo={setRatingsInfo}
+        />
         <Typography variant="caption" className={classes.reviewsLink}>
            Read all {ratingsInfo.totalRatings} reviews
         </Typography>
@@ -131,13 +108,19 @@ const ProductDetails = ({currentProduct, productStyles, styleIndex, changeStyle}
         <Grid item xs={8}>
           <TextField variant="outlined" defaultValue="Select Size" fullWidth></TextField>
         </Grid>
-        <Grid item xs={2}>
-          <Select variant="outlined" label="Qty">
+        <Grid item xs={4}>
+          <Select variant="outlined" fullWidth>
             <MenuItem>1</MenuItem>
           </Select>
         </Grid>
-        <Grid item xs={12}>
-          <Button variant="contained" color="primary">Add to Cart</Button>
+        <Grid item xs={12} md={8}>
+          <Button variant="contained" color="primary" fullWidth>Add to Cart</Button>
+        </Grid>
+        <Grid item xs={12} md={3}>
+          <SocialMediaShare
+            currentProduct={currentProduct}
+            photoUrl={productStyles[styleIndex]["photos"][0]["thumbnail_url"]}
+          />
         </Grid>
       </Grid>
     </Grid>

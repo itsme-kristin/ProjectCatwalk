@@ -32,6 +32,7 @@
     "react": "^16.4",
     "react-dom": "^16.4",
     "react-items-carousel": "^2.8.0",
+    "react-share": "^4.4.0",
     "react-simply-carousel": "^5.1.3"
   }
 }
