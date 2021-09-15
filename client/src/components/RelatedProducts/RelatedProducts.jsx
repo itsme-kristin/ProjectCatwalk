@@ -35,7 +35,7 @@ const RelatedProducts = (props) => {
           chevronWidth={chevronWidth}
           >
             {relatedProductsList.map((product, index) => {
-              return <ProductCard productId={product} key={index}/>
+              return <ProductCard productId={product} key={index} setProduct={props.setProduct}/>
             })}
         </ItemsCarousel>
       </div>

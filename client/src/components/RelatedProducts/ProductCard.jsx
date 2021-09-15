@@ -43,6 +43,10 @@ const ProductCard = (props) => {
       });
   }
 
+  const handleProductCardClick = () => {
+    props.setProduct(productCardInfo);
+  }
+
   useEffect(() => {
     getPhoto();
     getProductInfo();
@@ -51,7 +55,7 @@ const ProductCard = (props) => {
 
   return productCardPhoto && productCardInfo && (
     <React.Fragment>
-      <Card className={classes.root}>
+      <Card className={classes.root} onClick={() => handleProductCardClick()}>
         <CardMedia
           component='div'
           className={classes.media}

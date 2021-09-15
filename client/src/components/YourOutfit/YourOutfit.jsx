@@ -22,8 +22,8 @@ const YourOutfit = (props) => {
           outsideChevron
           chevronWidth={chevronWidth}
         >
-          <AddOutfitButton outfitList={props.outfitList} setOutfitList={props.setOutfitList} currentProduct={props.currentProduct} />
-          {props.outfitList ? props.outfitList.map((product, index) => { return <OutfitCard product={product} key={index} />}) : null
+          <AddOutfitButton outfitList={props.outfitList}  setOutfitList={props.setOutfitList} currentProduct={props.currentProduct} />
+          {(props.outfitList.length !== 0) ? props.outfitList.map((product, index) => { return <OutfitCard product={product} key={index}/>}) : null
           }
         </ItemsCarousel>
       </div>
