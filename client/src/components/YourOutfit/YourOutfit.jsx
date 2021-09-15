@@ -9,17 +9,18 @@ const YourOutfit = (props) => {
   const chevronWidth = 40;
 
   const handleAddOutfitClick = () => {
-    const newOutfitList = props.outfitList.slice();
-    if (newOutfitList.length === 0) {
-      newOutfitList.push(props.currentProduct);
-      props.setOutfitList(newOutfitList);
+    if (props.outfitList.length === 0) {
+      props.setOutfitList([props.currentProduct]);
+      return;
     }
+    const newOutfitList = props.outfitList.slice();
     for (var i = 0; i < newOutfitList.length; i++) {
       var current = newOutfitList[i];
-      if (current.id !== props.currentProduct.id) {
-        newOutfitList.push(props.currentProduct);
+      if (current.id === props.currentProduct.id) {
+        return;
       }
     }
+    newOutfitList.push(props.currentProduct);
     props.setOutfitList(newOutfitList);
   }
   return (
