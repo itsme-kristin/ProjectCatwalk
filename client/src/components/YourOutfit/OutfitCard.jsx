@@ -24,7 +24,7 @@ const OutfitCard = (props) => {
   const classes = useStyles();
 
   const getPhoto = () => {
-    axios.get(`/api/products/${props.productId}/styles`)
+    axios.get(`/api/products/${props.product.id}/styles`)
       .then(stylesInfo => {
         setOutfitCardPhoto(stylesInfo.data.results[0]);
       })
@@ -34,7 +34,7 @@ const OutfitCard = (props) => {
   }
 
   const getProductInfo = () => {
-    axios.get(`/api/products/${props.productId}`)
+    axios.get(`/api/products/${props.product.id}`)
       .then(productInfo => {
         setOutfitCardInfo(productInfo.data);
       })
