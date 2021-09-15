@@ -9,15 +9,15 @@ const useStyles = makeStyles({
   }
 });
 
-const RatingsBreakdown = ({ currentProduct, reviewData }) => {
+const RatingsBreakdown = ({ currentProduct, reviewData, filterReviews }) => {
   const [ratingsInfo, setRatingsInfo] = useState({
     avgProductRating: 0,
     totalRatings: 0
   });
   const classes = useStyles();
 
-  const handleClick = e => {
-    e.preventDefault();
+  const handleClick = (rating) => {
+    filterReviews(rating)
   };
 
   if (reviewData) {
@@ -44,7 +44,7 @@ const RatingsBreakdown = ({ currentProduct, reviewData }) => {
                 component='button'
                 underline='always'
                 color='inherit'
-                onClick={handleClick}
+                onClick={() => handleClick(5)}
               >
                 5 Stars
               </Link>
@@ -66,7 +66,7 @@ const RatingsBreakdown = ({ currentProduct, reviewData }) => {
                 component='button'
                 underline='always'
                 color='inherit'
-                onClick={handleClick}
+                onClick={() => handleClick(4)}
               >
                 4 Stars
               </Link>
@@ -88,7 +88,7 @@ const RatingsBreakdown = ({ currentProduct, reviewData }) => {
                 component='button'
                 underline='always'
                 color='inherit'
-                onClick={handleClick}
+                onClick={() => handleClick(3)}
               >
                 3 Stars
               </Link>
@@ -110,7 +110,7 @@ const RatingsBreakdown = ({ currentProduct, reviewData }) => {
                 component='button'
                 underline='always'
                 color='inherit'
-                onClick={handleClick}
+                onClick={() => handleClick(2)}
               >
                 2 Stars
               </Link>
@@ -132,7 +132,7 @@ const RatingsBreakdown = ({ currentProduct, reviewData }) => {
                 component='button'
                 underline='always'
                 color='inherit'
-                onClick={handleClick}
+                onClick={() => handleClick(1)}
               >
                 1 Star
               </Link>

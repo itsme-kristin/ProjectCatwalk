@@ -7,6 +7,8 @@ import RatingsBreakdown from './RatingsBreakdown.jsx';
 
 const Reviews = ({ currentProduct }) => {
   const [reviews, setReviews] = useState([]);
+  const [filteredReviews, setFilteredReviews] = useState([]);
+  const [filters, setFilters] = useState([]);
   const [reviewData, setReviewData] = useState(null);
 
   useEffect(() => {
@@ -14,6 +16,7 @@ const Reviews = ({ currentProduct }) => {
       .get(`/api/reviews?product_id=${currentProduct.id}`)
       .then(({ data }) => {
         setReviews(data.results);
+        setFilteredReviews(data.results);
         axios
           .get(`/api/reviews/meta?product_id=${currentProduct.id}`)
           .then(({ data }) => {
@@ -28,11 +31,27 @@ const Reviews = ({ currentProduct }) => {
       });
   }, []);
 
+  useEffect(() => {
+    const reviewsToRender = [...reviews].filter(review => {
+      if (filters.length > 0) {
+        return filters.includes(review.rating);
+      } else {
+        return review;
+      }
+    });
+    setFilteredReviews(reviewsToRender);
+  }, [filters]);
+
   const filterReviews = rating => {
-    const filteredReviews = [...reviews].filter(
-      review => review.rating === rating
-    );
-    setReviews(filteredReviews);
+    const ratingIndex = filters.indexOf(rating);
+    console.log(ratingIndex);
+    if (ratingIndex >= 0) {
+      const updatedFilters = [...filters]
+      updatedFilters.splice(ratingIndex, 1)
+      setFilters(updatedFilters);
+    } else {
+      setFilters([...filters, rating]);
+    }
   };
 
   return (
@@ -52,10 +71,7 @@ const Reviews = ({ currentProduct }) => {
           </Grid>
         </Grid>
         <Grid item xs={9}>
-          <ReviewList
-            reviews={reviews}
-            currentProduct={currentProduct}
-          />
+          <ReviewList reviews={filteredReviews} currentProduct={currentProduct} />
         </Grid>
       </Grid>
     </div>
