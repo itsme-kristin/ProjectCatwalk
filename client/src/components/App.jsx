@@ -7,6 +7,7 @@ import Overview from './Overview/Overview.jsx';
 
 const App = () => {
   const [product, setProduct] = useState(null);
+  const [outfitList, setOutfitList] = useState([]);
 
   useEffect(() => {
     axios.get('/api/products')
@@ -21,7 +22,7 @@ const App = () => {
       <h1>{product.name}</h1>
       <Overview productId={product.id}/>
       <RelatedProducts currentProduct={product}/>
-      <YourOutfit currentProduct={product}/>
+      <YourOutfit currentProduct={product} outfitList={outfitList} setOutfitList={setOutfitList}/>
       <Reviews currentProduct={product} />
       </React.Fragment>
     );

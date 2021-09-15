@@ -4,9 +4,9 @@ import AddOutfitButton from './AddOutfitButton.jsx';
 import OutfitCard from './OutfitCard.jsx';
 
 const YourOutfit = (props) => {
-  const [outfitList, setOutfitList] = useState([]);
   const [activeItemIndex, setActiveItemIndex] = useState(0);
   const chevronWidth = 40;
+
 
   return (
     <React.Fragment>
@@ -22,8 +22,8 @@ const YourOutfit = (props) => {
           outsideChevron
           chevronWidth={chevronWidth}
         >
-          <AddOutfitButton currentProduct={props.currentProduct} />
-          {outfitList ? outfitList.map((product, index) => { return <OutfitCard productID={product} key={index} />}) : null
+          <AddOutfitButton outfitList={props.outfitList} setOutfitList={props.setOutfitList} currentProduct={props.currentProduct} />
+          {props.outfitList ? props.outfitList.map((product, index) => { return <OutfitCard product={product} key={index} />}) : null
           }
         </ItemsCarousel>
       </div>
