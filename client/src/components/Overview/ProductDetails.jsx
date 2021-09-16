@@ -49,11 +49,32 @@ const useStyles = makeStyles({
 
 const ProductDetails = ({currentProduct, productStyles, styleIndex, changeStyle}) => {
   const classes = useStyles();
+  const [stock, setStock] = useState([]);
+  const [skuIndex, setSkuIndex] = useState('');
+  const [selectedSku, setSelectedSku] = useState(null);
+  const [selectedQty, setSelectedQty] = useState(null);
   const [ratingsInfo, setRatingsInfo] = useState({
     avgProductRating: 0,
     totalRatings: 0
   })
 
+  useEffect(() => {
+    var skus = {...productStyles[styleIndex]["skus"]};
+    var availableStock = [];
+    for (var sku in skus) {
+      if (skus[sku].quantity !== 0) {
+        availableStock.push({
+          sku_id: sku,
+          size: skus[sku].size,
+          qty: skus[sku].quantity
+        })
+      }
+    }
+    setStock(availableStock);
+    setSkuIndex('');
+    setSelectedSku(null);
+    setSelectedQty(null);
+  }, [styleIndex])
 
   const displayPrice = () => {
     if (productStyles[styleIndex]["sale_price"]) {
@@ -82,6 +103,90 @@ const ProductDetails = ({currentProduct, productStyles, styleIndex, changeStyle}
     }
   }
 
+  const sizeChange = (e) => {
+    if (e.target.value !== '') {
+      setSelectedSku(stock[e.target.value]["sku_id"])
+      setSelectedQty(1);
+    } else {
+      setSelectedSku(null)
+      setSelectedQty(null)
+    }
+    setSkuIndex(e.target.value);
+  }
+
+  const sizeSelection = () => {
+    if (stock.length === 0) {
+      return null
+    } else {
+      return (
+        <Select labelId="size" id="selectSize" value={skuIndex} displayEmpty={true}variant="outlined" fullWidth onChange={sizeChange}>
+          <MenuItem value=''>Select Size</MenuItem>
+          {stock.map(({ size }, skuIndex) => {
+            return <MenuItem value={skuIndex} key={skuIndex}>{size}</MenuItem>
+          })}
+        </Select>
+      )
+    }
+  };
+
+  const qtyChange = (e) => {
+    setSelectedQty(e.target.value)
+  }
+
+  const qtySelection = () => {
+    if (stock.length === 0) {
+      return null
+    }
+    if (skuIndex === '') {
+      return (
+        <Select labelId="qty" id="selectQty" value="" displayEmpty={true} variant="outlined" fullWidth disabled>
+          <MenuItem value="">-</MenuItem>
+        </Select>
+      )
+    } else {
+      let maxQty = stock[skuIndex].qty < 15 ? stock[skuIndex].qty : 15
+      var numArray = Array.from(Array(maxQty + 1).keys())
+      numArray.shift()
+      return (
+        <Select labelId="qty" id="selectQty" value={selectedQty} displayEmpty={true} variant="outlined" fullWidth onChange={qtyChange}>
+          {numArray.map((qty) => {
+            return <MenuItem value={qty} key={qty}>{qty}</MenuItem>
+          })}
+        </Select>
+      )
+    }
+  }
+
+  const addProductToCart = () => {
+    let data = {
+      'sku_id': selectedSku
+    }
+    axios.post('/api/cart', data)
+    .then(() => {
+      console.log('Successfully added product to the cart')
+    }).catch((err) => {
+      console.log('Could not add product to the cart.')
+    });
+  }
+
+  const addToCartButton = () => {
+    if (stock.length === 0) {
+      return (
+        <Button variant="outlined" fullWidth disabled>Out Of Stock</Button>
+      )
+    }
+    if (stock.length !== 0 && selectedSku === null) {
+      return (
+        <Button variant="outlined" fullWidth disabled>Add to Cart</Button>
+      )
+    }
+    if (stock.length !==0 && selectedSku !== null) {
+      return (
+        <Button variant="contained" color="primary" fullWidth onClick={addProductToCart}>Add to Cart</Button>
+      )
+    }
+  }
+
   return (
     <Grid container className={classes.root} direction="column" alignItems="stretch">
       <Grid container alignItems="center" className={classes.rating}>
@@ -106,15 +211,13 @@ const ProductDetails = ({currentProduct, productStyles, styleIndex, changeStyle}
        <StyleSelector productStyles={productStyles} styleIndex={styleIndex} changeStyle={changeStyle} />
       <Grid container spacing={1}>
         <Grid item xs={8}>
-          <TextField variant="outlined" defaultValue="Select Size" fullWidth></TextField>
+          {sizeSelection()}
         </Grid>
         <Grid item xs={4}>
-          <Select variant="outlined" fullWidth>
-            <MenuItem>1</MenuItem>
-          </Select>
+          {qtySelection()}
         </Grid>
         <Grid item xs={12} md={8}>
-          <Button variant="contained" color="primary" fullWidth>Add to Cart</Button>
+          {addToCartButton()}
         </Grid>
         <Grid item xs={12} md={4}>
           <SocialMediaShare
