@@ -15,21 +15,22 @@ const Reviews = ({ currentProduct }) => {
 
   useEffect(() => {
     axios
-      .get(`/api/reviews?product_id=${currentProduct.id}`)
+      .get(`/api/reviews/meta?product_id=${currentProduct.id}`)
       .then(({ data }) => {
-        setReviews(data.results);
-        setFilteredReviews(data.results);
+        setReviewData(data);
+        const totalReviews = Object.values(data.ratings).reduce((sum, val) => sum + Number(val), 0)
         axios
-          .get(`/api/reviews/meta?product_id=${currentProduct.id}`)
+          .get(`/api/reviews?product_id=${currentProduct.id}&count=${totalReviews}`)
           .then(({ data }) => {
-            setReviewData(data);
+            setReviews(data.results);
+            setFilteredReviews(data.results);
           })
           .catch(() => {
-            console.log('error getting review metadata');
+            console.log('error getting reviews');
           });
       })
       .catch(() => {
-        console.log('error getting reviews');
+        console.log('error getting review metadata');
       });
   }, []);
 
