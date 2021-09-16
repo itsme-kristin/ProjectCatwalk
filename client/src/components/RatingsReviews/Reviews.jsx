@@ -17,7 +17,7 @@ const Reviews = ({ currentProduct }) => {
     axios
       .get(`/api/reviews?product_id=${currentProduct.id}`)
       .then(({ data }) => {
-        sortReviews(data.results);
+        // sortReviews(data.results);
         setReviews(data.results);
         setFilteredReviews(data.results);
         axios
@@ -45,6 +45,13 @@ const Reviews = ({ currentProduct }) => {
     setFilteredReviews(reviewsToRender);
   }, [filters]);
 
+  // useEffect(() => {
+  //   const sortedReviews = sortReviews([...reviews]);
+  //   const sortedFilteredReviews = sortReviews([...filteredReviews])
+  //   setReviews(sortedReviews)
+  //   setFilteredReviews(sortedFilteredReviews)
+  // }, [selected])
+
   const filterReviews = rating => {
     const ratingIndex = filters.indexOf(rating);
     if (ratingIndex >= 0) {
@@ -55,12 +62,6 @@ const Reviews = ({ currentProduct }) => {
       setFilters([...filters, rating]);
     }
   };
-
-  const sortReviews = (reviews) => {
-    if (selected === 'Most Recent') {
-      return reviews.sort((a, b) => b.review_id - a.review_id);
-    }
-  }
 
   const removeFiltersButton =
     filters.length > 0 ? (
@@ -93,6 +94,7 @@ const Reviews = ({ currentProduct }) => {
           <ReviewList
             reviews={filteredReviews}
             currentProduct={currentProduct}
+            selected={selected}
           />
         </Grid>
       </Grid>
