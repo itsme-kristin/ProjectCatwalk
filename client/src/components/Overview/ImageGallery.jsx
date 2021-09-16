@@ -78,7 +78,7 @@ const ImageGallery = ({ photos }) => {
     let showRight = imgIndex !== photos.length - 1 ? true : false;
     let iconSize = 32;
     let iconColor = '#3f51b5';
-    let iconOpacity = 0.6
+    let iconOpacity = 0.6;
 
     var inline = {
       media: {
