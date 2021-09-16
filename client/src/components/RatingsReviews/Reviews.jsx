@@ -17,7 +17,6 @@ const Reviews = ({ currentProduct }) => {
     axios
       .get(`/api/reviews?product_id=${currentProduct.id}`)
       .then(({ data }) => {
-        // sortReviews(data.results);
         setReviews(data.results);
         setFilteredReviews(data.results);
         axios
@@ -44,13 +43,6 @@ const Reviews = ({ currentProduct }) => {
     });
     setFilteredReviews(reviewsToRender);
   }, [filters]);
-
-  // useEffect(() => {
-  //   const sortedReviews = sortReviews([...reviews]);
-  //   const sortedFilteredReviews = sortReviews([...filteredReviews])
-  //   setReviews(sortedReviews)
-  //   setFilteredReviews(sortedFilteredReviews)
-  // }, [selected])
 
   const filterReviews = rating => {
     const ratingIndex = filters.indexOf(rating);
