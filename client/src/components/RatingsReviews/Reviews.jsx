@@ -4,6 +4,7 @@ import { Grid, Button } from '@material-ui/core';
 import ReviewList from './ReviewList.jsx';
 import ProductBreakdown from './ProductBreakdown.jsx';
 import RatingsBreakdown from './RatingsBreakdown.jsx';
+import SortingDropdown from './SortingDropdown.jsx';
 
 const Reviews = ({ currentProduct }) => {
   const [reviews, setReviews] = useState([]);
@@ -80,6 +81,7 @@ const Reviews = ({ currentProduct }) => {
           </Grid>
         </Grid>
         <Grid item xs={9}>
+          <SortingDropdown />
           <ReviewList
             reviews={filteredReviews}
             currentProduct={currentProduct}
