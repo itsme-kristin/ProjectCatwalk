@@ -5,6 +5,7 @@ import ReviewList from './ReviewList.jsx';
 import ProductBreakdown from './ProductBreakdown.jsx';
 import RatingsBreakdown from './RatingsBreakdown.jsx';
 import SortingDropdown from './SortingDropdown.jsx';
+import NewReview from './NewReview.jsx';
 
 const Reviews = ({ currentProduct }) => {
   const [reviews, setReviews] = useState([]);
@@ -66,6 +67,7 @@ const Reviews = ({ currentProduct }) => {
   return (
     <div>
       Ratings & Reviews
+      <NewReview />
       <Grid container spacing={2}>
         <Grid item xs={3} container spacing={1}>
           <Grid item xs={12}>
