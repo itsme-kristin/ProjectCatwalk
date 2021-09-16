@@ -5,9 +5,9 @@ const SortingDropdown = ({ selected, setSelected }) => {
   return (
     <FormControl>
       <Select value={selected} onChange={(e) => setSelected(e.target.value)}>
-        <MenuItem value={'Most Recent'}>Most Recent</MenuItem>
-        <MenuItem value={'Most Helpful'}>Most Helpful</MenuItem>
-        <MenuItem value={'Most Relevant'}>Most Relevant</MenuItem>
+        <MenuItem value={'relevant'}>Most Relevant</MenuItem>
+        <MenuItem value={'newest'}>Most Recent</MenuItem>
+        <MenuItem value={'helpful'}>Most Helpful</MenuItem>
       </Select>
     </FormControl>
   );

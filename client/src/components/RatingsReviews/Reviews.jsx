@@ -11,7 +11,7 @@ const Reviews = ({ currentProduct }) => {
   const [filteredReviews, setFilteredReviews] = useState([]);
   const [filters, setFilters] = useState([]);
   const [reviewData, setReviewData] = useState(null);
-  const [selected, setSelected] = useState('Most Recent');
+  const [selected, setSelected] = useState('relevant');
 
   useEffect(() => {
     axios
@@ -20,7 +20,7 @@ const Reviews = ({ currentProduct }) => {
         setReviewData(data);
         const totalReviews = Object.values(data.ratings).reduce((sum, val) => sum + Number(val), 0)
         axios
-          .get(`/api/reviews?product_id=${currentProduct.id}&count=${totalReviews}`)
+          .get(`/api/reviews?product_id=${currentProduct.id}&count=${totalReviews}&sort=${selected}`)
           .then(({ data }) => {
             setReviews(data.results);
             setFilteredReviews(data.results);
@@ -32,7 +32,7 @@ const Reviews = ({ currentProduct }) => {
       .catch(() => {
         console.log('error getting review metadata');
       });
-  }, []);
+  }, [selected]);
 
   useEffect(() => {
     const reviewsToRender = [...reviews].filter(review => {
