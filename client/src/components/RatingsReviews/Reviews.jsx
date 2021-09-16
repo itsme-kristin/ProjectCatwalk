@@ -11,11 +11,13 @@ const Reviews = ({ currentProduct }) => {
   const [filteredReviews, setFilteredReviews] = useState([]);
   const [filters, setFilters] = useState([]);
   const [reviewData, setReviewData] = useState(null);
+  const [selected, setSelected] = useState('Most Recent');
 
   useEffect(() => {
     axios
       .get(`/api/reviews?product_id=${currentProduct.id}`)
       .then(({ data }) => {
+        sortReviews(data.results);
         setReviews(data.results);
         setFilteredReviews(data.results);
         axios
@@ -54,6 +56,12 @@ const Reviews = ({ currentProduct }) => {
     }
   };
 
+  const sortReviews = (reviews) => {
+    if (selected === 'Most Recent') {
+      return reviews.sort((a, b) => b.review_id - a.review_id);
+    }
+  }
+
   const removeFiltersButton =
     filters.length > 0 ? (
       <Button variant='outlined' onClick={() => setFilters([])}>
@@ -81,7 +89,7 @@ const Reviews = ({ currentProduct }) => {
           </Grid>
         </Grid>
         <Grid item xs={9}>
-          <SortingDropdown />
+          <SortingDropdown selected={selected} setSelected={setSelected} />
           <ReviewList
             reviews={filteredReviews}
             currentProduct={currentProduct}

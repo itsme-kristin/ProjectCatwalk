@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
 import { Select, MenuItem, FormControl } from '@material-ui/core';
 
-const SortingDropdown = () => {
-  const [selected, setSelected] = useState('Most Recent');
-
+const SortingDropdown = ({ selected, setSelected }) => {
   return (
     <FormControl>
       <Select value={selected} onChange={(e) => setSelected(e.target.value)}>
