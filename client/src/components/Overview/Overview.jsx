@@ -15,6 +15,10 @@ import ListItemText from '@material-ui/core/ListItemText';
 // import DoneIcon from '@material-ui/icons/Done';
 
 const useStyles = makeStyles({
+  root: {
+    margin: '20px 0 20px 0'
+  },
+
   prodOverview: {
     padding: "20px",
   },
@@ -56,7 +60,7 @@ const Overview = ({ productId }) => {
     let features = productDetails.productInfo.features
     if (!!slogan || !!description || features.length !== 0) {
       return (
-        <Grid container>
+        <Grid container className={classes.root}>
           <Grid item xs={7} className={classes.prodOverview}>
             <Typography variant="h5" gutterBottom>
               {slogan}
@@ -92,7 +96,7 @@ const Overview = ({ productId }) => {
         alignItems="flex-start"
       >
         <Grid item xs={7}>
-          <ImageGallery selectedStyle={productDetails.productStyles[styleIndex].photos}/>
+          <ImageGallery photos={productDetails.productStyles[styleIndex].photos}/>
         </Grid>
         <Grid item xs={5}>
           <ProductDetails
