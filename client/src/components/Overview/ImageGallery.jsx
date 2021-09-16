@@ -33,21 +33,33 @@ const useStyles = makeStyles({
 
 const ImageGallery = ({ photos }) => {
   const classes = useStyles();
-  const [thumbs, setThumbs] = useState([]);
+  const [selectedThumb, setSelectedThumb] = useState([]);
   const [imgIndex, setImgIndex] = useState(0);
 
   const grabSevenThumbs = () => {
-    let newThumbs = photos.slice(0, 7);
+    let start = 0;
+    let end = 7;
+
+    if (imgIndex > 3) {
+      if (imgIndex + 4 >= photos.length) {
+        start = photos.length - 7
+        end = photos.length
+      } else {
+        start = imgIndex - 3;
+        end = imgIndex + 4;
+      }
+    }
 
     return (
-      newThumbs.map(({ thumbnail_url }, index) => {
+      photos.map((image, index) => {
         let styleBG = {
-          backgroundImage: `url(${thumbnail_url})`,
+          backgroundImage: `url(${image.thumbnail_url})`,
           backgroundRepeat: 'no-repeat',
           backgroundSize: '50px',
           backgroundPosition: 'center'
         }
         if (index === imgIndex) {
+          console.log('I\'m Selected!:', index, '\n', image)
           return (
             <Grid item xs={12} key={index}>
               <Paper className={classes.selected} style={styleBG}/>
@@ -55,16 +67,15 @@ const ImageGallery = ({ photos }) => {
           )
         }
         return (
-          <Grid item xs={12} key={index}>
+          <Grid item xs={12} key={index} >
             <Paper className={classes.thumb} style={styleBG} onClick={() => setImgIndex(index)}/>
           </Grid>
         )
-      })
+      }).slice(start, end)
     )
   }
 
   const displayImage = () => {
-    console.log('photo:', photos[imgIndex], 'index:', imgIndex)
     var image = {
       backgroundImage: `url(${photos[imgIndex].url})`
     }
