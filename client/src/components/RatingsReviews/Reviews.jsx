@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Grid } from '@material-ui/core';
+import { Grid, Button } from '@material-ui/core';
 import ReviewList from './ReviewList.jsx';
 import ProductBreakdown from './ProductBreakdown.jsx';
 import RatingsBreakdown from './RatingsBreakdown.jsx';
@@ -45,19 +45,26 @@ const Reviews = ({ currentProduct }) => {
   const filterReviews = rating => {
     const ratingIndex = filters.indexOf(rating);
     if (ratingIndex >= 0) {
-      const updatedFilters = [...filters]
-      updatedFilters.splice(ratingIndex, 1)
+      const updatedFilters = [...filters];
+      updatedFilters.splice(ratingIndex, 1);
       setFilters(updatedFilters);
     } else {
       setFilters([...filters, rating]);
     }
   };
 
+  const removeFiltersButton =
+    filters.length > 0 ? (
+      <Button variant='outlined' onClick={() => setFilters([])}>
+        Remove Filters
+      </Button>
+    ) : null;
+
   return (
     <div>
       Ratings & Reviews
       <Grid container spacing={2}>
-        <Grid item xs={3} container>
+        <Grid item xs={3} container spacing={1}>
           <Grid item xs={12}>
             <RatingsBreakdown
               currentProduct={currentProduct}
@@ -66,11 +73,17 @@ const Reviews = ({ currentProduct }) => {
             />
           </Grid>
           <Grid item xs={12}>
+            {removeFiltersButton}
+          </Grid>
+          <Grid item xs={12}>
             <ProductBreakdown reviewData={reviewData} />
           </Grid>
         </Grid>
         <Grid item xs={9}>
-          <ReviewList reviews={filteredReviews} currentProduct={currentProduct} />
+          <ReviewList
+            reviews={filteredReviews}
+            currentProduct={currentProduct}
+          />
         </Grid>
       </Grid>
     </div>
