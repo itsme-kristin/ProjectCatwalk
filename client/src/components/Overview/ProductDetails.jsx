@@ -116,9 +116,9 @@ const ProductDetails = ({currentProduct, productStyles, styleIndex, changeStyle}
         <Grid item xs={12} md={8}>
           <Button variant="contained" color="primary" fullWidth>Add to Cart</Button>
         </Grid>
-        <Grid item xs={12} md={3}>
+        <Grid item xs={12} md={4}>
           <SocialMediaShare
-            currentProduct={currentProduct}
+            productName={currentProduct.name}
             photoUrl={productStyles[styleIndex]["photos"][0]["thumbnail_url"]}
           />
         </Grid>
