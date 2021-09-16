@@ -4,6 +4,11 @@ import { makeStyles } from '@material-ui/core/styles';
 import { Grid, Typography, Paper, Container } from '@material-ui/core';
 
 const useStyles = makeStyles({
+  gallery: {
+    width: '650px',
+    height: '510px'
+  },
+
   media: {
     width: '500px',
     height: '500px',
@@ -15,11 +20,12 @@ const useStyles = makeStyles({
 
   selected: {
     border: 'solid 4px #3f51b5',
-    width: '60px',
-    height: '60px'
+    width: '50px',
+    height: '50px'
   },
 
   thumb: {
+    margin: '4px',
     width: '50px',
     height: '50px'
   }
@@ -70,7 +76,7 @@ const ImageGallery = ({ photos }) => {
   }
 
   return (
-    <Grid container spacing={1}>
+    <Grid container spacing={1} className={classes.gallery}>
       <Grid item xs={1}>
         <Grid container spacing={2} direction="column" justifyContent="center">
           {grabSevenThumbs()}
@@ -87,17 +93,3 @@ const ImageGallery = ({ photos }) => {
 
 
 export default ImageGallery;
-
-    // <div style={styles}>
-    //   <div style={styles2}>
-    //     <div style={styles3}>
-    //       <div style={styles4}>P</div>
-    //       <div style={styles4}>P</div>
-    //       <div style={styles4}>P</div>
-    //       <div style={styles4}>P</div>
-    //     </div>
-    //     <div style={styles5}>
-    //       <h1>Image Gallery</h1>
-    //     </div>
-    //   </div>
-    // </div>
