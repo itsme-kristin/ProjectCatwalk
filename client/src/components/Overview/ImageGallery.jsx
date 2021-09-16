@@ -33,14 +33,13 @@ const useStyles = makeStyles({
 
 const ImageGallery = ({ photos }) => {
   const classes = useStyles();
-  const [selectedThumb, setSelectedThumb] = useState([]);
   const [imgIndex, setImgIndex] = useState(0);
 
   const grabSevenThumbs = () => {
     let start = 0;
     let end = 7;
 
-    if (imgIndex > 3 && photos.length > 7) {
+    if (photos.length > 7 && imgIndex > 3) {
       if (imgIndex + 4 >= photos.length) {
         start = photos.length - 7
         end = photos.length
@@ -75,12 +74,53 @@ const ImageGallery = ({ photos }) => {
   }
 
   const displayImage = () => {
-    var image = {
-      backgroundImage: `url(${photos[imgIndex].url})`
+    let showLeft = imgIndex !== 0 ? true : false;
+    let showRight = imgIndex !== photos.length - 1 ? true : false;
+    let iconSize = 32;
+    let iconColor = '#3f51b5';
+    let iconOpacity = 0.6
+
+    var inline = {
+      media: {
+        position: 'relative',
+        backgroundImage: `url(${photos[imgIndex].url})`
+      },
+
+      rightButton: {
+        position: 'absolute',
+        top: '50%',
+        right: '-20px',
+        visibility: showRight ? 'visible' : 'hidden',
+        fontSize: iconSize,
+        color: iconColor,
+        opacity: iconOpacity,
+        userSelect: 'none',
+        cursor: 'pointer'
+      },
+
+      leftButton: {
+        position: 'absolute',
+        top: '50%',
+        left: '-20px',
+        visibility: showLeft ? 'visible' : 'hidden',
+        fontSize: iconSize,
+        color: iconColor,
+        opacity: iconOpacity,
+        userSelect: 'none',
+        cursor: 'pointer'
+      }
     }
+
     return (
       <Grid item>
-        <Paper className={classes.media} style={image} elevation={3}/>
+        <Paper className={classes.media} style={inline.media} elevation={3}>
+        <i className="material-icons"
+          style={inline.leftButton}
+          onClick={() => setImgIndex(imgIndex - 1)}>arrow_circle_left</i>
+        <i className="material-icons"
+          style={inline.rightButton}
+          onClick={() => setImgIndex(imgIndex + 1)}>arrow_circle_right</i>
+        </Paper>
       </Grid>
     )
   }
