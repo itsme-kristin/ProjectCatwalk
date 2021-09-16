@@ -3,8 +3,7 @@ import axios from 'axios';
 import { Button } from '@material-ui/core';
 import ReviewTile from './ReviewTile.jsx';
 
-// Will eventually map through reviews from API and render a review tile for each
-const ReviewList = ({ reviews, currentProduct }) => {
+const ReviewList = ({ reviews, currentProduct, selected }) => {
   const [numOfReviews, setNumOfReviews] = useState(2);
 
   const renderedReviews = reviews
