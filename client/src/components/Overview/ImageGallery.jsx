@@ -59,7 +59,6 @@ const ImageGallery = ({ photos }) => {
           backgroundPosition: 'center'
         }
         if (index === imgIndex) {
-          console.log('I\'m Selected!:', index, '\n', image)
           return (
             <Grid item xs={12} key={index}>
               <Paper className={classes.selected} style={styleBG}/>
