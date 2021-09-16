@@ -4,6 +4,9 @@ import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardMedia from '@material-ui/core/CardMedia';
 import CardContent from '@material-ui/core/CardContent';
+import Rating from '@material-ui/lab/Rating';
+import AverageRating from '../AverageRating.jsx';
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -21,6 +24,10 @@ const useStyles = makeStyles((theme) => ({
 const ProductCard = (props) => {
   const [productCardInfo, setProductCardInfo] = useState(null);
   const [productCardPhoto, setProductCardPhoto] = useState(null);
+  const [ratingsInfo, setRatingsInfo] = useState({
+          avgProductRating: 0,
+          totalRatings: 0
+          });
   const classes = useStyles();
 
   const getPhoto = () => {
@@ -67,7 +74,13 @@ const ProductCard = (props) => {
           <div>{productCardInfo.category}</div>
           <h3>{productCardInfo.name}</h3>
           <div>${productCardInfo.default_price}</div>
-          <div>Star Rating</div>
+          <div>
+            <AverageRating
+                productId={props.productId}
+                avgProductRating={ratingsInfo.avgProductRating}
+                setRatingsInfo={setRatingsInfo}
+              />
+          </div>
         </CardContent>
       </Card>
     </React.Fragment>
