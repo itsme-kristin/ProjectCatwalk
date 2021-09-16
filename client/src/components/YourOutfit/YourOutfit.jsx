@@ -23,6 +23,19 @@ const YourOutfit = (props) => {
     newOutfitList.push(props.currentProduct);
     props.setOutfitList(newOutfitList);
   }
+
+  const handleDeleteOutfitClick = (id) => {
+    const editedOutfitList = props.outfitList.slice();
+    for (var i = 0; i < editedOutfitList.length; i++) {
+      var current = editedOutfitList[i];
+      if (current.id === id) {
+        editedOutfitList.splice(i, 1);
+        props.setOutfitList(editedOutfitList);
+        return;
+      }
+    }
+  }
+
   return (
     <React.Fragment>
       <h3>YOUR OUTFIT</h3>
@@ -35,14 +48,18 @@ const YourOutfit = (props) => {
             <ItemsCarousel
               requestToChangeActive={setActiveItemIndex}
               activeItemIndex={activeItemIndex}
-              numberOfCards={4}
+              numberOfCards={3}
               gutter={20}
               leftChevron={<button>{'<'}</button>}
               rightChevron={<button>{'>'}</button>}
               outsideChevron
               chevronWidth={chevronWidth}
             >
-              {props.outfitList.map((product, index) => <OutfitCard product={product} key={index}/>)}
+              {props.outfitList.map((product, index) => <OutfitCard
+                handleDeleteOutfitClick={handleDeleteOutfitClick}
+                product={product}
+                key={index}
+              />)}
             </ItemsCarousel>
           </div>
         </Grid>

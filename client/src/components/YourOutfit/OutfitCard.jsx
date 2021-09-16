@@ -4,17 +4,22 @@ import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardMedia from '@material-ui/core/CardMedia';
 import CardContent from '@material-ui/core/CardContent';
+import Icon from '@material-ui/core/Icon';
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    maxWidth: 230,
-    maxHeight: 350,
+    width: 230,
+    height: 330,
   },
   media: {
-    paddingTop: '70.25%',
+    paddingTop: '70.60%',
   },
   content: {
     paddingTop: '10%',
+  },
+  icon: {
+    position: "relative to parent",
+    top: 5,
   }
 }));
 
@@ -51,7 +56,8 @@ const OutfitCard = (props) => {
 
   return outfitCardPhoto && outfitCardInfo && (
     <React.Fragment>
-      <Card className={classes.root}>
+      <Card className={classes.root} variant="outlined">
+        <Icon onClick={() => props.handleDeleteOutfitClick(props.product.id)} sx={{ fontSize: 10 }} className={classes.icon}>highlight_off</Icon>
         <CardMedia
           component='div'
           className={classes.media}
