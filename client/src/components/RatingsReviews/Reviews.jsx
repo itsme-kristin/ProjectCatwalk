@@ -4,32 +4,35 @@ import { Grid, Button } from '@material-ui/core';
 import ReviewList from './ReviewList.jsx';
 import ProductBreakdown from './ProductBreakdown.jsx';
 import RatingsBreakdown from './RatingsBreakdown.jsx';
+import SortingDropdown from './SortingDropdown.jsx';
 
 const Reviews = ({ currentProduct }) => {
   const [reviews, setReviews] = useState([]);
   const [filteredReviews, setFilteredReviews] = useState([]);
   const [filters, setFilters] = useState([]);
   const [reviewData, setReviewData] = useState(null);
+  const [selected, setSelected] = useState('relevant');
 
   useEffect(() => {
     axios
-      .get(`/api/reviews?product_id=${currentProduct.id}`)
+      .get(`/api/reviews/meta?product_id=${currentProduct.id}`)
       .then(({ data }) => {
-        setReviews(data.results);
-        setFilteredReviews(data.results);
+        setReviewData(data);
+        const totalReviews = Object.values(data.ratings).reduce((sum, val) => sum + Number(val), 0)
         axios
-          .get(`/api/reviews/meta?product_id=${currentProduct.id}`)
+          .get(`/api/reviews?product_id=${currentProduct.id}&count=${totalReviews}&sort=${selected}`)
           .then(({ data }) => {
-            setReviewData(data);
+            setReviews(data.results);
+            setFilteredReviews(data.results);
           })
           .catch(() => {
-            console.log('error getting review metadata');
+            console.log('error getting reviews');
           });
       })
       .catch(() => {
-        console.log('error getting reviews');
+        console.log('error getting review metadata');
       });
-  }, []);
+  }, [selected]);
 
   useEffect(() => {
     const reviewsToRender = [...reviews].filter(review => {
@@ -80,9 +83,11 @@ const Reviews = ({ currentProduct }) => {
           </Grid>
         </Grid>
         <Grid item xs={9}>
+          <SortingDropdown selected={selected} setSelected={setSelected} />
           <ReviewList
             reviews={filteredReviews}
             currentProduct={currentProduct}
+            selected={selected}
           />
         </Grid>
       </Grid>

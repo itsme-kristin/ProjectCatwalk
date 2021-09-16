@@ -24,12 +24,12 @@ const RatingsBreakdown = ({ currentProduct, reviewData, filterReviews }) => {
     return (
       <Grid container direction='column'>
         <Grid item xs={12} container>
-          <Grid item xs={3}>
+          <Grid item xs={12} md={3} >
             <Typography variant='h3'>
               {Math.round(ratingsInfo.avgProductRating * 4) / 4}
             </Typography>
           </Grid>
-          <Grid item xs={9}>
+          <Grid item xs={12} md={9}>
             <AverageRating
               productId={currentProduct.id}
               avgProductRating={ratingsInfo.avgProductRating}
