@@ -43,15 +43,20 @@ const ProductCard = (props) => {
       });
   }
 
+  // const handleProductCardClick = () => {
+  //   props.setProduct(productCardInfo);
+  // }
+
   useEffect(() => {
     getPhoto();
     getProductInfo();
   }, []);
 
-
+  //will add to card once bug is fixed:
+  //onClick={() => handleProductCardClick()}
   return productCardPhoto && productCardInfo && (
     <React.Fragment>
-      <Card className={classes.root}>
+      <Card className={classes.root} >
         <CardMedia
           component='div'
           className={classes.media}
