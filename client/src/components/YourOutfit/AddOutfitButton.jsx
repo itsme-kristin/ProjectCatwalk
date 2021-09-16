@@ -13,8 +13,8 @@ const useStyles = makeStyles((theme) => ({
     '& > span': {
       margin: theme.spacing(2),
     },
-    maxWidth: 230,
-    maxHeight: 350,
+    width: 200,
+    height: 330,
   },
   title: {
     fontSize: 30,
