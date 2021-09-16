@@ -40,7 +40,7 @@ const ImageGallery = ({ photos }) => {
     let start = 0;
     let end = 7;
 
-    if (imgIndex > 3) {
+    if (imgIndex > 3 && photos.length > 7) {
       if (imgIndex + 4 >= photos.length) {
         start = photos.length - 7
         end = photos.length
