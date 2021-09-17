@@ -5,7 +5,6 @@ import Cart from './Cart.jsx';
 
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
-import IconButton from '@material-ui/core/IconButton';
 import Modal from '@material-ui/core/Modal';
 import { FacebookShareButton, PinterestShareButton, TwitterShareButton } from 'react-share';
 import { FacebookIcon, PinterestIcon, TwitterIcon } from 'react-share';
