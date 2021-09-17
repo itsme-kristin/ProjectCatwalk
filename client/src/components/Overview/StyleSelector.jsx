@@ -30,7 +30,7 @@ const StyleSelector = ({ productStyles, styleIndex, changeStyle }) => {
       </Grid>
       {productStyles.map((productStyle, index) => {
         var styleBG = {
-          background: `url(${productStyle["photos"][0]["thumbnail_url"]})`,
+          backgroundImage: `url(${productStyle["photos"][0]["thumbnail_url"]})`,
           backgroundRepeat: 'no-repeat',
           backgroundSize: '50px',
           backgroundPosition: 'center',
