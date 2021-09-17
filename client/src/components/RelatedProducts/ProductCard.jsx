@@ -9,6 +9,8 @@ import AverageRating from '../AverageRating.jsx';
 import Icon from '@material-ui/core/Icon';
 import Modal from '@material-ui/core/Modal';
 import ComparisonModal from './ComparisonModal.jsx';
+import '.../lib/images/NoImage.png';
+
 
 
 const useStyles = makeStyles((theme) => ({
@@ -74,9 +76,9 @@ const ProductCard = (props) => {
   const getFeatureData = () => {
     const featureData = {};
 
-    for (var i = 0; i < currentProductInfo.features.length; i++) {
-      var currentFeatureObject = currentProductInfo.features[i];
-      var currentFeatureValue = [];
+    for (let i = 0; i < currentProductInfo.features.length; i++) {
+      let currentFeatureObject = currentProductInfo.features[i];
+      let currentFeatureValue = [];
       if (currentFeatureObject.value === null) {
         currentFeatureValue.push('yes!');
       } else {
@@ -86,8 +88,8 @@ const ProductCard = (props) => {
       featureData[currentFeatureObject.feature] = currentFeatureValue;
     }
 
-    for (var j = 0; j < productCardInfo.features.length; j++) {
-      var currentFeatureObject = productCardInfo.features[j];
+    for (let j = 0; j < productCardInfo.features.length; j++) {
+      let currentFeatureObject = productCardInfo.features[j];
       if (featureData[currentFeatureObject.feature] !== undefined) {
         if (currentFeatureObject.value === null) {
           featureData[currentFeatureObject.feature] = 'yes!';
@@ -95,7 +97,7 @@ const ProductCard = (props) => {
           featureData[currentFeatureObject.feature][1] = currentFeatureObject.value;
         }
       } else {
-        var currentFeatureValue = [];
+        let currentFeatureValue = [];
         currentFeatureValue.push('');
         if (currentFeatureObject.value === null) {
           currentFeatureValue.push('yes!');
@@ -134,7 +136,7 @@ const ProductCard = (props) => {
         <CardMedia
           component='div'
           className={classes.media}
-          image={productCardPhoto.photos[0].thumbnail_url || ''}
+          image={productCardPhoto.photos[0].thumbnail_url || '.../lib/images/NoImage.png'}
           title={productCardInfo.name}
           onClick={() => handleProductCardClick()}
         />
