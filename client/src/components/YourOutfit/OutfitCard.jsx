@@ -5,7 +5,6 @@ import Card from '@material-ui/core/Card';
 import CardMedia from '@material-ui/core/CardMedia';
 import CardContent from '@material-ui/core/CardContent';
 import Icon from '@material-ui/core/Icon';
-import Rating from '@material-ui/lab/Rating';
 import AverageRating from '../AverageRating.jsx';
 
 const useStyles = makeStyles((theme) => ({
@@ -37,7 +36,6 @@ const OutfitCard = (props) => {
   const getPhoto = () => {
     axios.get(`/api/products/${props.product.id}/styles`)
       .then(stylesInfo => {
-        console.log(stylesInfo.data.results[0]);
         setOutfitCardPhoto(stylesInfo.data.results[0]);
       })
       .catch(err => {
