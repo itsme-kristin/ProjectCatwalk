@@ -14,7 +14,7 @@ import {
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import Rating from '@material-ui/lab/Rating';
-import CharacteristicsRadio from './CharacteristicsRadio.jsx';
+// import CharacteristicsRadio from './CharacteristicsRadio.jsx';
 
 const useStyles = makeStyles({
   modal: {
@@ -46,10 +46,10 @@ const NewReview = ({ characteristics }) => {
   const [review, setReview] = useState(reviewObj);
   const classes = useStyles();
 
-  const charArray = Object.entries(characteristics);
-  const renderedChars = charArray.map((char, index) => {
-    return <CharacteristicsRadio key={index} char={char} />;
-  });
+  // const charArray = Object.entries(characteristics);
+  // const renderedChars = charArray.map((char, index) => {
+  //   return <CharacteristicsRadio key={index} char={char} />;
+  // });
 
   return (
     <React.Fragment>
@@ -114,7 +114,7 @@ const NewReview = ({ characteristics }) => {
               </RadioGroup>
             </FormControl>
           </Grid>
-          <Grid item xs={12}>
+          {/*<Grid item xs={12}>
             <FormControl component='fieldset' required>
               <FormLabel component='legend'>
                 Characteristics
@@ -127,7 +127,7 @@ const NewReview = ({ characteristics }) => {
                 {renderedChars}
               </RadioGroup>
             </FormControl>
-          </Grid>
+          </Grid>*/}
           <Grid item xs={12}>
             <TextField
               required
