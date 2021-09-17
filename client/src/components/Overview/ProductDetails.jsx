@@ -46,7 +46,7 @@ const useStyles = makeStyles({
   }
 })
 
-const ProductDetails = ({currentProduct, productStyles, styleIndex, changeStyle}) => {
+const ProductDetails = ({currentProduct, productStyles, styleIndex, imgIndex, setStyleIndex, setImgIndex}) => {
   const classes = useStyles();
   const [stock, setStock] = useState([]);
   const [skuIndex, setSkuIndex] = useState('');
@@ -118,7 +118,7 @@ const ProductDetails = ({currentProduct, productStyles, styleIndex, changeStyle}
       return null
     } else {
       return (
-        <Select labelId="size" id="selectSize" value={skuIndex} displayEmpty={true}variant="outlined" fullWidth onChange={sizeChange}>
+        <Select labelId="size" id="selectSize" value={skuIndex} displayEmpty={true} variant="outlined" fullWidth onChange={sizeChange}>
           <MenuItem value=''>Select Size</MenuItem>
           {stock.map(({ size }, skuIndex) => {
             return <MenuItem value={skuIndex} key={skuIndex}>{size}</MenuItem>
@@ -207,7 +207,13 @@ const ProductDetails = ({currentProduct, productStyles, styleIndex, changeStyle}
       <Grid container className={classes.price}>
         {displayPrice()}
       </Grid>
-       <StyleSelector productStyles={productStyles} styleIndex={styleIndex} changeStyle={changeStyle} />
+       <StyleSelector
+        productStyles={productStyles}
+        styleIndex={styleIndex}
+        imgIndex={imgIndex}
+        setStyleIndex={setStyleIndex}
+        setImgIndex={setImgIndex}
+      />
       <Grid container spacing={1}>
         <Grid item xs={8}>
           {sizeSelection()}
