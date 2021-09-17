@@ -19,7 +19,7 @@ const useStyles = makeStyles({
   }
 });
 
-const ExpandedView = React.forwardRef(({ photos, imgIndex, setImgIndex }, ref) => {
+const ExpandedView = React.forwardRef(({ photos, imgIndex, setImgIndex, close }, ref) => {
   const classes = useStyles();
 
   let showLeft = imgIndex !== 0 ? true : false;
@@ -53,10 +53,27 @@ const ExpandedView = React.forwardRef(({ photos, imgIndex, setImgIndex }, ref) =
       opacity: iconOpacity,
       userSelect: 'none',
       cursor: 'pointer'
+    },
+
+    closeDot: {
+      marginLeft: 'auto',
+      marginRight: '5%',
+      fontSize: iconSize,
+      color: iconColor,
+      opacity: iconOpacity,
+      userSelect: 'none',
+      cursor: 'pointer'
     }
   }
   return (
     <Grid container className={classes.viewModal} direction="column">
+      <Grid item xs={12}>
+        <Grid container justifyContent="flex-end">
+          <i className="material-icons"
+            style={inline.closeDot}
+            onClick={close}>cancel</i>
+        </Grid>
+      </Grid>
       <Grid item xs={12} >
         <Grid container justifyContent="center">
           <img className={classes.viewImage} src={photos[imgIndex].url}/>

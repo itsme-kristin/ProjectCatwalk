@@ -154,7 +154,7 @@ const ImageGallery = ({ photos, imgIndex, setImgIndex }) => {
         </Grid>
       </Grid>
       <Modal open={viewOpen} onClose={closeExpandedView}>
-        <ExpandedView photos={photos} imgIndex={imgIndex} setImgIndex={setImgIndex} ref/>
+        <ExpandedView photos={photos} imgIndex={imgIndex} setImgIndex={setImgIndex} close={closeExpandedView}ref/>
       </Modal>
     </Grid>
   )
