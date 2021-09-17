@@ -6,18 +6,25 @@ import CardMedia from '@material-ui/core/CardMedia';
 import CardContent from '@material-ui/core/CardContent';
 import Rating from '@material-ui/lab/Rating';
 import AverageRating from '../AverageRating.jsx';
+import Icon from '@material-ui/core/Icon';
+import Modal from '@material-ui/core/Modal';
+import ComparisonModal from './ComparisonModal.jsx';
 
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    maxWidth: 230,
-    maxHeight: 350,
+    width: 230,
+    height: 350,
   },
   media: {
     paddingTop: '70.25%',
   },
   content: {
     paddingTop: '10%',
+  },
+  icon: {
+    position: 'relative to parent',
+    top: 5,
   }
 }));
 
@@ -28,7 +35,16 @@ const ProductCard = (props) => {
           avgProductRating: 0,
           totalRatings: 0
           });
+  const [showComparison, setShowComparison] = useState(false);
   const classes = useStyles();
+
+  const openShowComparison = () => {
+    setShowComparison(true);
+  }
+
+  const closeShowComparison = () => {
+    setShowComparison(false);
+  }
 
   const getPhoto = () => {
     axios.get(`/api/products/${props.productId}/styles`)
@@ -50,9 +66,9 @@ const ProductCard = (props) => {
       });
   }
 
-  // const handleProductCardClick = () => {
-  //   props.setProduct(productCardInfo);
-  // }
+  const handleProductCardClick = () => {
+    props.setProduct(productCardInfo);
+  }
 
   useEffect(() => {
     getPhoto();
@@ -63,7 +79,8 @@ const ProductCard = (props) => {
   //onClick={() => handleProductCardClick()}
   return productCardPhoto && productCardInfo && (
     <React.Fragment>
-      <Card className={classes.root} >
+      <Card className={classes.root} variant="outlined" onClick={() => handleProductCardClick()}>
+        <Icon onClick={openShowComparison} sx={{ fontSize: 10 }} className={classes.icon}>grade</Icon>
         <CardMedia
           component='div'
           className={classes.media}
@@ -83,6 +100,9 @@ const ProductCard = (props) => {
           </div>
         </CardContent>
       </Card>
+      <Modal open={showComparison} onClose={closeShowComparison} productcardinfo={productCardInfo}>
+        <ComparisonModal />
+      </Modal>
     </React.Fragment>
   );
 }
