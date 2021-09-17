@@ -18,7 +18,7 @@ const useStyles = makeStyles({
   }
 });
 
-const StyleSelector = ({ productStyles, styleIndex, changeStyle }) => {
+const StyleSelector = ({ productStyles, styleIndex, imgIndex, setStyleIndex, setImgIndex }) => {
   const classes = useStyles();
 
   return (
@@ -59,7 +59,8 @@ const StyleSelector = ({ productStyles, styleIndex, changeStyle }) => {
                 elevation={3}
                 style={styleBG}
                 onClick={() => {
-                  changeStyle(index)
+                  setStyleIndex(index);
+                  setImgIndex(0);
                 }}/>
             </Grid>
           )
