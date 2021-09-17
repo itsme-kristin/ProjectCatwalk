@@ -14,6 +14,7 @@ import {
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import Rating from '@material-ui/lab/Rating';
+import CharacteristicsRadio from './CharacteristicsRadio.jsx';
 
 const useStyles = makeStyles({
   modal: {
@@ -29,7 +30,7 @@ const useStyles = makeStyles({
   }
 });
 
-const NewReview = () => {
+const NewReview = ({ characteristics }) => {
   const [open, setOpen] = useState(false);
   const reviewObj = {
     product_id: null,
@@ -44,6 +45,11 @@ const NewReview = () => {
   };
   const [review, setReview] = useState(reviewObj);
   const classes = useStyles();
+
+  const charArray = Object.entries(characteristics);
+  const renderedChars = charArray.map((char, index) => {
+    return <CharacteristicsRadio key={index} char={char} />;
+  });
 
   return (
     <React.Fragment>
@@ -76,7 +82,6 @@ const NewReview = () => {
             <TextField
               required
               multiline
-              rows={3}
               name='body'
               label='Body'
               defaultValue={review.body}
@@ -88,8 +93,8 @@ const NewReview = () => {
                 Do you recommend this product?
               </FormLabel>
               <RadioGroup
-                aria-label='gender'
-                name='controlled-radio-buttons-group'
+                aria-label='recommend'
+                name='recommend'
                 value={review.recommend}
                 onChange={e => {
                   reviewObj.recommend = e.target.value;
@@ -110,11 +115,23 @@ const NewReview = () => {
             </FormControl>
           </Grid>
           <Grid item xs={12}>
-            <FormLabel required component='legend'>
-              What is your nickname?
-            </FormLabel>
+            <FormControl component='fieldset' required>
+              <FormLabel component='legend'>
+                Characteristics
+              </FormLabel>
+              <RadioGroup
+                aria-label='characteristics'
+                name='characteristics'
+                value={review.characteristics}
+              >
+                {renderedChars}
+              </RadioGroup>
+            </FormControl>
+          </Grid>
+          <Grid item xs={12}>
             <TextField
               required
+              label='Nickname'
               name='name'
               defaultValue={review.name}
             />
@@ -123,7 +140,7 @@ const NewReview = () => {
             <TextField
               required
               name='email'
-              label='What is your email?'
+              label='Email'
               defaultValue={review.email}
             />
           </Grid>

@@ -64,37 +64,41 @@ const Reviews = ({ currentProduct }) => {
       </Button>
     ) : null;
 
-  return (
-    <div>
-      Ratings & Reviews
-      <NewReview />
-      <Grid container spacing={2}>
-        <Grid item xs={3} container spacing={1}>
-          <Grid item xs={12}>
-            <RatingsBreakdown
+  if (reviewData) {
+    return (
+      <div>
+        Ratings & Reviews
+        <NewReview characteristics={reviewData.characteristics} />
+        <Grid container spacing={2}>
+          <Grid item xs={3} container spacing={1}>
+            <Grid item xs={12}>
+              <RatingsBreakdown
+                currentProduct={currentProduct}
+                reviewData={reviewData}
+                filterReviews={filterReviews}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              {removeFiltersButton}
+            </Grid>
+            <Grid item xs={12}>
+              <ProductBreakdown reviewData={reviewData} />
+            </Grid>
+          </Grid>
+          <Grid item xs={9}>
+            <SortingDropdown selected={selected} setSelected={setSelected} />
+            <ReviewList
+              reviews={filteredReviews}
               currentProduct={currentProduct}
-              reviewData={reviewData}
-              filterReviews={filterReviews}
+              selected={selected}
             />
           </Grid>
-          <Grid item xs={12}>
-            {removeFiltersButton}
-          </Grid>
-          <Grid item xs={12}>
-            <ProductBreakdown reviewData={reviewData} />
-          </Grid>
         </Grid>
-        <Grid item xs={9}>
-          <SortingDropdown selected={selected} setSelected={setSelected} />
-          <ReviewList
-            reviews={filteredReviews}
-            currentProduct={currentProduct}
-            selected={selected}
-          />
-        </Grid>
-      </Grid>
-    </div>
-  );
+      </div>
+    );
+  } else {
+    return null;
+  }
 };
 
 export default Reviews;
