@@ -115,9 +115,7 @@ const NewReview = ({ characteristics }) => {
           </Grid>
           <Grid item xs={12}>
             <FormControl component='fieldset' required>
-              <FormLabel component='legend'>
-                Characteristics
-              </FormLabel>
+              <FormLabel component='legend'>Characteristics</FormLabel>
               <RadioGroup
                 aria-label='characteristics'
                 name='characteristics'
