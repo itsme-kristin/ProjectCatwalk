@@ -4,13 +4,10 @@ import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardMedia from '@material-ui/core/CardMedia';
 import CardContent from '@material-ui/core/CardContent';
-import Rating from '@material-ui/lab/Rating';
 import AverageRating from '../AverageRating.jsx';
 import Icon from '@material-ui/core/Icon';
 import Modal from '@material-ui/core/Modal';
 import ComparisonModal from './ComparisonModal.jsx';
-import '.../lib/images/NoImage.png';
-
 
 
 const useStyles = makeStyles((theme) => ({
@@ -136,7 +133,7 @@ const ProductCard = (props) => {
         <CardMedia
           component='div'
           className={classes.media}
-          image={productCardPhoto.photos[0].thumbnail_url || '.../lib/images/NoImage.png'}
+          image={productCardPhoto.photos[0].thumbnail_url || ''}
           title={productCardInfo.name}
           onClick={() => handleProductCardClick()}
         />
