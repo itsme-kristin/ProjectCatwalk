@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
 
+import ExpandedView from './ExpandedView.jsx'
+
 import { makeStyles } from '@material-ui/core/styles';
-import { Grid, Typography, Paper, Container } from '@material-ui/core';
+import { Grid, Typography, Paper, Modal } from '@material-ui/core';
 
 const useStyles = makeStyles({
   gallery: {
@@ -32,7 +34,9 @@ const useStyles = makeStyles({
 })
 
 const ImageGallery = ({ photos, imgIndex, setImgIndex }) => {
+  const [viewOpen, setViewOpen] = useState(false);
   const classes = useStyles();
+
 
   const grabSevenThumbs = () => {
     let start = 0;
@@ -80,8 +84,11 @@ const ImageGallery = ({ photos, imgIndex, setImgIndex }) => {
     let iconOpacity = 0.6;
 
     var inline = {
+      view: {
+        position: 'relative'
+      },
+
       media: {
-        position: 'relative',
         backgroundImage: `url(${photos[imgIndex].url})`
       },
 
@@ -111,17 +118,27 @@ const ImageGallery = ({ photos, imgIndex, setImgIndex }) => {
     }
 
     return (
-      <Grid item>
-        <Paper className={classes.media} style={inline.media} elevation={3}>
-        <i className="material-icons"
-          style={inline.leftButton}
-          onClick={() => setImgIndex(imgIndex - 1)}>arrow_circle_left</i>
-        <i className="material-icons"
-          style={inline.rightButton}
-          onClick={() => setImgIndex(imgIndex + 1)}>arrow_circle_right</i>
+      <Grid item style={inline.view}>
+        <Paper className={classes.media}
+          style={inline.media} elevation={3}
+          onClick={openExpandedView}>
         </Paper>
+          <i className="material-icons"
+            style={inline.leftButton}
+            onClick={() => setImgIndex(imgIndex - 1)}>arrow_circle_left</i>
+          <i className="material-icons"
+            style={inline.rightButton}
+            onClick={() => setImgIndex(imgIndex + 1)}>arrow_circle_right</i>
       </Grid>
     )
+  }
+
+  const openExpandedView = () => {
+    setViewOpen(true);
+  }
+
+  const closeExpandedView = () => {
+    setViewOpen(false);
   }
 
   return (
@@ -136,6 +153,9 @@ const ImageGallery = ({ photos, imgIndex, setImgIndex }) => {
           {displayImage()}
         </Grid>
       </Grid>
+      <Modal open={viewOpen} onClose={closeExpandedView}>
+        <ExpandedView photos={photos} imgIndex={imgIndex} setImgIndex={setImgIndex} close={closeExpandedView}ref/>
+      </Modal>
     </Grid>
   )
 }
