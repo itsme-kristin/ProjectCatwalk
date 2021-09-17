@@ -31,9 +31,8 @@ const useStyles = makeStyles({
   }
 })
 
-const ImageGallery = ({ photos }) => {
+const ImageGallery = ({ photos, imgIndex, setImgIndex }) => {
   const classes = useStyles();
-  const [imgIndex, setImgIndex] = useState(0);
 
   const grabSevenThumbs = () => {
     let start = 0;

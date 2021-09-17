@@ -34,6 +34,7 @@ const Overview = ({ productId }) => {
   const classes = useStyles();
   const [productDetails, setProductDetails] = useState(null)
   const [styleIndex, setStyleIndex] = useState(0);
+  const [imgIndex, setImgIndex] = useState(0);
 
   useEffect(() => {
     let currentProductDetails = {};
@@ -96,14 +97,19 @@ const Overview = ({ productId }) => {
         alignItems="flex-start"
       >
         <Grid item xs={7}>
-          <ImageGallery photos={productDetails.productStyles[styleIndex].photos}/>
+          <ImageGallery
+          photos={productDetails.productStyles[styleIndex].photos}
+          imgIndex={imgIndex}
+          setImgIndex={setImgIndex}/>
         </Grid>
         <Grid item xs={5}>
           <ProductDetails
             currentProduct={productDetails.productInfo}
             productStyles={productDetails.productStyles}
             styleIndex={styleIndex}
-            changeStyle={setStyleIndex}
+            imgIndex={imgIndex}
+            setStyleIndex={setStyleIndex}
+            setImgIndex={setImgIndex}
           />
         </Grid>
         {showDetails()}
