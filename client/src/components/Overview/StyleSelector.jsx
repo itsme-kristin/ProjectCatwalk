@@ -39,7 +39,8 @@ const StyleSelector = ({ productStyles, styleIndex, changeStyle }) => {
         var check = {
           position: "absolute",
           top: "-5px",
-          left: "35px"
+          left: "35px",
+          color: '#3f51b5'
         }
 
         if (index === styleIndex) {
