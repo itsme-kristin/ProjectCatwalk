@@ -10,9 +10,9 @@ const App = () => {
   const [outfitList, setOutfitList] = useState([]);
 
   useEffect(() => {
-    axios.get('/api/products')
+    axios.get('/api/products?count=10')
       .then(products => {
-        setProduct(products.data[0]);
+        setProduct(products.data[7]);
       });
   }, []);
 
@@ -23,7 +23,7 @@ const App = () => {
       <Overview productId={product.id}/>
       <RelatedProducts currentProduct={product} setProduct={setProduct}/>
       <YourOutfit currentProduct={product} outfitList={outfitList} setOutfitList={setOutfitList}/>
-      <Reviews currentProduct={product} />
+      {/* <Reviews currentProduct={product} /> */}
       </React.Fragment>
     );
   }

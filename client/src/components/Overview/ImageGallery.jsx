@@ -84,8 +84,11 @@ const ImageGallery = ({ photos, imgIndex, setImgIndex }) => {
     let iconOpacity = 0.6;
 
     var inline = {
+      view: {
+        position: 'relative'
+      },
+
       media: {
-        position: 'relative',
         backgroundImage: `url(${photos[imgIndex].url})`
       },
 
@@ -115,17 +118,17 @@ const ImageGallery = ({ photos, imgIndex, setImgIndex }) => {
     }
 
     return (
-      <Grid item>
+      <Grid item style={inline.view}>
         <Paper className={classes.media}
           style={inline.media} elevation={3}
           onClick={openExpandedView}>
-        <i className="material-icons"
-          style={inline.leftButton}
-          onClick={() => setImgIndex(imgIndex - 1)}>arrow_circle_left</i>
-        <i className="material-icons"
-          style={inline.rightButton}
-          onClick={() => setImgIndex(imgIndex + 1)}>arrow_circle_right</i>
         </Paper>
+          <i className="material-icons"
+            style={inline.leftButton}
+            onClick={() => setImgIndex(imgIndex - 1)}>arrow_circle_left</i>
+          <i className="material-icons"
+            style={inline.rightButton}
+            onClick={() => setImgIndex(imgIndex + 1)}>arrow_circle_right</i>
       </Grid>
     )
   }
@@ -151,7 +154,7 @@ const ImageGallery = ({ photos, imgIndex, setImgIndex }) => {
         </Grid>
       </Grid>
       <Modal open={viewOpen} onClose={closeExpandedView}>
-        <ExpandedView  ref/>
+        <ExpandedView photos={photos} imgIndex={imgIndex} setImgIndex={setImgIndex} ref/>
       </Modal>
     </Grid>
   )
