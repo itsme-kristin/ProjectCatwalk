@@ -8,7 +8,7 @@ import AverageRating from '../AverageRating.jsx';
 import Icon from '@material-ui/core/Icon';
 import Modal from '@material-ui/core/Modal';
 import ComparisonModal from './ComparisonModal.jsx';
-
+import Grid from '@material-ui/core/Grid';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -129,7 +129,11 @@ const ProductCard = (props) => {
   return productCardPhoto && productCardInfo && (
     <React.Fragment>
       <Card className={classes.root} variant="outlined">
-        <Icon onClick={openShowComparison} sx={{ fontSize: 10 }} className={classes.icon}>grade</Icon>
+        <Grid container>
+          <Grid item align="right" xs={12}>
+            <Icon onClick={openShowComparison} sx={{ fontSize: 10 }} className={classes.icon}>grade</Icon>
+          </Grid>
+        </Grid>
         <CardMedia
           component='div'
           className={classes.media}
