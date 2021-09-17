@@ -35,35 +35,86 @@ const ProductCard = (props) => {
           avgProductRating: 0,
           totalRatings: 0
           });
+  const [currentProductInfo, setCurrentProductInfo] = useState(null);
   const [showComparison, setShowComparison] = useState(false);
+  const [featureData, setFeatureData] = useState(null);
   const classes = useStyles();
 
-  const openShowComparison = () => {
-    setShowComparison(true);
-  }
-
-  const closeShowComparison = () => {
-    setShowComparison(false);
-  }
 
   const getPhoto = () => {
     axios.get(`/api/products/${props.productId}/styles`)
-      .then(stylesInfo => {
-        setProductCardPhoto(stylesInfo.data.results[0]);
-      })
-      .catch(err => {
-        console.info('There was an error getting product photo from the server.');
-      });
+    .then(stylesInfo => {
+      setProductCardPhoto(stylesInfo.data.results[0]);
+    })
+    .catch(err => {
+      console.info('There was an error getting product photo from the server.');
+    });
   }
 
   const getProductInfo = () => {
     axios.get(`/api/products/${props.productId}`)
-      .then(productInfo => {
-        setProductCardInfo(productInfo.data);
-      })
-      .catch(err => {
-        console.info('There was an error retrieving product information from the server.');
-      });
+    .then(productInfo => {
+      setProductCardInfo(productInfo.data);
+    })
+    .catch(err => {
+      console.info('There was an error retrieving product information from the server.');
+    });
+  }
+
+  const getCurrentProductInfo = () => {
+    axios.get(`/api/products/${props.currentProduct.id}`)
+    .then(productInfo => {
+      setCurrentProductInfo(productInfo.data);
+    })
+    .catch(err => {
+      console.info('There was an error retrieving product information from the server.');
+    });
+  }
+
+  const getFeatureData = () => {
+    const featureData = {};
+
+    for (var i = 0; i < currentProductInfo.features.length; i++) {
+      var currentFeatureObject = currentProductInfo.features[i];
+      var currentFeatureValue = [];
+      if (currentFeatureObject.value === null) {
+        currentFeatureValue.push('yes!');
+      } else {
+        currentFeatureValue.push(currentFeatureObject.value);
+      }
+      currentFeatureValue.push('');
+      featureData[currentFeatureObject.feature] = currentFeatureValue;
+    }
+
+    for (var j = 0; j < productCardInfo.features.length; j++) {
+      var currentFeatureObject = productCardInfo.features[j];
+      if (featureData[currentFeatureObject.feature] !== undefined) {
+        if (currentFeatureObject.value === null) {
+          featureData[currentFeatureObject.feature] = 'yes!';
+        } else {
+          featureData[currentFeatureObject.feature][1] = currentFeatureObject.value;
+        }
+      } else {
+        var currentFeatureValue = [];
+        currentFeatureValue.push('');
+        if (currentFeatureObject.value === null) {
+          currentFeatureValue.push('yes!');
+        } else {
+          currentFeatureValue.push(currentFeatureObject.value);
+        }
+        featureData[currentFeatureObject.feature] = currentFeatureValue;
+      }
+    }
+    setFeatureData(featureData);
+  }
+
+  const openShowComparison = () => {
+    setShowComparison(true);
+    getFeatureData();
+  }
+
+  const closeShowComparison = () => {
+    setShowComparison(false);
   }
 
   const handleProductCardClick = () => {
@@ -73,21 +124,21 @@ const ProductCard = (props) => {
   useEffect(() => {
     getPhoto();
     getProductInfo();
+    getCurrentProductInfo();
   }, []);
 
-  //will add to card once bug is fixed:
-  //onClick={() => handleProductCardClick()}
   return productCardPhoto && productCardInfo && (
     <React.Fragment>
-      <Card className={classes.root} variant="outlined" onClick={() => handleProductCardClick()}>
+      <Card className={classes.root} variant="outlined">
         <Icon onClick={openShowComparison} sx={{ fontSize: 10 }} className={classes.icon}>grade</Icon>
         <CardMedia
           component='div'
           className={classes.media}
           image={productCardPhoto.photos[0].thumbnail_url || ''}
           title={productCardInfo.name}
+          onClick={() => handleProductCardClick()}
         />
-        <CardContent>
+        <CardContent onClick={() => handleProductCardClick()}>
           <div>{productCardInfo.category}</div>
           <h3>{productCardInfo.name}</h3>
           <div>${productCardInfo.default_price}</div>
@@ -100,8 +151,8 @@ const ProductCard = (props) => {
           </div>
         </CardContent>
       </Card>
-      <Modal open={showComparison} onClose={closeShowComparison} productcardinfo={productCardInfo}>
-        <ComparisonModal />
+      <Modal open={showComparison} onClose={closeShowComparison}  >
+        <ComparisonModal featureData={featureData} productCardInfo={productCardInfo} currentProductInfo={currentProductInfo}/>
       </Modal>
     </React.Fragment>
   );

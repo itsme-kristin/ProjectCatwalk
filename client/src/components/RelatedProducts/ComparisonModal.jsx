@@ -10,12 +10,13 @@ const useStyles = makeStyles({
   },
 
   comparisonHeaderBox: {
-    borderBottom: 'solid 2px black'
+    borderBottom: 'solid 2px black',
+    alignItems: 'center'
   },
 
   comparisonModal: {
     position: 'absolute',
-    width: 500,
+    width: 600,
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
@@ -33,15 +34,30 @@ const ComparisonModal = React.forwardRef((props, ref) => {
         COMPARING:
       </Typography>
       <Grid container>
-        <Grid item xs={4} className={classes.comparisonHeaderBox}>
-          <span className={classes.comparisonHeaderValue}>Current Product</span>
+        <Grid item align="left" xs={4} className={classes.comparisonHeaderBox}>
+          <span className={classes.comparisonHeaderValue}>{props.currentProductInfo.name}</span>
         </Grid>
-        <Grid item xs={4} className={classes.comparisonHeaderBox}>
-          <span className={classes.comparisonHeaderValue}></span>
+        <Grid item align="center" xs={4} className={classes.comparisonHeaderBox}>
+          <span className={classes.comparisonHeaderValue}>Features</span>
         </Grid>
-        <Grid item xs={4} className={classes.comparisonHeaderBox}>
-          <span className={classes.comparisonHeaderValue} justify-content="right">Product Card Title</span>
+        <Grid item align="right" xs={4} className={classes.comparisonHeaderBox}>
+          <span className={classes.comparisonHeaderValue}>{props.productCardInfo.name}</span>
         </Grid>
+        {Object.keys(props.featureData).map((feature, index) => {
+          return (
+            <React.Fragment key={index}>
+              <Grid item align="left" xs={4}>
+                <span>{props.featureData[feature][0]}</span>
+              </Grid>
+              <Grid item align="center" xs={4}>
+                <span>{feature}</span>
+              </Grid>
+              <Grid item align="right" xs={4}>
+                <span>{props.featureData[feature][1]}</span>
+              </Grid>
+            </React.Fragment>
+          )
+        })}
       </Grid>
     </Paper>
   )
