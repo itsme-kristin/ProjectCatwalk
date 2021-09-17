@@ -10,7 +10,7 @@ const App = () => {
   const [outfitList, setOutfitList] = useState([]);
 
   useEffect(() => {
-    axios.get('/api/products')
+    axios.get('/api/products?count=10')
       .then(products => {
         setProduct(products.data[0]);
       });
