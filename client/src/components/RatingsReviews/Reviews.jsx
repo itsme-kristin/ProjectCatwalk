@@ -19,9 +19,14 @@ const Reviews = ({ currentProduct }) => {
       .get(`/api/reviews/meta?product_id=${currentProduct.id}`)
       .then(({ data }) => {
         setReviewData(data);
-        const totalReviews = Object.values(data.ratings).reduce((sum, val) => sum + Number(val), 0)
+        const totalReviews = Object.values(data.ratings).reduce(
+          (sum, val) => sum + Number(val),
+          0
+        );
         axios
-          .get(`/api/reviews?product_id=${currentProduct.id}&count=${totalReviews}&sort=${selected}`)
+          .get(
+            `/api/reviews?product_id=${currentProduct.id}&count=${totalReviews}&sort=${selected}`
+          )
           .then(({ data }) => {
             setReviews(data.results);
             setFilteredReviews(data.results);
