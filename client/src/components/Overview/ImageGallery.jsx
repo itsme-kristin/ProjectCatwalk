@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
 
+import ExpandedView from './ExpandedView.jsx'
+
 import { makeStyles } from '@material-ui/core/styles';
-import { Grid, Typography, Paper, Container } from '@material-ui/core';
+import { Grid, Typography, Paper, Modal } from '@material-ui/core';
 
 const useStyles = makeStyles({
   gallery: {
@@ -32,7 +34,9 @@ const useStyles = makeStyles({
 })
 
 const ImageGallery = ({ photos, imgIndex, setImgIndex }) => {
+  const [viewOpen, setViewOpen] = useState(false);
   const classes = useStyles();
+
 
   const grabSevenThumbs = () => {
     let start = 0;
@@ -112,7 +116,9 @@ const ImageGallery = ({ photos, imgIndex, setImgIndex }) => {
 
     return (
       <Grid item>
-        <Paper className={classes.media} style={inline.media} elevation={3}>
+        <Paper className={classes.media}
+          style={inline.media} elevation={3}
+          onClick={openExpandedView}>
         <i className="material-icons"
           style={inline.leftButton}
           onClick={() => setImgIndex(imgIndex - 1)}>arrow_circle_left</i>
@@ -122,6 +128,14 @@ const ImageGallery = ({ photos, imgIndex, setImgIndex }) => {
         </Paper>
       </Grid>
     )
+  }
+
+  const openExpandedView = () => {
+    setViewOpen(true);
+  }
+
+  const closeExpandedView = () => {
+    setViewOpen(false);
   }
 
   return (
@@ -136,6 +150,9 @@ const ImageGallery = ({ photos, imgIndex, setImgIndex }) => {
           {displayImage()}
         </Grid>
       </Grid>
+      <Modal open={viewOpen} onClose={closeExpandedView}>
+        <ExpandedView  ref/>
+      </Modal>
     </Grid>
   )
 }
