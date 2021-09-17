@@ -37,7 +37,6 @@ const OutfitCard = (props) => {
   const getPhoto = () => {
     axios.get(`/api/products/${props.product.id}/styles`)
       .then(stylesInfo => {
-        console.log(stylesInfo.data.results[0]);
         setOutfitCardPhoto(stylesInfo.data.results[0]);
       })
       .catch(err => {
