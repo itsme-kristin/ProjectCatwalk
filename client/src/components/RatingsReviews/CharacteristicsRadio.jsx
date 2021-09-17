@@ -10,7 +10,6 @@ import {
 
 const CharacteristicsRadio = ({ char }) => {
   const [val, setVal] = useState(0);
-
   let labels = [];
 
   if (char[0] === 'Fit') {
