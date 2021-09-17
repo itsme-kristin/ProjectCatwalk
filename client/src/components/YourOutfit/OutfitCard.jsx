@@ -6,6 +6,8 @@ import CardMedia from '@material-ui/core/CardMedia';
 import CardContent from '@material-ui/core/CardContent';
 import Icon from '@material-ui/core/Icon';
 import AverageRating from '../AverageRating.jsx';
+import Grid from '@material-ui/core/Grid';
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -62,7 +64,11 @@ const OutfitCard = (props) => {
   return outfitCardPhoto && outfitCardInfo && (
     <React.Fragment>
       <Card className={classes.root} variant="outlined">
-        <Icon onClick={() => props.handleDeleteOutfitClick(props.product.id)} sx={{ fontSize: 10 }} className={classes.icon}>highlight_off</Icon>
+        <Grid container>
+          <Grid item align="right" xs={12}>
+            <Icon onClick={() => props.handleDeleteOutfitClick(props.product.id)} sx={{ fontSize: 10 }} className={classes.icon}>highlight_off</Icon>
+          </Grid>
+        </Grid>
         <CardMedia
           component='div'
           className={classes.media}
