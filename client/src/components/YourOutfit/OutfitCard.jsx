@@ -7,6 +7,7 @@ import CardContent from '@material-ui/core/CardContent';
 import Icon from '@material-ui/core/Icon';
 import AverageRating from '../AverageRating.jsx';
 import Grid from '@material-ui/core/Grid';
+import Typography from '@material-ui/core/Typography';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -76,9 +77,15 @@ const OutfitCard = (props) => {
           title={outfitCardInfo.name}
         />
         <CardContent>
-          <div>{outfitCardInfo.category}</div>
-          <h3>{outfitCardInfo.name}</h3>
-          <div>${outfitCardInfo.default_price}</div>
+          <Typography>
+            {outfitCardInfo.category}
+          </Typography>
+          <Typography className={classes.title} variant="h6">
+            {outfitCardInfo.name}
+          </Typography>
+          <Typography>
+            ${outfitCardInfo.default_price}
+          </Typography>
           <div>
             <AverageRating
                 productId={props.product.id}
