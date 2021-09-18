@@ -47,7 +47,7 @@ const NewReview = ({ characteristics }) => {
 
   const charArray = Object.entries(characteristics);
   const renderedChars = charArray.map((char, index) => {
-    return <CharacteristicsRadio key={index} char={char} />;
+    return <CharacteristicsRadio key={index} char={char}/>;
   });
 
   return (

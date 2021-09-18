@@ -69,7 +69,6 @@ const CharacteristicsRadio = ({ char }) => {
   }
 
   const label = labels[val - 1];
-  const classes = useStyles();
 
   return (
     <FormControl component='fieldset' required>
