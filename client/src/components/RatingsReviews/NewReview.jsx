@@ -15,6 +15,7 @@ import {
 import { makeStyles } from '@material-ui/core/styles';
 import Rating from '@material-ui/lab/Rating';
 import CharacteristicsRadio from './CharacteristicsRadio.jsx';
+import UploadPhotos from './UploadPhotos.jsx';
 
 const useStyles = makeStyles({
   modal: {
@@ -47,7 +48,7 @@ const NewReview = ({ characteristics }) => {
 
   const charArray = Object.entries(characteristics);
   const renderedChars = charArray.map((char, index) => {
-    return <CharacteristicsRadio key={index} char={char} />;
+    return <CharacteristicsRadio key={index} char={char}/>;
   });
 
   return (
@@ -123,6 +124,14 @@ const NewReview = ({ characteristics }) => {
               >
                 {renderedChars}
               </RadioGroup>
+            </FormControl>
+          </Grid>
+          <Grid item xs={12}>
+            <FormControl component='fieldset'>
+              <FormLabel component='legend'>
+                Photos
+              </FormLabel>
+              <UploadPhotos />
             </FormControl>
           </Grid>
           <Grid item xs={12}>
