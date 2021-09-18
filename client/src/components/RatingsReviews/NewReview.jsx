@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 import {
   Grid,
   TextField,
-  MenuItem,
   Modal,
   Button,
   Typography,
@@ -30,10 +30,10 @@ const useStyles = makeStyles({
   }
 });
 
-const NewReview = ({ characteristics }) => {
+const NewReview = ({ productId, characteristics }) => {
   const [open, setOpen] = useState(false);
   const reviewObj = {
-    product_id: null,
+    product_id: productId,
     rating: 0,
     summary: '',
     body: '',
@@ -54,6 +54,17 @@ const NewReview = ({ characteristics }) => {
       setReview({ ...review, [key]: value})
     }
   }
+
+  const postReview = () => {
+    axios.post('/api/reviews', review)
+      .then(() => {
+        console.log('Posted review')
+      })
+      .catch(() => {
+        console.log('Error posting review')
+      })
+  }
+
   const charArray = Object.entries(characteristics);
   const renderedChars = charArray.map((char, index) => {
     return <CharacteristicsRadio key={index} char={char} handleFormChange={handleFormChange} />;
@@ -159,6 +170,14 @@ const NewReview = ({ characteristics }) => {
               value={review.email}
               onChange={(e) => handleFormChange('email', e.target.value)}
             />
+          </Grid>
+          <Grid item xs={12}>
+            <Button
+              variant='outlined'
+              onClick={() => postReview()}
+            >
+              Submit Review
+            </Button>
           </Grid>
         </Grid>
       </Modal>
