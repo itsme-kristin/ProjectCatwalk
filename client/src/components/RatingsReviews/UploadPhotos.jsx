@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Button, Modal, Grid, TextField, Paper } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
-const UploadPhotos = () => {
+const UploadPhotos = ({ handleFormChange }) => {
   const [photos, setPhotos] = useState([]);
   const [url, setUrl] = useState('');
   const [open, setOpen] = useState(false);
@@ -49,6 +49,11 @@ const UploadPhotos = () => {
       </Button>
     ) : null;
 
+  const handleClick = () => {
+    handleFormChange('photos', photos);
+    setOpen(false);
+  };
+
   return (
     <React.Fragment>
       <Button variant='outlined' onClick={() => setOpen(true)}>
@@ -71,7 +76,9 @@ const UploadPhotos = () => {
           </Grid>
           <Grid item xs={10}>
             {showAddPhotoButton}
-            <Button variant='outlined' onClick={() => setOpen(false)}>Done</Button>
+            <Button variant='outlined' onClick={() => handleClick()}>
+              Done
+            </Button>
           </Grid>
         </Grid>
       </Modal>

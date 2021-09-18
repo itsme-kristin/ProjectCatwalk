@@ -8,7 +8,7 @@ import {
   RadioGroup
 } from '@material-ui/core';
 
-const CharacteristicsRadio = ({ char }) => {
+const CharacteristicsRadio = ({ char, handleFormChange }) => {
   const [val, setVal] = useState(0);
   let labels = [];
 
@@ -80,7 +80,8 @@ const CharacteristicsRadio = ({ char }) => {
         name={char[0]}
         value={val}
         onChange={e => {
-          setVal(e.target.value);
+          setVal(Number(e.target.value));
+          handleFormChange(`characteristics`, Number(e.target.value), char[1].id)
         }}
       >
         <FormControlLabel

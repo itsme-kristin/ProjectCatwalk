@@ -46,9 +46,17 @@ const NewReview = ({ characteristics }) => {
   const [review, setReview] = useState(reviewObj);
   const classes = useStyles();
 
+
+  const handleFormChange = (key, value, charKey) => {
+    if (key === 'characteristics') {
+      setReview({...review, [key]: { ...review[key], [charKey]: value }})
+    } else {
+      setReview({ ...review, [key]: value})
+    }
+  }
   const charArray = Object.entries(characteristics);
   const renderedChars = charArray.map((char, index) => {
-    return <CharacteristicsRadio key={index} char={char}/>;
+    return <CharacteristicsRadio key={index} char={char} handleFormChange={handleFormChange} />;
   });
 
   return (
@@ -65,8 +73,7 @@ const NewReview = ({ characteristics }) => {
                 name='overall-rating'
                 value={review.rating}
                 onChange={(e, newValue) => {
-                  reviewObj.rating = newValue;
-                  setReview(reviewObj);
+                  handleFormChange('rating', newValue)
                 }}
               />
             </FormControl>
@@ -75,7 +82,8 @@ const NewReview = ({ characteristics }) => {
             <TextField
               name='summary'
               label='Summary'
-              defaultValue={review.summary}
+              value={review.summary}
+              onChange={(e) => handleFormChange('summary', e.target.value)}
             />
           </Grid>
           <Grid item xs={12}>
@@ -84,7 +92,8 @@ const NewReview = ({ characteristics }) => {
               multiline
               name='body'
               label='Body'
-              defaultValue={review.body}
+              value={review.body}
+              onChange={(e) => handleFormChange('body', e.target.value)}
             />
           </Grid>
           <Grid item xs={12}>
@@ -97,8 +106,7 @@ const NewReview = ({ characteristics }) => {
                 name='recommend'
                 value={review.recommend}
                 onChange={e => {
-                  reviewObj.recommend = e.target.value;
-                  setReview(reviewObj);
+                  handleFormChange('recommend', e.target.value === 'true');
                 }}
               >
                 <FormControlLabel
@@ -131,7 +139,7 @@ const NewReview = ({ characteristics }) => {
               <FormLabel component='legend'>
                 Photos
               </FormLabel>
-              <UploadPhotos />
+              <UploadPhotos handleFormChange={handleFormChange} />
             </FormControl>
           </Grid>
           <Grid item xs={12}>
@@ -139,7 +147,8 @@ const NewReview = ({ characteristics }) => {
               required
               label='Nickname'
               name='name'
-              defaultValue={review.name}
+              value={review.name}
+              onChange={(e) => handleFormChange('name', e.target.value)}
             />
           </Grid>
           <Grid item xs={12}>
@@ -147,7 +156,8 @@ const NewReview = ({ characteristics }) => {
               required
               name='email'
               label='Email'
-              defaultValue={review.email}
+              value={review.email}
+              onChange={(e) => handleFormChange('email', e.target.value)}
             />
           </Grid>
         </Grid>
