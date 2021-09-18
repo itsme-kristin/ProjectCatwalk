@@ -174,7 +174,10 @@ const NewReview = ({ productId, characteristics }) => {
           <Grid item xs={12}>
             <Button
               variant='outlined'
-              onClick={() => postReview()}
+              onClick={() => {
+                postReview();
+                setOpen(false);
+              }}
             >
               Submit Review
             </Button>
