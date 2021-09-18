@@ -9,6 +9,8 @@ import Icon from '@material-ui/core/Icon';
 import Modal from '@material-ui/core/Modal';
 import ComparisonModal from './ComparisonModal.jsx';
 import Grid from '@material-ui/core/Grid';
+import Typography from '@material-ui/core/Typography';
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -24,16 +26,19 @@ const useStyles = makeStyles((theme) => ({
   icon: {
     position: 'relative to parent',
     top: 5,
-  }
+  },
+  title: {
+    fontWeight: '700',
+  },
 }));
 
 const ProductCard = (props) => {
   const [productCardInfo, setProductCardInfo] = useState(null);
   const [productCardPhoto, setProductCardPhoto] = useState(null);
   const [ratingsInfo, setRatingsInfo] = useState({
-          avgProductRating: 0,
-          totalRatings: 0
-          });
+    avgProductRating: 0,
+    totalRatings: 0
+  });
   const [currentProductInfo, setCurrentProductInfo] = useState(null);
   const [showComparison, setShowComparison] = useState(false);
   const [featureData, setFeatureData] = useState(null);
@@ -42,32 +47,32 @@ const ProductCard = (props) => {
 
   const getPhoto = () => {
     axios.get(`/api/products/${props.productId}/styles`)
-    .then(stylesInfo => {
-      setProductCardPhoto(stylesInfo.data.results[0]);
-    })
-    .catch(err => {
-      console.info('There was an error getting product photo from the server.');
-    });
+      .then(stylesInfo => {
+        setProductCardPhoto(stylesInfo.data.results[0]);
+      })
+      .catch(err => {
+        console.info('There was an error getting product photo from the server.');
+      });
   }
 
   const getProductInfo = () => {
     axios.get(`/api/products/${props.productId}`)
-    .then(productInfo => {
-      setProductCardInfo(productInfo.data);
-    })
-    .catch(err => {
-      console.info('There was an error retrieving product information from the server.');
-    });
+      .then(productInfo => {
+        setProductCardInfo(productInfo.data);
+      })
+      .catch(err => {
+        console.info('There was an error retrieving product information from the server.');
+      });
   }
 
   const getCurrentProductInfo = () => {
     axios.get(`/api/products/${props.currentProduct.id}`)
-    .then(productInfo => {
-      setCurrentProductInfo(productInfo.data);
-    })
-    .catch(err => {
-      console.info('There was an error retrieving product information from the server.');
-    });
+      .then(productInfo => {
+        setCurrentProductInfo(productInfo.data);
+      })
+      .catch(err => {
+        console.info('There was an error retrieving product information from the server.');
+      });
   }
 
   const getFeatureData = () => {
@@ -142,20 +147,26 @@ const ProductCard = (props) => {
           onClick={() => handleProductCardClick()}
         />
         <CardContent onClick={() => handleProductCardClick()}>
-          <div>{productCardInfo.category}</div>
-          <h3>{productCardInfo.name}</h3>
-          <div>${productCardInfo.default_price}</div>
+          <Typography >
+            {productCardInfo.category}
+          </Typography>
+          <Typography className={classes.title} variant="h6">
+            {productCardInfo.name}
+          </Typography>
+          <Typography>
+            ${productCardInfo.default_price}
+          </Typography>
           <div>
             <AverageRating
-                productId={props.productId}
-                avgProductRating={ratingsInfo.avgProductRating}
-                setRatingsInfo={setRatingsInfo}
-              />
+              productId={props.productId}
+              avgProductRating={ratingsInfo.avgProductRating}
+              setRatingsInfo={setRatingsInfo}
+            />
           </div>
         </CardContent>
       </Card>
       <Modal open={showComparison} onClose={closeShowComparison}  >
-        <ComparisonModal featureData={featureData} productCardInfo={productCardInfo} currentProductInfo={currentProductInfo}/>
+        <ComparisonModal featureData={featureData} productCardInfo={productCardInfo} currentProductInfo={currentProductInfo} />
       </Modal>
     </React.Fragment>
   );
