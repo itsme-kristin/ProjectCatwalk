@@ -137,7 +137,7 @@ const ProductCard = (props) => {
         <CardMedia
           component='div'
           className={classes.media}
-          image={productCardPhoto.photos[0].thumbnail_url || ''}
+          image={productCardPhoto.photos[0].thumbnail_url || 'https://media.istockphoto.com/photos/hangers-on-pole-picture-id91001400?b=1&k=20&m=91001400&s=170667a&w=0&h=Ni2lbk6vK2n9PuYSjZ0oR-Vsqfosr1UYuDuHhYmSboE='}
           title={productCardInfo.name}
           onClick={() => handleProductCardClick()}
         />
