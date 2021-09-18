@@ -7,6 +7,7 @@ import CardContent from '@material-ui/core/CardContent';
 import Icon from '@material-ui/core/Icon';
 import Typography from '@material-ui/core/Typography';
 import OutfitCard from './OutfitCard.jsx';
+import Grid from '@material-ui/core/Grid';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -15,17 +16,13 @@ const useStyles = makeStyles((theme) => ({
     },
     width: 200,
     height: 330,
+    border: "solid 3px black"
   },
   title: {
-    fontSize: 30,
+    fontSize: 35,
   },
-  pos: {
-    marginBottom: 12,
-  }
-}));
+  }));
 
-//add to card:
-//onClick={() => props.handleAddOutfitClick()}
 const AddOutfitButton = (props) => {
   const classes = useStyles();
 
@@ -33,13 +30,29 @@ const AddOutfitButton = (props) => {
   return (
     <React.Fragment>
       <Card className={classes.root} variant="outlined" onClick={() => props.handleAddOutfitClick()}>
-        <CardContent>
-          <Typography className={classes.title} gutterBottom>
-            Add to Your Outfit
-          </Typography>
-          <div className={classes.root}>
-            <Icon style={{ fontSize: 50}}>add_circle</Icon>
-          </div>
+        <CardContent >
+          <Grid container direction="column">
+            <Grid container direction="row" item>
+              <Grid item xs={1}>
+              </Grid>
+              <Grid item xs={10} align="center">
+                <Typography className={classes.title} gutterBottom>
+                Add To Your Outfit!
+                </Typography>
+              </Grid>
+              <Grid item xs={1}>
+              </Grid>
+            </Grid>
+            <Grid container direction="row" item>
+              <Grid item xs={2}>
+              </Grid>
+              <Grid item xs={4}>
+                  <Icon style={{ fontSize: 100}}>add_circle</Icon>
+              </Grid>
+              <Grid item xs={6}>
+              </Grid>
+            </Grid>
+          </Grid>
         </CardContent>
       </Card>
     </React.Fragment>
