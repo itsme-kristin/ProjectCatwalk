@@ -3,8 +3,17 @@ import ItemsCarousel from 'react-items-carousel';
 import AddOutfitButton from './AddOutfitButton.jsx';
 import OutfitCard from './OutfitCard.jsx';
 import Grid from '@material-ui/core/Grid';
+import Typography from '@material-ui/core/Typography';
+import { makeStyles } from '@material-ui/core/styles';
+
+const useStyles = makeStyles((theme) => ({
+  title: {
+    fontSize: 20,
+  }
+}));
 
 const YourOutfit = (props) => {
+  const classes = useStyles();
   const [activeItemIndex, setActiveItemIndex] = useState(0);
   const chevronWidth = 40;
 
@@ -38,7 +47,9 @@ const YourOutfit = (props) => {
 
   return (
     <React.Fragment>
-      <h3>YOUR OUTFIT</h3>
+      <Typography className={classes.title} variant="h4" gutterBottom>
+        YOUR OUTFIT
+      </Typography>
       <Grid container direction="row">
         <Grid item xs={2}>
           <AddOutfitButton handleAddOutfitClick={handleAddOutfitClick}/>

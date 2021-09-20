@@ -2,10 +2,17 @@ import React, { useState, useEffect } from 'react';
 import ProductCard from './ProductCard.jsx';
 import axios from 'axios';
 import ItemsCarousel from 'react-items-carousel';
+import Typography from '@material-ui/core/Typography';
+import { makeStyles } from '@material-ui/core/styles';
 
-
+const useStyles = makeStyles((theme) => ({
+  title: {
+    fontSize: 20,
+  }
+}));
 
 const RelatedProducts = (props) => {
+  const classes = useStyles();
   const [relatedProductsList, setRelatedProductsList] = useState(null);
   const [activeItemIndex, setActiveItemIndex] = useState(0);
   const chevronWidth = 40;
@@ -20,9 +27,11 @@ const RelatedProducts = (props) => {
       })
   }, []);
 
-  return relatedProductsList && ( // this is called lazy eval
+  return relatedProductsList && (
     <React.Fragment>
-      <h3>RELATED PRODUCTS</h3>
+      <Typography className={classes.title} variant="h4" gutterBottom>
+        RELATED PRODUCTS
+      </Typography>
       <div style={{ padding: `0 ${chevronWidth}px` }}>
         <ItemsCarousel
           requestToChangeActive={setActiveItemIndex}
