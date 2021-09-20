@@ -18,7 +18,7 @@ const App = () => {
   const classes = useStyles();
   const [productId, setProductId] = useState(38322);
   const [product, setProduct] = useState(null);
-  const [productMeta, setProductMeta] = useState({});
+  const [productMeta, setProductMeta] = useState(null);
   const [outfitList, setOutfitList] = useState([]);
 
   useEffect(() => {
@@ -39,7 +39,7 @@ const App = () => {
         <Overview productId={product.id}/>
         <RelatedProducts currentProduct={product} setProduct={setProduct}/>
         <YourOutfit currentProduct={product} outfitList={outfitList} setOutfitList={setOutfitList}/>
-        <Reviews currentProduct={product} />
+        <Reviews currentProduct={product} productMeta={productMeta} />
         </React.Fragment>
       </Container>
     );

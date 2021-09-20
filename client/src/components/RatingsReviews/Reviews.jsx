@@ -7,36 +7,31 @@ import RatingsBreakdown from './RatingsBreakdown.jsx';
 import SortingDropdown from './SortingDropdown.jsx';
 import NewReview from './NewReview.jsx';
 
-const Reviews = ({ currentProduct }) => {
+const Reviews = ({ currentProduct, productMeta }) => {
   const [reviews, setReviews] = useState([]);
   const [filteredReviews, setFilteredReviews] = useState([]);
   const [filters, setFilters] = useState([]);
   const [reviewData, setReviewData] = useState(null);
   const [selected, setSelected] = useState('relevant');
 
+  console.log(productMeta)
+
+  const totalReviews = Object.values(productMeta).reduce(
+    (sum, val) => sum + Number(val),
+    0
+  );
+
   useEffect(() => {
     axios
-      .get(`/api/reviews/meta?product_id=${currentProduct.id}`)
+      .get(
+        `/api/reviews?product_id=${currentProduct.id}&count=${totalReviews}&sort=${selected}`
+      )
       .then(({ data }) => {
-        setReviewData(data);
-        const totalReviews = Object.values(data.ratings).reduce(
-          (sum, val) => sum + Number(val),
-          0
-        );
-        axios
-          .get(
-            `/api/reviews?product_id=${currentProduct.id}&count=${totalReviews}&sort=${selected}`
-          )
-          .then(({ data }) => {
-            setReviews(data.results);
-            setFilteredReviews(data.results);
-          })
-          .catch(() => {
-            console.log('error getting reviews');
-          });
+        setReviews(data.results);
+        setFilteredReviews(data.results);
       })
       .catch(() => {
-        console.log('error getting review metadata');
+        console.log('error getting reviews');
       });
   }, [selected]);
 
