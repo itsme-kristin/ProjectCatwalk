@@ -6,8 +6,8 @@ import Typography from '@material-ui/core/Typography';
 import Icon from '@material-ui/core/Icon';
 
 const useStyles = makeStyles({
-  comparisonHeaderValue: {
-    fontWeight: 700
+  title: {
+    fontWeight: '700',
   },
 
   comparisonHeaderBox: {
@@ -42,17 +42,17 @@ const ComparisonModal = React.forwardRef(({ featureData, productCardInfo, curren
       <Grid container>
         <Grid item align="left" xs={4} className={classes.comparisonHeaderBox}>
           <span className={classes.comparisonHeaderValue}>
-            <Typography>{currentProductInfo.name}</Typography>
+            <Typography className={classes.title}>{currentProductInfo.name}</Typography>
           </span>
         </Grid>
         <Grid item align="center" xs={4} className={classes.comparisonHeaderBox}>
           <span className={classes.comparisonHeaderValue}>
-            <Typography>Features</Typography>
+            <Typography className={classes.title}>Features</Typography>
           </span>
         </Grid>
         <Grid item align="right" xs={4} className={classes.comparisonHeaderBox}>
           <span className={classes.comparisonHeaderValue}>
-            <Typography>{productCardInfo.name}</Typography>
+            <Typography className={classes.title}>{productCardInfo.name}</Typography>
           </span>
         </Grid>
         {Object.keys(featureData).map((feature, index) => {
