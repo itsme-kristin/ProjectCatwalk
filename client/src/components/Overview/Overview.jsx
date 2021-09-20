@@ -38,7 +38,6 @@ const Overview = ({ product, productId }) => {
   useEffect(() => {
     axios.get(`/api/products/${product.id}/styles`)
     .then(({ data }) => {
-      console.log('styles retireved:', data.results)
       setStyles(data.results);
       setStyleIndex(0);
     }).catch((err) => {

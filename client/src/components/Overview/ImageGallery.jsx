@@ -38,7 +38,6 @@ const ImageGallery = ({ photos }) => {
   const [imgIndex, setImgIndex] = useState(0);
   const classes = useStyles();
 
-  console.log('p.length', photos.length, 'i.index:', imgIndex, 'p.url,', photos[imgIndex]?.url)
   if (imgIndex > photos.length - 1) {
     setImgIndex(photos.length - 1)
     return null
