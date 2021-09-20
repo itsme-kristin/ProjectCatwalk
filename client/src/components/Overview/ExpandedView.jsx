@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import InnerImageZoom from 'react-inner-image-zoom'
 
 import { makeStyles } from '@material-ui/core/styles';
 import { Grid, Typography, Paper} from '@material-ui/core';
@@ -75,8 +76,9 @@ const ExpandedView = React.forwardRef(({ photos, imgIndex, setImgIndex, close },
         </Grid>
       </Grid>
       <Grid item xs={12} >
-        <Grid container justifyContent="center">
-          <img className={classes.viewImage} src={photos[imgIndex].url}/>
+        <Grid container className={classes.viewImage} justifyContent="center">
+          {/* <img className={classes.viewImage} src={photos[imgIndex].url}/> */}
+          <InnerImageZoom src={photos[imgIndex].url}/>
         </Grid>
       </Grid>
       <Grid item xs={12}>
