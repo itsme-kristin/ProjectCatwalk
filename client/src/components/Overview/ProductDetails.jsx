@@ -46,7 +46,7 @@ const useStyles = makeStyles({
   }
 })
 
-const ProductDetails = ({currentProduct, productStyles, styleIndex, imgIndex, setStyleIndex, setImgIndex}) => {
+const ProductDetails = ({product, styles, styleIndex, setStyleIndex }) => {
   const classes = useStyles();
   const [stock, setStock] = useState([]);
   const [skuIndex, setSkuIndex] = useState('');
@@ -58,7 +58,7 @@ const ProductDetails = ({currentProduct, productStyles, styleIndex, imgIndex, se
   })
 
   useEffect(() => {
-    var skus = {...productStyles[styleIndex]["skus"]};
+    var skus = {...styles[styleIndex]["skus"]};
     var availableStock = [];
     for (var sku in skus) {
       if (skus[sku].quantity !== 0) {
@@ -76,17 +76,17 @@ const ProductDetails = ({currentProduct, productStyles, styleIndex, imgIndex, se
   }, [styleIndex])
 
   const displayPrice = () => {
-    if (productStyles[styleIndex]["sale_price"]) {
+    if (styles[styleIndex]["sale_price"]) {
       return (
         <React.Fragment>
           <Grid item xs={12}>
             <Typography className={classes.salePrice} variant="h6">
-              {productStyles[styleIndex]["sale_price"]}
+              {styles[styleIndex]["sale_price"]}
             </Typography>
           </Grid>
           <Grid item xs={12}>
             <Typography variant="overline" gutterBottom>
-            Original Price: <span className={classes.lineThrough}>{productStyles[styleIndex]["original_price"]}</span>
+            Original Price: <span className={classes.lineThrough}>{styles[styleIndex]["original_price"]}</span>
             </Typography>
           </Grid>
         </React.Fragment>
@@ -95,7 +95,7 @@ const ProductDetails = ({currentProduct, productStyles, styleIndex, imgIndex, se
       return (
         <React.Fragment>
           <Typography variant="h6" gutterBottom>
-            {productStyles[styleIndex]["original_price"]}
+            {styles[styleIndex]["original_price"]}
           </Typography>
         </React.Fragment>
       )
@@ -190,7 +190,7 @@ const ProductDetails = ({currentProduct, productStyles, styleIndex, imgIndex, se
     <Grid container className={classes.root} direction="column" alignItems="stretch">
       <Grid container alignItems="center" className={classes.rating}>
         <AverageRating
-          productId={currentProduct.id}
+          productId={product.id}
           avgProductRating={ratingsInfo.avgProductRating}
           setRatingsInfo={setRatingsInfo}
         />
@@ -199,20 +199,18 @@ const ProductDetails = ({currentProduct, productStyles, styleIndex, imgIndex, se
         </Typography>
       </Grid>
       <Typography variant="h6">
-        {currentProduct.category}
+        {product.category}
       </Typography>
       <Typography className={classes.category} variant="h3" gutterBottom>
-        {currentProduct.name}
+        {product.name}
       </Typography>
       <Grid container className={classes.price}>
         {displayPrice()}
       </Grid>
        <StyleSelector
-        productStyles={productStyles}
+        styles={styles}
         styleIndex={styleIndex}
-        imgIndex={imgIndex}
         setStyleIndex={setStyleIndex}
-        setImgIndex={setImgIndex}
       />
       <Grid container spacing={1}>
         <Grid item xs={8}>
@@ -226,8 +224,8 @@ const ProductDetails = ({currentProduct, productStyles, styleIndex, imgIndex, se
         </Grid>
         <Grid item xs={12} md={4}>
           <SocialMediaShare
-            productName={currentProduct.name}
-            photoUrl={productStyles[styleIndex]["photos"][0]["thumbnail_url"]}
+            productName={product.name}
+            photoUrl={styles[styleIndex]["photos"][0]["thumbnail_url"]}
           />
         </Grid>
       </Grid>

@@ -30,35 +30,29 @@ const useStyles = makeStyles({
 });
 
 
-const Overview = ({ productId }) => {
+const Overview = ({ product, productId }) => {
   const classes = useStyles();
-  const [productDetails, setProductDetails] = useState(null)
+  const [styles, setStyles] = useState([]);
   const [styleIndex, setStyleIndex] = useState(0);
-  const [imgIndex, setImgIndex] = useState(0);
 
   useEffect(() => {
-    let currentProductDetails = {};
-    axios.get(`/api/products/${productId}`)
+    axios.get(`/api/products/${product.id}/styles`)
     .then(({ data }) => {
-      currentProductDetails["productInfo"] = data;
-      return axios.get(`/api/products/${productId}/styles`);
-    }).then(({ data }) => {
-      currentProductDetails["productStyles"] = data.results;
-      setProductDetails(currentProductDetails);
+      setStyles(data.results);
+      setStyleIndex(0);
     }).catch((err) => {
       console.log('Unable to retireve product details')
     });
-  }, [productId])
+  }, [product])
 
 
-  if (productDetails === null) {
+  if (styles.length === 0) {
     return <CircularProgress />
   }
 
   const showDetails = () => {
-    let slogan = productDetails.productInfo.slogan;
-    let description = productDetails.productInfo.description
-    let features = productDetails.productInfo.features
+    let { slogan, description, features } = product;
+
     if (!!slogan || !!description || features.length !== 0) {
       return (
         <Grid container className={classes.root}>
@@ -98,18 +92,15 @@ const Overview = ({ productId }) => {
       >
         <Grid item xs={7}>
           <ImageGallery
-          photos={productDetails.productStyles[styleIndex].photos}
-          imgIndex={imgIndex}
-          setImgIndex={setImgIndex}/>
+          photos={styles[styleIndex].photos}
+          />
         </Grid>
         <Grid item xs={5}>
           <ProductDetails
-            currentProduct={productDetails.productInfo}
-            productStyles={productDetails.productStyles}
+            product={product}
+            styles={styles}
             styleIndex={styleIndex}
-            imgIndex={imgIndex}
             setStyleIndex={setStyleIndex}
-            setImgIndex={setImgIndex}
           />
         </Grid>
         {showDetails()}
