@@ -3,6 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper'
 import Typography from '@material-ui/core/Typography';
+import Icon from '@material-ui/core/Icon';
 
 const useStyles = makeStyles({
   comparisonHeaderValue: {
@@ -23,6 +24,11 @@ const useStyles = makeStyles({
     backgroundColor: 'white',
     padding: '10px'
   },
+
+  comparisonContentBox: {
+    borderBottom: 'solid 1px grey',
+    padding: '15px',
+  }
 });
 
 const ComparisonModal = React.forwardRef(({ featureData, productCardInfo, currentProductInfo }, ref) => {
@@ -46,14 +52,16 @@ const ComparisonModal = React.forwardRef(({ featureData, productCardInfo, curren
         {Object.keys(featureData).map((feature, index) => {
           return (
             <React.Fragment key={index}>
-              <Grid item align="left" xs={4}>
-                <span>{featureData[feature][0]}</span>
-              </Grid>
-              <Grid item align="center" xs={4}>
-                <span>{feature}</span>
-              </Grid>
-              <Grid item align="right" xs={4}>
-                <span>{featureData[feature][1]}</span>
+              <Grid container className={classes.comparisonContentBox}>
+                <Grid item align="left" xs={4}>
+                  {featureData[feature][0] === "yes!" ? <Icon xs={{ fontSize: 8}}>check</Icon> : <span>{featureData[feature][0]}</span>}
+                </Grid>
+                <Grid item align="center" xs={4}>
+                  <span>{feature}</span>
+                </Grid>
+                <Grid item align="right" xs={4}>
+                {featureData[feature][1] === "yes!" ? <Icon xs={{ fontSize: 8}}>check</Icon> : <span>{featureData[feature][1]}</span>}
+                </Grid>
               </Grid>
             </React.Fragment>
           )
