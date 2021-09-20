@@ -46,16 +46,13 @@ const useStyles = makeStyles({
   }
 })
 
-const ProductDetails = ({product, styles, styleIndex, setStyleIndex }) => {
+const ProductDetails = ({product, productMeta, styles, styleIndex, setStyleIndex }) => {
   const classes = useStyles();
   const [stock, setStock] = useState([]);
   const [skuIndex, setSkuIndex] = useState('');
   const [selectedSku, setSelectedSku] = useState(null);
   const [selectedQty, setSelectedQty] = useState(null);
-  const [ratingsInfo, setRatingsInfo] = useState({
-    avgProductRating: 0,
-    totalRatings: 0
-  })
+  const [totalRatings, setTotalRatings] = useState(0);
 
   useEffect(() => {
     var skus = {...styles[styleIndex]["skus"]};
@@ -189,13 +186,9 @@ const ProductDetails = ({product, styles, styleIndex, setStyleIndex }) => {
   return (
     <Grid container className={classes.root} direction="column" alignItems="stretch">
       <Grid container alignItems="center" className={classes.rating}>
-        <AverageRating
-          productId={product.id}
-          avgProductRating={ratingsInfo.avgProductRating}
-          setRatingsInfo={setRatingsInfo}
-        />
+        <AverageRating productMeta={productMeta} totalRatingsSetter={setTotalRatings} totalRatings={totalRatings}/>
         <Typography variant="caption" className={classes.reviewsLink}>
-           <a href="#reviews">Read all {ratingsInfo.totalRatings} reviews</a>
+           <a href="#reviews">Read all {totalRatings} reviews</a>
         </Typography>
       </Grid>
       <Typography variant="h6">
