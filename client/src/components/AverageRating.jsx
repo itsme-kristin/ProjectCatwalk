@@ -4,6 +4,13 @@ import axios from 'axios';
 import Rating from '@material-ui/lab/Rating';
 
 const getRatingInfo = (ratings) => {
+  if (ratings.length === 0) {
+    return {
+      average: 0,
+      total: 0
+    }
+  }
+
   const weight = 5;
   let sum = 0;
   let ratingCount = 0;
@@ -15,48 +22,59 @@ const getRatingInfo = (ratings) => {
     ratingCount += ratingVal
   }
 
-  let average = (sum / (ratingCount * weight)) * weight
-
   return {
-    avgProductRating: average,
-    totalRatings: ratingCount
+    average: (sum / (ratingCount * weight)) * weight,
+    total: ratingCount
   }
 };
 
 
-/** READ ME **
- *  you need to set a useState constant on the Componenet where you're calling
- *  AverageRating from... like so:
+/**
+ *  AverageRating 2.0
+ *  <<<< READ ME >>>>
  *
- *  const [ratingsInfo, setRatingsInfo] = useState({
- *    avgProductRating: 0,
- *    totalRatings: 0
- *  })
+ *  IMPLEMENTATION:
+ *  Simply pass in the productMeta as a prop called productMeta to the
+ *  AverageRating component, and it will do the rest.
  *
- *  Pass the product id, the ratingsInfo.avgProductRating and the setter as props
- *  Doing so will give your component access to ratingsInfo.totalRatings for use.
- *  This may need to be refactored later...
- */
+ *  EXAMPLE:
+ *  <AverageRating productMeta={productMeta} />
+ *
+ *  OPTIONS:
+ *
+ *  If you want the total reviews count, setup a state in your parent component
+ *  to store the total, and then send the setter back through the totalRatingsSetter prop
+ *
+ *  EXAMPLE:
+ *  const [totalRatings, setTotalRatings] = useState(0);
+ *  <AverageRating productMeta={productMeta} totalRatingsSetter={setTotalRatings} />
+ *
+ *  You can indicate if you always want the Rating to show, even if there
+ *  are no reviews by setting a "alwaysShow" prop to true.
+ *
+ *  EXAMPLE:
+ *  <AverageRating productMeta={productMeta} alwaysShow={true} />
+ *
+ **/
 
 
-const AverageRating = ({ productId, avgProductRating, setRatingsInfo }) => {
+const AverageRating = ({ productMeta , alwaysShow = false, totalRatingsSetter }) => {
+  const [ratingInfo, setRatingInfo] = useState(getRatingInfo(productMeta.ratings))
 
   useEffect(() => {
-    axios.get(`api/reviews/meta?product_id=${productId}`)
-    .then(({ data }) => {
-      setRatingsInfo(getRatingInfo(data.ratings))
-    }).catch((err) => {
-      console.log('Unable to retrieve ratings info', err);
-    })
-  }, [productId]);
+      if (totalRatingsSetter) {
+        totalRatingsSetter(ratingInfo.total)
+      }
+  }, [productMeta]);
 
-  if (avgProductRating === null) {
-    return <CircularProgress />
+
+  if (ratingInfo.average === 0 && !alwaysShow) {
+    return null
   }
 
   return (
     <React.Fragment>
-      <Rating name="avgProductRating" value={avgProductRating}  precision={0.25} readOnly />
+      <Rating name="averageRating" value={ratingInfo.average}  precision={0.25} readOnly />
     </React.Fragment>
   )
 }

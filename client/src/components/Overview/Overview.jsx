@@ -30,7 +30,7 @@ const useStyles = makeStyles({
 });
 
 
-const Overview = ({ product, productId }) => {
+const Overview = ({ product, productMeta }) => {
   const classes = useStyles();
   const [styles, setStyles] = useState([]);
   const [styleIndex, setStyleIndex] = useState(0);
@@ -98,6 +98,7 @@ const Overview = ({ product, productId }) => {
         <Grid item xs={5}>
           <ProductDetails
             product={product}
+            productMeta={productMeta}
             styles={styles}
             styleIndex={styleIndex}
             setStyleIndex={setStyleIndex}
