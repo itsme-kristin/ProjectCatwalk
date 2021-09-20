@@ -73,7 +73,7 @@ const Reviews = ({ currentProduct }) => {
     return (
       <div>
         Ratings & Reviews
-        <NewReview characteristics={reviewData.characteristics} />
+        <NewReview productId={currentProduct.id} characteristics={reviewData.characteristics} />
         <Grid container spacing={2}>
           <Grid item xs={3} container spacing={1}>
             <Grid item xs={12}>
