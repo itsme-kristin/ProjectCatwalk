@@ -6,13 +6,14 @@ import YourOutfit from './YourOutfit/YourOutfit.jsx';
 import Overview from './Overview/Overview.jsx';
 
 const App = () => {
+  const [productId, setProductId] = useState(38322)
   const [product, setProduct] = useState(null);
   const [outfitList, setOutfitList] = useState([]);
 
   useEffect(() => {
-    axios.get('/api/products?count=10')
+    axios.get(`/api/products/${productId}`)
       .then(products => {
-        setProduct(products.data[0]);
+        setProduct(products.data);
       });
   }, []);
 
