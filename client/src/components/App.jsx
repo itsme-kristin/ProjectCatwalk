@@ -31,7 +31,7 @@ const App = () => {
       });
   }, [productId]);
 
-  if (product) {
+  if (product && productMeta) {
     return (
       <Container maxWidth="lg" className={classes.root}>
         <React.Fragment>
