@@ -14,14 +14,12 @@ const Reviews = ({ currentProduct, productMeta }) => {
   const [reviewData, setReviewData] = useState(null);
   const [selected, setSelected] = useState('relevant');
 
-  console.log(productMeta)
-
-  const totalReviews = Object.values(productMeta).reduce(
-    (sum, val) => sum + Number(val),
-    0
-  );
-
   useEffect(() => {
+    const totalReviews = Object.values(productMeta.ratings).reduce(
+      (sum, val) => sum + Number(val),
+      0
+    );
+
     axios
       .get(
         `/api/reviews?product_id=${currentProduct.id}&count=${totalReviews}&sort=${selected}`
@@ -64,41 +62,37 @@ const Reviews = ({ currentProduct, productMeta }) => {
       </Button>
     ) : null;
 
-  if (reviewData) {
-    return (
-      <div>
-        Ratings & Reviews
-        <NewReview productId={currentProduct.id} characteristics={reviewData.characteristics} />
-        <Grid container spacing={2}>
-          <Grid item xs={3} container spacing={1}>
-            <Grid item xs={12}>
-              <RatingsBreakdown
-                currentProduct={currentProduct}
-                reviewData={reviewData}
-                filterReviews={filterReviews}
-              />
-            </Grid>
-            <Grid item xs={12}>
-              {removeFiltersButton}
-            </Grid>
-            <Grid item xs={12}>
-              <ProductBreakdown reviewData={reviewData} />
-            </Grid>
-          </Grid>
-          <Grid item xs={9}>
-            <SortingDropdown selected={selected} setSelected={setSelected} />
-            <ReviewList
-              reviews={filteredReviews}
+  return (
+    <div>
+      Ratings & Reviews
+      <NewReview productId={currentProduct.id} characteristics={productMeta.characteristics} />
+      <Grid container spacing={2}>
+        <Grid item xs={3} container spacing={1}>
+          <Grid item xs={12}>
+            <RatingsBreakdown
               currentProduct={currentProduct}
-              selected={selected}
+              reviewData={productMeta}
+              filterReviews={filterReviews}
             />
           </Grid>
+          <Grid item xs={12}>
+            {removeFiltersButton}
+          </Grid>
+          <Grid item xs={12}>
+            <ProductBreakdown reviewData={productMeta} />
+          </Grid>
         </Grid>
-      </div>
-    );
-  } else {
-    return null;
-  }
+        <Grid item xs={9}>
+          <SortingDropdown selected={selected} setSelected={setSelected} />
+          <ReviewList
+            reviews={filteredReviews}
+            currentProduct={currentProduct}
+            selected={selected}
+          />
+        </Grid>
+      </Grid>
+    </div>
+  );
 };
 
 export default Reviews;
