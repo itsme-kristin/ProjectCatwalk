@@ -31,7 +31,7 @@ const Reviews = ({ currentProduct, productMeta }) => {
       .catch(() => {
         console.log('error getting reviews');
       });
-  }, [selected]);
+  }, [currentProduct, selected]);
 
   useEffect(() => {
     const reviewsToRender = [...reviews].filter(review => {
