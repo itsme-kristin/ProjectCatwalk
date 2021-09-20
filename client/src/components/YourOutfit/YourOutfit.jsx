@@ -12,34 +12,34 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const YourOutfit = (props) => {
+const YourOutfit = ({ currentProduct, outfitList, setOutfitList }) => {
   const classes = useStyles();
   const [activeItemIndex, setActiveItemIndex] = useState(0);
   const chevronWidth = 40;
 
   const handleAddOutfitClick = () => {
-    if (props.outfitList.length === 0) {
-      props.setOutfitList([props.currentProduct]);
+    if (outfitList.length === 0) {
+      setOutfitList([currentProduct]);
       return;
     }
-    const newOutfitList = props.outfitList.slice();
+    const newOutfitList = outfitList.slice();
     for (var i = 0; i < newOutfitList.length; i++) {
       var current = newOutfitList[i];
-      if (current.id === props.currentProduct.id) {
+      if (current.id === currentProduct.id) {
         return;
       }
     }
-    newOutfitList.push(props.currentProduct);
-    props.setOutfitList(newOutfitList);
+    newOutfitList.push(currentProduct);
+    setOutfitList(newOutfitList);
   }
 
   const handleDeleteOutfitClick = (id) => {
-    const editedOutfitList = props.outfitList.slice();
+    const editedOutfitList = outfitList.slice();
     for (var i = 0; i < editedOutfitList.length; i++) {
       var current = editedOutfitList[i];
       if (current.id === id) {
         editedOutfitList.splice(i, 1);
-        props.setOutfitList(editedOutfitList);
+        setOutfitList(editedOutfitList);
         return;
       }
     }
@@ -66,7 +66,7 @@ const YourOutfit = (props) => {
               outsideChevron
               chevronWidth={chevronWidth}
             >
-              {props.outfitList.map((product, index) => <OutfitCard
+              {outfitList.map((product, index) => <OutfitCard
                 handleDeleteOutfitClick={handleDeleteOutfitClick}
                 product={product}
                 key={index}

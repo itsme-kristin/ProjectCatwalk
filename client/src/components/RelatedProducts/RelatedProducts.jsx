@@ -11,14 +11,14 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const RelatedProducts = (props) => {
+const RelatedProducts = ({ currentProduct, setProductId }) => {
   const classes = useStyles();
   const [relatedProductsList, setRelatedProductsList] = useState(null);
   const [activeItemIndex, setActiveItemIndex] = useState(0);
   const chevronWidth = 40;
 
   useEffect(() => {
-    axios.get(`/api/products/${props.currentProduct.id}/related`)
+    axios.get(`/api/products/${currentProduct.id}/related`)
       .then(productIds => {
         setRelatedProductsList(productIds.data);
       })
@@ -43,8 +43,8 @@ const RelatedProducts = (props) => {
           outsideChevron
           chevronWidth={chevronWidth}
           >
-            {relatedProductsList.map((product, index) => {
-              return <ProductCard currentProduct={props.currentProduct} productId={product} key={index} setProduct={props.setProduct}/>
+            {relatedProductsList.map((productId, index) => {
+              return <ProductCard currentProduct={currentProduct} cardId={productId} key={index} setProductId={setProductId}/>
             })}
         </ItemsCarousel>
       </div>
