@@ -25,7 +25,7 @@ const useStyles = makeStyles({
   },
 });
 
-const ComparisonModal = React.forwardRef((props, ref) => {
+const ComparisonModal = React.forwardRef(({ featureData, productCardInfo, currentProductInfo }, ref) => {
   const classes = useStyles();
 
   return (
@@ -35,25 +35,25 @@ const ComparisonModal = React.forwardRef((props, ref) => {
       </Typography>
       <Grid container>
         <Grid item align="left" xs={4} className={classes.comparisonHeaderBox}>
-          <span className={classes.comparisonHeaderValue}>{props.currentProductInfo.name}</span>
+          <span className={classes.comparisonHeaderValue}>{currentProductInfo.name}</span>
         </Grid>
         <Grid item align="center" xs={4} className={classes.comparisonHeaderBox}>
           <span className={classes.comparisonHeaderValue}>Features</span>
         </Grid>
         <Grid item align="right" xs={4} className={classes.comparisonHeaderBox}>
-          <span className={classes.comparisonHeaderValue}>{props.productCardInfo.name}</span>
+          <span className={classes.comparisonHeaderValue}>{productCardInfo.name}</span>
         </Grid>
-        {Object.keys(props.featureData).map((feature, index) => {
+        {Object.keys(featureData).map((feature, index) => {
           return (
             <React.Fragment key={index}>
               <Grid item align="left" xs={4}>
-                <span>{props.featureData[feature][0]}</span>
+                <span>{featureData[feature][0]}</span>
               </Grid>
               <Grid item align="center" xs={4}>
                 <span>{feature}</span>
               </Grid>
               <Grid item align="right" xs={4}>
-                <span>{props.featureData[feature][1]}</span>
+                <span>{featureData[feature][1]}</span>
               </Grid>
             </React.Fragment>
           )
