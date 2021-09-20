@@ -4,6 +4,13 @@ import axios from 'axios';
 import Rating from '@material-ui/lab/Rating';
 
 const getRatingInfo = (ratings) => {
+  if (ratings.length === 0) {
+    return {
+      average: 0,
+      total: 0
+    }
+  }
+
   const weight = 5;
   let sum = 0;
   let ratingCount = 0;
