@@ -3,38 +3,27 @@ import { Grid, Slider, Typography } from '@material-ui/core';
 
 const ProductBreakdown = ({ reviewData }) => {
   if (reviewData) {
-    const { Comfort, Fit, Length, Quality } = reviewData.characteristics;
+    // const { Comfort, Fit, Length, Quality } = reviewData.characteristics;
+    // console.log(reviewData.characteristics)
+    // console.log(Object.entries(reviewData.characteristics))
+    const charScales = Object.entries(reviewData.characteristics).map((char, index) => {
+      return (
+        <Grid key={index} item xs={12}>
+          <Typography>{char[0]}</Typography>
+          <Slider
+            value={Number(char[1].value)}
+            marks
+            min={1}
+            max={5}
+            disabled
+          />
+        </Grid>
+      )
+    })
 
     return (
       <Grid container spacing={1} direction='column'>
-        <Grid item xs={12}>
-          <Typography>Comfort</Typography>
-          <Slider
-            value={Number(Comfort.value)}
-            marks
-            min={1}
-            max={5}
-            disabled
-          />
-        </Grid>
-        <Grid item xs={12}>
-          <Typography>Fit</Typography>
-          <Slider value={Number(Fit.value)} marks min={1} max={5} disabled />
-        </Grid>
-        <Grid item xs={12}>
-          <Typography>Length</Typography>
-          <Slider value={Number(Length.value)} marks min={1} max={5} disabled />
-        </Grid>
-        <Grid item xs={12}>
-          <Typography>Quality</Typography>
-          <Slider
-            value={Number(Quality.value)}
-            marks
-            min={1}
-            max={5}
-            disabled
-          />
-        </Grid>
+        {charScales}
       </Grid>
     );
   } else {
