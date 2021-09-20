@@ -32,48 +32,17 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const ProductCard = (props) => {
+const ProductCard = ({ currentProduct, cardId, setProductId }) => {
   const [productCardInfo, setProductCardInfo] = useState(null);
   const [productCardPhoto, setProductCardPhoto] = useState(null);
   const [ratingsInfo, setRatingsInfo] = useState({
     avgProductRating: 0,
     totalRatings: 0
   });
-  const [currentProductInfo, setCurrentProductInfo] = useState(null);
   const [showComparison, setShowComparison] = useState(false);
   const [featureData, setFeatureData] = useState(null);
   const classes = useStyles();
 
-
-  const getPhoto = () => {
-    axios.get(`/api/products/${props.productId}/styles`)
-      .then(stylesInfo => {
-        setProductCardPhoto(stylesInfo.data.results[0]);
-      })
-      .catch(err => {
-        console.info('There was an error getting product photo from the server.');
-      });
-  }
-
-  const getProductInfo = () => {
-    axios.get(`/api/products/${props.productId}`)
-      .then(productInfo => {
-        setProductCardInfo(productInfo.data);
-      })
-      .catch(err => {
-        console.info('There was an error retrieving product information from the server.');
-      });
-  }
-
-  const getCurrentProductInfo = () => {
-    axios.get(`/api/products/${props.currentProduct.id}`)
-      .then(productInfo => {
-        setCurrentProductInfo(productInfo.data);
-      })
-      .catch(err => {
-        console.info('There was an error retrieving product information from the server.');
-      });
-  }
 
   const getFeatureData = () => {
     const featureData = {};
@@ -122,13 +91,20 @@ const ProductCard = (props) => {
   }
 
   const handleProductCardClick = () => {
-    props.setProduct(productCardInfo);
+    setProductId(productCardInfo.id);
   }
 
   useEffect(() => {
-    getPhoto();
-    getProductInfo();
-    getCurrentProductInfo();
+    axios.get(`/api/products/${cardId}`)
+      .then(productInfo => {
+        setProductCardInfo(productInfo.data);
+        return axios.get(`/api/products/${cardId}/styles`)
+      }).then(stylesInfo => {
+          setProductCardPhoto(stylesInfo.data.results[0]);
+      })
+      .catch(err => {
+        console.info('There was an error retrieving product information and photo from the server.');
+      });
   }, []);
 
   return productCardPhoto && productCardInfo && (
@@ -158,7 +134,7 @@ const ProductCard = (props) => {
           </Typography>
           <div>
             <AverageRating
-              productId={props.productId}
+              productId={cardId}
               avgProductRating={ratingsInfo.avgProductRating}
               setRatingsInfo={setRatingsInfo}
             />
@@ -166,7 +142,7 @@ const ProductCard = (props) => {
         </CardContent>
       </Card>
       <Modal open={showComparison} onClose={closeShowComparison}  >
-        <ComparisonModal featureData={featureData} productCardInfo={productCardInfo} currentProductInfo={currentProductInfo} />
+        <ComparisonModal featureData={featureData} productCardInfo={productCardInfo} currentProductInfo={currentProduct} />
       </Modal>
     </React.Fragment>
   );

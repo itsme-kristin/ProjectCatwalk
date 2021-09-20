@@ -13,10 +13,10 @@ import Typography from '@material-ui/core/Typography';
 const useStyles = makeStyles((theme) => ({
   root: {
     width: 230,
-    height: 330,
+    height: 350,
   },
   media: {
-    paddingTop: '70.60%',
+    paddingTop: '70.25%',
   },
   content: {
     paddingTop: '10%',
@@ -24,10 +24,13 @@ const useStyles = makeStyles((theme) => ({
   icon: {
     position: "relative to parent",
     top: 5,
+  },
+  title: {
+    fontWeight: '700',
   }
 }));
 
-const OutfitCard = (props) => {
+const OutfitCard = ({ handleDeleteOutfitClick, product }) => {
   const [outfitCardInfo, setOutfitCardInfo] = useState(null);
   const [outfitCardPhoto, setOutfitCardPhoto] = useState(null);
   const [ratingsInfo, setRatingsInfo] = useState({
@@ -36,29 +39,17 @@ const OutfitCard = (props) => {
     });
   const classes = useStyles();
 
-  const getPhoto = () => {
-    axios.get(`/api/products/${props.product.id}/styles`)
-      .then(stylesInfo => {
-        setOutfitCardPhoto(stylesInfo.data.results[0]);
-      })
-      .catch(err => {
-        console.info('There was an error getting product photo from the server.');
-      });
-  }
-
-  const getProductInfo = () => {
-    axios.get(`/api/products/${props.product.id}`)
+  useEffect(() => {
+    axios.get(`/api/products/${product.id}`)
       .then(productInfo => {
         setOutfitCardInfo(productInfo.data);
+        return axios.get(`/api/products/${product.id}/styles`)
+      }).then(stylesInfo => {
+          setOutfitCardPhoto(stylesInfo.data.results[0]);
       })
       .catch(err => {
-        console.info('There was an error retrieving product information from the server.');
+        console.info('There was an error retrieving product information and photo from the server.');
       });
-  }
-
-  useEffect(() => {
-    getPhoto();
-    getProductInfo();
   }, []);
 
 
@@ -67,13 +58,13 @@ const OutfitCard = (props) => {
       <Card className={classes.root} variant="outlined">
         <Grid container>
           <Grid item align="right" xs={12}>
-            <Icon onClick={() => props.handleDeleteOutfitClick(props.product.id)} sx={{ fontSize: 10 }} className={classes.icon}>highlight_off</Icon>
+            <Icon onClick={() => handleDeleteOutfitClick(product.id)} sx={{ fontSize: 10 }} className={classes.icon}>highlight_off</Icon>
           </Grid>
         </Grid>
         <CardMedia
           component='div'
           className={classes.media}
-          image={outfitCardPhoto.photos[0].thumbnail_url || ''}
+          image={outfitCardPhoto.photos[0].thumbnail_url || 'https://media.istockphoto.com/photos/hangers-on-pole-picture-id91001400?b=1&k=20&m=91001400&s=170667a&w=0&h=Ni2lbk6vK2n9PuYSjZ0oR-Vsqfosr1UYuDuHhYmSboE='}
           title={outfitCardInfo.name}
         />
         <CardContent>
@@ -88,7 +79,7 @@ const OutfitCard = (props) => {
           </Typography>
           <div>
             <AverageRating
-                productId={props.product.id}
+                productId={outfitCardInfo.id}
                 avgProductRating={ratingsInfo.avgProductRating}
                 setRatingsInfo={setRatingsInfo}
             />

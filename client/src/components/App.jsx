@@ -37,7 +37,7 @@ const App = () => {
         <React.Fragment>
         <h1>{product.name}</h1>
         <Overview productId={product.id}/>
-        <RelatedProducts currentProduct={product} setProduct={setProduct}/>
+        <RelatedProducts currentProduct={product} setProductId={setProductId}/>
         <YourOutfit currentProduct={product} outfitList={outfitList} setOutfitList={setOutfitList}/>
         <Reviews currentProduct={product} />
         </React.Fragment>
