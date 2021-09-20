@@ -7,7 +7,7 @@ import RatingsBreakdown from './RatingsBreakdown.jsx';
 import SortingDropdown from './SortingDropdown.jsx';
 import NewReview from './NewReview.jsx';
 
-const Reviews = ({ currentProduct }) => {
+const Reviews = ({ currentProduct, productMeta }) => {
   const [reviews, setReviews] = useState([]);
   const [filteredReviews, setFilteredReviews] = useState([]);
   const [filters, setFilters] = useState([]);
@@ -15,28 +15,21 @@ const Reviews = ({ currentProduct }) => {
   const [selected, setSelected] = useState('relevant');
 
   useEffect(() => {
+    const totalReviews = Object.values(productMeta.ratings).reduce(
+      (sum, val) => sum + Number(val),
+      0
+    );
+
     axios
-      .get(`/api/reviews/meta?product_id=${currentProduct.id}`)
+      .get(
+        `/api/reviews?product_id=${currentProduct.id}&count=${totalReviews}&sort=${selected}`
+      )
       .then(({ data }) => {
-        setReviewData(data);
-        const totalReviews = Object.values(data.ratings).reduce(
-          (sum, val) => sum + Number(val),
-          0
-        );
-        axios
-          .get(
-            `/api/reviews?product_id=${currentProduct.id}&count=${totalReviews}&sort=${selected}`
-          )
-          .then(({ data }) => {
-            setReviews(data.results);
-            setFilteredReviews(data.results);
-          })
-          .catch(() => {
-            console.log('error getting reviews');
-          });
+        setReviews(data.results);
+        setFilteredReviews(data.results);
       })
       .catch(() => {
-        console.log('error getting review metadata');
+        console.log('error getting reviews');
       });
   }, [selected]);
 
@@ -69,41 +62,37 @@ const Reviews = ({ currentProduct }) => {
       </Button>
     ) : null;
 
-  if (reviewData) {
-    return (
-      <div>
-        Ratings & Reviews
-        <NewReview productId={currentProduct.id} characteristics={reviewData.characteristics} />
-        <Grid container spacing={2}>
-          <Grid item xs={3} container spacing={1}>
-            <Grid item xs={12}>
-              <RatingsBreakdown
-                currentProduct={currentProduct}
-                reviewData={reviewData}
-                filterReviews={filterReviews}
-              />
-            </Grid>
-            <Grid item xs={12}>
-              {removeFiltersButton}
-            </Grid>
-            <Grid item xs={12}>
-              <ProductBreakdown reviewData={reviewData} />
-            </Grid>
-          </Grid>
-          <Grid item xs={9}>
-            <SortingDropdown selected={selected} setSelected={setSelected} />
-            <ReviewList
-              reviews={filteredReviews}
+  return (
+    <div>
+      Ratings & Reviews
+      <NewReview productId={currentProduct.id} characteristics={productMeta.characteristics} />
+      <Grid container spacing={2}>
+        <Grid item xs={3} container spacing={1}>
+          <Grid item xs={12}>
+            <RatingsBreakdown
               currentProduct={currentProduct}
-              selected={selected}
+              reviewData={productMeta}
+              filterReviews={filterReviews}
             />
           </Grid>
+          <Grid item xs={12}>
+            {removeFiltersButton}
+          </Grid>
+          <Grid item xs={12}>
+            <ProductBreakdown reviewData={productMeta} />
+          </Grid>
         </Grid>
-      </div>
-    );
-  } else {
-    return null;
-  }
+        <Grid item xs={9}>
+          <SortingDropdown selected={selected} setSelected={setSelected} />
+          <ReviewList
+            reviews={filteredReviews}
+            currentProduct={currentProduct}
+            selected={selected}
+          />
+        </Grid>
+      </Grid>
+    </div>
+  );
 };
 
 export default Reviews;
