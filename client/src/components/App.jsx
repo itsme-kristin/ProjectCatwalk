@@ -5,31 +5,47 @@ import Reviews from './RatingsReviews/Reviews.jsx';
 import YourOutfit from './YourOutfit/YourOutfit.jsx';
 import Overview from './Overview/Overview.jsx';
 
+import { makeStyles } from '@material-ui/core/styles';
+import { Container, CircularProgress } from '@material-ui/core';
+
+const useStyles = makeStyles({
+  root: {
+    border: "dotted 1px grey"
+  }
+})
+
 const App = () => {
-  const [productId, setProductId] = useState(38322)
+  const classes = useStyles();
+  const [productId, setProductId] = useState(38322);
   const [product, setProduct] = useState(null);
+  const [productMeta, setProductMeta] = useState({});
   const [outfitList, setOutfitList] = useState([]);
 
   useEffect(() => {
     axios.get(`/api/products/${productId}`)
       .then(products => {
         setProduct(products.data);
+        return axios.get(`/api/reviews/meta?product_id=${productId}`)
+      }).then(meta => {
+        setProductMeta(meta.data);
       });
-  }, []);
+  }, [productId]);
 
   if (product) {
     return (
-      <React.Fragment>
-      <h1>{product.name}</h1>
-      <Overview productId={product.id}/>
-      <RelatedProducts currentProduct={product} setProduct={setProduct}/>
-      <YourOutfit currentProduct={product} outfitList={outfitList} setOutfitList={setOutfitList}/>
-      <Reviews currentProduct={product} />
-      </React.Fragment>
+      <Container maxWidth="lg" className={classes.root}>
+        <React.Fragment>
+        <h1>{product.name}</h1>
+        <Overview productId={product.id}/>
+        <RelatedProducts currentProduct={product} setProduct={setProduct}/>
+        <YourOutfit currentProduct={product} outfitList={outfitList} setOutfitList={setOutfitList}/>
+        <Reviews currentProduct={product} />
+        </React.Fragment>
+      </Container>
     );
   }
   else {
-    return <h1>Hi</h1>
+    return <CircularProgress />
   }
 };
 

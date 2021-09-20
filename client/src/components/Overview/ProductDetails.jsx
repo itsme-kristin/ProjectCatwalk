@@ -195,7 +195,7 @@ const ProductDetails = ({currentProduct, productStyles, styleIndex, imgIndex, se
           setRatingsInfo={setRatingsInfo}
         />
         <Typography variant="caption" className={classes.reviewsLink}>
-           Read all {ratingsInfo.totalRatings} reviews
+           <a href="#reviews">Read all {ratingsInfo.totalRatings} reviews</a>
         </Typography>
       </Grid>
       <Typography variant="h6">
