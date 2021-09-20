@@ -18,17 +18,17 @@ const useStyles = makeStyles({
   }
 });
 
-const StyleSelector = ({ productStyles, styleIndex, imgIndex, setStyleIndex, setImgIndex }) => {
+const StyleSelector = ({ styles, styleIndex, setStyleIndex }) => {
   const classes = useStyles();
 
   return (
     <Grid container alignItems="center" spacing={2} className={classes.root}>
       <Grid item xs={12}>
         <Typography variant="overline">
-          Style > {productStyles[styleIndex]["name"]}
+          Style > {styles[styleIndex]["name"]}
         </Typography>
       </Grid>
-      {productStyles.map((productStyle, index) => {
+      {styles.map((productStyle, index) => {
         var styleBG = {
           backgroundImage: `url(${productStyle["photos"][0]["thumbnail_url"]})`,
           backgroundRepeat: 'no-repeat',
@@ -60,7 +60,6 @@ const StyleSelector = ({ productStyles, styleIndex, imgIndex, setStyleIndex, set
                 style={styleBG}
                 onClick={() => {
                   setStyleIndex(index);
-                  setImgIndex(0);
                 }}/>
             </Grid>
           )

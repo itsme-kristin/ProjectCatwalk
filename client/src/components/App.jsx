@@ -36,7 +36,7 @@ const App = () => {
       <Container maxWidth="lg" className={classes.root}>
         <React.Fragment>
         <h1>{product.name}</h1>
-        <Overview productId={product.id}/>
+        <Overview product={product} productMeta={productMeta}/>
         <RelatedProducts currentProduct={product} setProduct={setProduct}/>
         <YourOutfit currentProduct={product} outfitList={outfitList} setOutfitList={setOutfitList}/>
         <Reviews currentProduct={product} />

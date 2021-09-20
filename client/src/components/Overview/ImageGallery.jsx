@@ -33,10 +33,16 @@ const useStyles = makeStyles({
   }
 })
 
-const ImageGallery = ({ photos, imgIndex, setImgIndex }) => {
+const ImageGallery = ({ photos }) => {
   const [viewOpen, setViewOpen] = useState(false);
+  const [imgIndex, setImgIndex] = useState(0);
   const classes = useStyles();
 
+  console.log('p.length', photos.length, 'i.index:', imgIndex, 'p.url,', photos[imgIndex]?.url)
+  if (imgIndex > photos.length - 1) {
+    setImgIndex(photos.length - 1)
+    return null
+  }
 
   const grabSevenThumbs = () => {
     let start = 0;
