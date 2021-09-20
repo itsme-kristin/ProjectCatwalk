@@ -41,26 +41,34 @@ const ComparisonModal = React.forwardRef(({ featureData, productCardInfo, curren
       </Typography>
       <Grid container>
         <Grid item align="left" xs={4} className={classes.comparisonHeaderBox}>
-          <span className={classes.comparisonHeaderValue}>{currentProductInfo.name}</span>
+          <span className={classes.comparisonHeaderValue}>
+            <Typography>{currentProductInfo.name}</Typography>
+          </span>
         </Grid>
         <Grid item align="center" xs={4} className={classes.comparisonHeaderBox}>
-          <span className={classes.comparisonHeaderValue}>Features</span>
+          <span className={classes.comparisonHeaderValue}>
+            <Typography>Features</Typography>
+          </span>
         </Grid>
         <Grid item align="right" xs={4} className={classes.comparisonHeaderBox}>
-          <span className={classes.comparisonHeaderValue}>{productCardInfo.name}</span>
+          <span className={classes.comparisonHeaderValue}>
+            <Typography>{productCardInfo.name}</Typography>
+          </span>
         </Grid>
         {Object.keys(featureData).map((feature, index) => {
           return (
             <React.Fragment key={index}>
               <Grid container className={classes.comparisonContentBox}>
                 <Grid item align="left" xs={4}>
-                  {featureData[feature][0] === "yes!" ? <Icon xs={{ fontSize: 8}}>check</Icon> : <span>{featureData[feature][0]}</span>}
+                  {featureData[feature][0] === "yes!" ? <Icon xs={{ fontSize: 8}}>check</Icon> : <span><Typography>{featureData[feature][0]}</Typography></span>}
                 </Grid>
                 <Grid item align="center" xs={4}>
-                  <span>{feature}</span>
+                  <span>
+                    <Typography>{feature}</Typography>
+                  </span>
                 </Grid>
                 <Grid item align="right" xs={4}>
-                {featureData[feature][1] === "yes!" ? <Icon xs={{ fontSize: 8}}>check</Icon> : <span>{featureData[feature][1]}</span>}
+                {featureData[feature][1] === "yes!" ? <Icon xs={{ fontSize: 8}}>check</Icon> : <span><Typography>{featureData[feature][1]}</Typography></span>}
                 </Grid>
               </Grid>
             </React.Fragment>
