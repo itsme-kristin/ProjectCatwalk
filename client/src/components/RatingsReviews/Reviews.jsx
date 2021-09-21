@@ -63,7 +63,7 @@ const Reviews = ({ currentProduct, productMeta }) => {
   if (reviews.length === 0) {
     return (
       <React.Fragment>
-        <Typography>Ratings & Reviews</Typography>
+        <Typography id='reviews'>Ratings & Reviews</Typography>
         <NewReview
           productId={currentProduct.id}
           characteristics={productMeta.characteristics}
@@ -72,8 +72,8 @@ const Reviews = ({ currentProduct, productMeta }) => {
     );
   } else {
     return (
-      <div>
-        <Typography>Ratings & Reviews</Typography>
+      <React.Fragment>
+        <Typography id='reviews'>Ratings & Reviews</Typography>
         <NewReview
           productId={currentProduct.id}
           characteristics={productMeta.characteristics}
@@ -102,7 +102,7 @@ const Reviews = ({ currentProduct, productMeta }) => {
             />
           </Grid>
         </Grid>
-      </div>
+      </React.Fragment>
     );
   }
 };
