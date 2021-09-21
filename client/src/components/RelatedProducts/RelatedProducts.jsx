@@ -11,23 +11,27 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const RelatedProducts = ({ currentProduct, setProductId }) => {
+const RelatedProducts = ({ currentProduct, setProductId, productMeta }) => {
   const classes = useStyles();
   const [relatedProductsList, setRelatedProductsList] = useState(null);
+  const [doneSearching, setDoneSearching] = useState(false);
   const [activeItemIndex, setActiveItemIndex] = useState(0);
   const chevronWidth = 40;
 
   useEffect(() => {
+    setDoneSearching(false);
     axios.get(`/api/products/${currentProduct.id}/related`)
       .then(productIds => {
         setRelatedProductsList(productIds.data);
+        setDoneSearching(true);
       })
       .catch(err => {
         console.info('There was an error getting related product information from the server.')
       })
-  }, []);
+  }, [currentProduct]);
 
-  return relatedProductsList && (
+  if (doneSearching) {
+    return (
     <React.Fragment>
       <Typography className={classes.title} variant="h4" gutterBottom>
         RELATED PRODUCTS
@@ -44,12 +48,15 @@ const RelatedProducts = ({ currentProduct, setProductId }) => {
           chevronWidth={chevronWidth}
           >
             {relatedProductsList.map((productId, index) => {
-              return <ProductCard currentProduct={currentProduct} cardId={productId} key={index} setProductId={setProductId}/>
+              return <ProductCard currentProduct={currentProduct} productMeta={productMeta} cardId={productId} key={index} setProductId={setProductId}/>
             })}
         </ItemsCarousel>
       </div>
     </React.Fragment>
-  );
+    );
+  } else {
+    return null;
+  }
 };
 
 export default RelatedProducts;

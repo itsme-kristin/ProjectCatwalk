@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Grid, Button } from '@material-ui/core';
+import { Grid, Button, Typography } from '@material-ui/core';
 import ReviewList from './ReviewList.jsx';
 import ProductBreakdown from './ProductBreakdown.jsx';
 import RatingsBreakdown from './RatingsBreakdown.jsx';
@@ -31,7 +31,7 @@ const Reviews = ({ currentProduct, productMeta }) => {
       .catch(() => {
         console.log('error getting reviews');
       });
-  }, [selected]);
+  }, [currentProduct, selected]);
 
   useEffect(() => {
     const reviewsToRender = [...reviews].filter(review => {
@@ -62,37 +62,50 @@ const Reviews = ({ currentProduct, productMeta }) => {
       </Button>
     ) : null;
 
-  return (
-    <div>
-      Ratings & Reviews
-      <NewReview productId={currentProduct.id} characteristics={productMeta.characteristics} />
-      <Grid container spacing={2}>
-        <Grid item xs={3} container spacing={1}>
-          <Grid item xs={12}>
-            <RatingsBreakdown
+  if (reviews.length === 0) {
+    return (
+      <React.Fragment>
+        <Typography>
+          Ratings & Reviews
+        </Typography>
+        <NewReview productId={currentProduct.id} characteristics={productMeta.characteristics} />
+      </React.Fragment>
+    )
+  } else {
+    return (
+      <div>
+        <Typography>
+          Ratings & Reviews
+        </Typography>
+        <NewReview productId={currentProduct.id} characteristics={productMeta.characteristics} />
+        <Grid container spacing={2}>
+          <Grid item xs={3} container spacing={1}>
+            <Grid item xs={12}>
+              <RatingsBreakdown
+                currentProduct={currentProduct}
+                reviewData={productMeta}
+                filterReviews={filterReviews}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              {removeFiltersButton}
+            </Grid>
+            <Grid item xs={12}>
+              <ProductBreakdown reviewData={productMeta} />
+            </Grid>
+          </Grid>
+          <Grid item xs={9}>
+            <SortingDropdown selected={selected} setSelected={setSelected} />
+            <ReviewList
+              reviews={filteredReviews}
               currentProduct={currentProduct}
-              reviewData={productMeta}
-              filterReviews={filterReviews}
+              selected={selected}
             />
           </Grid>
-          <Grid item xs={12}>
-            {removeFiltersButton}
-          </Grid>
-          <Grid item xs={12}>
-            <ProductBreakdown reviewData={productMeta} />
-          </Grid>
         </Grid>
-        <Grid item xs={9}>
-          <SortingDropdown selected={selected} setSelected={setSelected} />
-          <ReviewList
-            reviews={filteredReviews}
-            currentProduct={currentProduct}
-            selected={selected}
-          />
-        </Grid>
-      </Grid>
-    </div>
-  );
+      </div>
+    );
+  }
 };
 
 export default Reviews;
