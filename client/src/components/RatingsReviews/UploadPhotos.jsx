@@ -18,11 +18,6 @@ const UploadPhotos = ({ handleFormChange }) => {
       'background-color': 'white',
       border: '2px solid #000',
       boxShadow: 24
-    },
-    thumb: {
-      margin: '4px',
-      width: '50px',
-      height: '50px'
     }
   });
   const classes = useStyles();
