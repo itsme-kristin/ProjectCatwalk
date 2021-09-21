@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
 import ExpandedView from './ExpandedView.jsx'
+import Thumbs from './Thumbs.jsx'
 
 import { makeStyles } from '@material-ui/core/styles';
 import { Grid, Typography, Paper, Modal } from '@material-ui/core';
@@ -20,16 +21,16 @@ const useStyles = makeStyles({
     cursor: 'zoom-in'
   },
 
-  selected: {
-    border: 'solid 4px #3f51b5',
-    width: '50px',
-    height: '50px'
+  noMedia: {
+    width: '500px',
+    height: '500px',
+    backgroundColor: 'grey',
   },
 
-  thumb: {
-    margin: '4px',
-    width: '50px',
-    height: '50px'
+  message: {
+    backgroundColor: 'white',
+    padding: '10px',
+    borderRadius: '5px'
   }
 })
 
@@ -38,55 +39,25 @@ const ImageGallery = ({ photos }) => {
   const [imgIndex, setImgIndex] = useState(0);
   const classes = useStyles();
 
-  if (imgIndex > photos.length - 1) {
-    setImgIndex(photos.length - 1)
-    return null
-  }
-
-  const grabSevenThumbs = () => {
-    let start = 0;
-    let end = 7;
-
-    if (photos.length > 7 && imgIndex > 3) {
-      if (imgIndex + 4 >= photos.length) {
-        start = photos.length - 7
-        end = photos.length
-      } else {
-        start = imgIndex - 3;
-        end = imgIndex + 4;
-      }
-    }
-
-    return (
-      photos.map((image, index) => {
-        let styleBG = {
-          backgroundImage: `url(${image.thumbnail_url})`,
-          backgroundRepeat: 'no-repeat',
-          backgroundSize: '50px',
-          backgroundPosition: 'center'
-        }
-        if (index === imgIndex) {
-          return (
-            <Grid item xs={12} key={index}>
-              <Paper className={classes.selected} style={styleBG}/>
-            </Grid>
-          )
-        }
-        return (
-          <Grid item xs={12} key={index} >
-            <Paper className={classes.thumb} style={styleBG} onClick={() => setImgIndex(index)}/>
-          </Grid>
-        )
-      }).slice(start, end)
-    )
-  }
-
   const displayImage = () => {
     let showLeft = imgIndex !== 0 ? true : false;
     let showRight = imgIndex !== photos.length - 1 ? true : false;
     let iconSize = 32;
     let iconColor = '#3f51b5';
     let iconOpacity = 0.6;
+
+    if (imgIndex > photos.length - 1) {
+      setImgIndex(photos.length - 1)
+      return (
+        <Grid container justifyContent="center" alignItems="center" className={classes.noMedia}>
+          <Paper>
+            <Typography variant="h6" className={classes.message}>
+              Please select an image.
+            </Typography>
+          </Paper>
+        </Grid>
+      )
+    }
 
     var inline = {
       view: {
@@ -150,7 +121,7 @@ const ImageGallery = ({ photos }) => {
     <Grid container spacing={1} className={classes.gallery}>
       <Grid item xs={1}>
         <Grid container spacing={2} direction="column" justifyContent="center">
-          {grabSevenThumbs()}
+          <Thumbs photos={photos} imgIndex={imgIndex} setImgIndex={setImgIndex} />
         </Grid>
       </Grid>
       <Grid item xs={11}>
