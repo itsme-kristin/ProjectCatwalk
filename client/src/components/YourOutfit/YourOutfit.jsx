@@ -12,7 +12,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const YourOutfit = ({ currentProduct, outfitList, setOutfitList, productMeta }) => {
+const YourOutfit = ({ currentProduct, outfitList, setOutfitList }) => {
   const classes = useStyles();
   const [activeItemIndex, setActiveItemIndex] = useState(0);
   const chevronWidth = 40;
@@ -70,7 +70,6 @@ const YourOutfit = ({ currentProduct, outfitList, setOutfitList, productMeta }) 
                 handleDeleteOutfitClick={handleDeleteOutfitClick}
                 product={product}
                 key={index}
-                productMeta={productMeta}
               />)}
             </ItemsCarousel>
           </div>
