@@ -17,6 +17,9 @@ const useStyles = makeStyles({
   },
   feedback: {
     padding: '9px 0px'
+  },
+  summary: {
+    'font-weight': 'bold'
   }
 });
 
@@ -60,7 +63,7 @@ const ReviewTile = ({ review }) => {
         </Grid>
       </Grid>
       <Grid item xs={12}>
-        <Typography>{review.summary}</Typography>
+        <Typography className={classes.summary}>{review.summary}</Typography>
       </Grid>
       <Grid item xs={12}>
         <Typography>{review.body}</Typography>
