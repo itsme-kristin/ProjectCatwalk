@@ -4,6 +4,7 @@ import RelatedProducts from './RelatedProducts/RelatedProducts.jsx';
 import Reviews from './RatingsReviews/Reviews.jsx';
 import YourOutfit from './YourOutfit/YourOutfit.jsx';
 import Overview from './Overview/Overview.jsx';
+import Header from './Header.jsx';
 
 import { makeStyles } from '@material-ui/core/styles';
 import { Container, CircularProgress } from '@material-ui/core';
@@ -11,7 +12,7 @@ import { Container, CircularProgress } from '@material-ui/core';
 const useStyles = makeStyles({
   root: {
     border: "dotted 1px grey"
-  }
+  },
 })
 
 const App = () => {
@@ -34,13 +35,12 @@ const App = () => {
   if (product && productMeta) {
     return (
       <Container maxWidth="lg" className={classes.root}>
-        <React.Fragment>
-        <h1>{product.name}</h1>
+        <Header />
+        {/* <h1>{product.name}</h1> */}
         <Overview product={product} productMeta={productMeta}/>
         <RelatedProducts currentProduct={product} setProductId={setProductId} />
         <YourOutfit currentProduct={product} outfitList={outfitList} setOutfitList={setOutfitList}/>
         <Reviews currentProduct={product} productMeta={productMeta} />
-        </React.Fragment>
       </Container>
     );
   }
