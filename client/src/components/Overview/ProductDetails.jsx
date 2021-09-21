@@ -186,7 +186,7 @@ const ProductDetails = ({product, productMeta, styles, styleIndex, setStyleIndex
   return (
     <Grid container className={classes.root} direction="column" alignItems="stretch">
       <Grid container alignItems="center" className={classes.rating}>
-        <AverageRating productMeta={productMeta} totalRatingsSetter={setTotalRatings} totalRatings={totalRatings}/>
+        <AverageRating productMeta={productMeta} totalRatingsSetter={setTotalRatings}/>
         <Typography variant="caption" className={classes.reviewsLink}>
            <a href="#reviews">Read all {totalRatings} reviews</a>
         </Typography>
