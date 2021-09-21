@@ -23,7 +23,7 @@ const Header = () => {
 
   const klosetLogo = (
     <h1 className={classes.logo}>
-      BD Kloset
+      BDKloset
     </h1>
   );
 
