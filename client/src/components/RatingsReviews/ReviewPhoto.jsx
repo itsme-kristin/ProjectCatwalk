@@ -19,6 +19,8 @@ const useStyles = makeStyles({
 const ReviewPhoto = ({ photo }) => {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
+  const photoUrl = typeof photo === 'object' ? photo.url : photo;
+
   return (
     <React.Fragment>
       <Grid item xs={2}>
@@ -26,7 +28,7 @@ const ReviewPhoto = ({ photo }) => {
           className={classes.thumb}
           onClick={() => setOpen(true)}
           style={{
-            backgroundImage: `url(${photo.url})`,
+            backgroundImage: `url(${photoUrl})`,
             backgroundSize: '100% 100%',
             backgroundRepeat: 'no-repeat'
           }}
@@ -35,7 +37,7 @@ const ReviewPhoto = ({ photo }) => {
       </Grid>
       <Modal open={open} onClose={() => setOpen(false)}>
         <Grid className={classes.modal}>
-          <img src={photo.url} />
+          <img src={photoUrl} />
         </Grid>
       </Modal>
     </React.Fragment>

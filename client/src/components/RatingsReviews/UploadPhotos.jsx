@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Button, Modal, Grid, TextField, Paper } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
+import ReviewPhoto from './ReviewPhoto.jsx'
 
 const UploadPhotos = ({ handleFormChange }) => {
   const [photos, setPhotos] = useState([]);
@@ -27,19 +28,7 @@ const UploadPhotos = ({ handleFormChange }) => {
   const classes = useStyles();
 
   const renderedPhotos = photos.map((photo, index) => {
-    return (
-      <Grid key={index} item xs={2}>
-        <Paper
-          className={classes.thumb}
-          style={{
-            backgroundImage: `url(${photo})`,
-            backgroundSize: '100% 100%',
-            backgroundRepeat: 'no-repeat'
-          }}
-          elevation={3}
-        ></Paper>
-      </Grid>
-    );
+    return <ReviewPhoto key={index} photo={photo} />;
   });
 
   const showAddPhotoButton =
