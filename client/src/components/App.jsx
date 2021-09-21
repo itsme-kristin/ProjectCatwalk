@@ -16,7 +16,7 @@ const useStyles = makeStyles({
 
 const App = () => {
   const classes = useStyles();
-  const [productId, setProductId] = useState(38329);
+  const [productId, setProductId] = useState(38322);
   const [product, setProduct] = useState(null);
   const [productMeta, setProductMeta] = useState(null);
   const [outfitList, setOutfitList] = useState([]);
@@ -37,9 +37,9 @@ const App = () => {
         <React.Fragment>
         <h1>{product.name}</h1>
         <Overview product={product} productMeta={productMeta}/>
-        {/* <RelatedProducts currentProduct={product} setProductId={setProductId}/>
+        <RelatedProducts currentProduct={product} setProductId={setProductId}/>
         <YourOutfit currentProduct={product} outfitList={outfitList} setOutfitList={setOutfitList}/>
-        <Reviews currentProduct={product} productMeta={productMeta} /> */}
+        <Reviews currentProduct={product} productMeta={productMeta} />
         </React.Fragment>
       </Container>
     );
