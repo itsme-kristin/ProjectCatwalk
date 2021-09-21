@@ -4,6 +4,7 @@ import { Grid, Divider, Typography, Button } from '@material-ui/core';
 import Rating from '@material-ui/lab/Rating';
 import { makeStyles } from '@material-ui/core/styles';
 import FeedbackButton from './FeedbackButton.jsx';
+import ReviewPhoto from './ReviewPhoto.jsx';
 
 const useStyles = makeStyles({
   root: {
@@ -50,11 +51,19 @@ const ReviewTile = ({ review }) => {
     review.body.length > 250 && !showFullBody ? (
       <React.Fragment>
         <Typography>{review.body.slice(0, 250)}</Typography>
-        <Button variant='outlined' onClick={() => setShowFullBody(true)}>Show More</Button>
+        <Button variant='outlined' onClick={() => setShowFullBody(true)}>
+          Show More
+        </Button>
       </React.Fragment>
     ) : (
       <Typography>{review.body}</Typography>
     );
+
+  const renderedPhotos = review.photos.length
+    ? review.photos.map((photo, index) => {
+        return <ReviewPhoto photo={photo} key={index} />;
+      })
+    : null;
 
   return (
     <Grid className={classes.root} container spacing={3} direction='column'>
@@ -77,6 +86,7 @@ const ReviewTile = ({ review }) => {
         <Typography className={classes.summary}>{review.summary}</Typography>
       </Grid>
       <Grid item xs={12}>
+        {renderedPhotos}
         {body}
       </Grid>
       <Grid item xs={12}>
