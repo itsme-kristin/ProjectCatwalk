@@ -32,9 +32,10 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const ProductCard = ({ currentProduct, cardId, setProductId, productMeta }) => {
+const ProductCard = ({ currentProduct, cardId, setProductId }) => {
   const [productCardInfo, setProductCardInfo] = useState(null);
   const [productCardPhoto, setProductCardPhoto] = useState(null);
+  const [productCardMeta, setProductCardMeta] = useState(null);
   const [showComparison, setShowComparison] = useState(false);
   const [featureData, setFeatureData] = useState(null);
   const classes = useStyles();
@@ -97,13 +98,16 @@ const ProductCard = ({ currentProduct, cardId, setProductId, productMeta }) => {
         return axios.get(`/api/products/${cardId}/styles`)
       }).then(stylesInfo => {
           setProductCardPhoto(stylesInfo.data.results[0]);
+          return axios.get(`/api/reviews/meta?product_id=${cardId}`)
+      }).then(meta => {
+          setProductCardMeta(meta.data)
       })
       .catch(err => {
         console.info('There was an error retrieving product information and photo from the server.');
       });
   }, []);
 
-  return productCardPhoto && productCardInfo && (
+  return productCardPhoto && productCardInfo && productCardMeta && (
     <React.Fragment>
       <Card className={classes.root} variant="outlined">
         <Grid container>
@@ -130,7 +134,7 @@ const ProductCard = ({ currentProduct, cardId, setProductId, productMeta }) => {
           </Typography>
           <div>
             <AverageRating
-              productMeta={productMeta}
+              productMeta={productCardMeta}
               // productId={cardId}
               // avgProductRating={ratingsInfo.avgProductRating}
               // setRatingsInfo={setRatingsInfo}

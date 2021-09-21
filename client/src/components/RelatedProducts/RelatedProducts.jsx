@@ -48,7 +48,7 @@ const RelatedProducts = ({ currentProduct, setProductId, productMeta }) => {
           chevronWidth={chevronWidth}
           >
             {relatedProductsList.map((productId, index) => {
-              return <ProductCard currentProduct={currentProduct} productMeta={productMeta} cardId={productId} key={index} setProductId={setProductId}/>
+              return <ProductCard currentProduct={currentProduct} cardId={productId} key={index} setProductId={setProductId}/>
             })}
         </ItemsCarousel>
       </div>
