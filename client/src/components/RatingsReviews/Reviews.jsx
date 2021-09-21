@@ -63,25 +63,26 @@ const Reviews = ({ currentProduct, productMeta }) => {
   if (reviews.length === 0) {
     return (
       <React.Fragment>
-        <Typography>
-          Ratings & Reviews
-        </Typography>
-        <NewReview productId={currentProduct.id} characteristics={productMeta.characteristics} />
+        <Typography id='reviews'>Ratings & Reviews</Typography>
+        <NewReview
+          productId={currentProduct.id}
+          characteristics={productMeta.characteristics}
+        />
       </React.Fragment>
-    )
+    );
   } else {
     return (
-      <div>
-        <Typography>
-          Ratings & Reviews
-        </Typography>
-        <NewReview productId={currentProduct.id} characteristics={productMeta.characteristics} />
+      <React.Fragment>
+        <Typography id='reviews'>Ratings & Reviews</Typography>
+        <NewReview
+          productId={currentProduct.id}
+          characteristics={productMeta.characteristics}
+        />
         <Grid container spacing={2}>
           <Grid item xs={3} container spacing={1}>
             <Grid item xs={12}>
               <RatingsBreakdown
-                currentProduct={currentProduct}
-                reviewData={productMeta}
+                productMeta={productMeta}
                 filterReviews={filterReviews}
               />
             </Grid>
@@ -89,7 +90,7 @@ const Reviews = ({ currentProduct, productMeta }) => {
               {removeFiltersButton}
             </Grid>
             <Grid item xs={12}>
-              <ProductBreakdown reviewData={productMeta} />
+              <ProductBreakdown productMeta={productMeta} />
             </Grid>
           </Grid>
           <Grid item xs={9}>
@@ -101,10 +102,9 @@ const Reviews = ({ currentProduct, productMeta }) => {
             />
           </Grid>
         </Grid>
-      </div>
+      </React.Fragment>
     );
   }
-
 };
 
 export default Reviews;
