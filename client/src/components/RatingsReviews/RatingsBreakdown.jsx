@@ -9,26 +9,24 @@ const useStyles = makeStyles({
   }
 });
 
-const RatingsBreakdown = ({ currentProduct, reviewData, filterReviews }) => {
+const RatingsBreakdown = ({ productMeta, filterReviews }) => {
   const [totalRatings, setTotalRatings] = useState(0);
   const [avgRating, setAvgRating] = useState(0);
   const classes = useStyles();
 
-  const handleClick = (rating) => {
-    filterReviews(rating)
+  const handleClick = rating => {
+    filterReviews(rating);
   };
 
   return (
     <Grid container direction='column'>
       <Grid item xs={12} container>
-        <Grid item xs={12} md={3} >
-          <Typography variant='h3'>
-            {avgRating}
-          </Typography>
+        <Grid item xs={12} md={3}>
+          <Typography variant='h3'>{avgRating}</Typography>
         </Grid>
         <Grid item xs={12} md={9}>
           <AverageRating
-            productMeta={reviewData}
+            productMeta={productMeta}
             totalRatingsSetter={setTotalRatings}
             averageRatingSetter={setAvgRating}
           />
@@ -49,7 +47,7 @@ const RatingsBreakdown = ({ currentProduct, reviewData, filterReviews }) => {
         </Grid>
         <Grid item xs={5}>
           <Slider
-            value={Number(reviewData.ratings['5'])}
+            value={Number(productMeta.ratings['5'])}
             min={1}
             max={totalRatings}
             disabled
@@ -71,7 +69,7 @@ const RatingsBreakdown = ({ currentProduct, reviewData, filterReviews }) => {
         </Grid>
         <Grid item xs={5}>
           <Slider
-            value={Number(reviewData.ratings['4'])}
+            value={Number(productMeta.ratings['4'])}
             min={1}
             max={totalRatings}
             disabled
@@ -93,7 +91,7 @@ const RatingsBreakdown = ({ currentProduct, reviewData, filterReviews }) => {
         </Grid>
         <Grid item xs={5}>
           <Slider
-            value={Number(reviewData.ratings['3'])}
+            value={Number(productMeta.ratings['3'])}
             min={1}
             max={totalRatings}
             disabled
@@ -115,7 +113,7 @@ const RatingsBreakdown = ({ currentProduct, reviewData, filterReviews }) => {
         </Grid>
         <Grid item xs={5}>
           <Slider
-            value={Number(reviewData.ratings['2'])}
+            value={Number(productMeta.ratings['2'])}
             min={1}
             max={totalRatings}
             disabled
@@ -137,7 +135,7 @@ const RatingsBreakdown = ({ currentProduct, reviewData, filterReviews }) => {
         </Grid>
         <Grid item xs={5}>
           <Slider
-            value={Number(reviewData.ratings['1'])}
+            value={Number(productMeta.ratings['1'])}
             min={1}
             max={totalRatings}
             disabled
