@@ -16,7 +16,7 @@ const Reviews = ({ currentProduct, productMeta }) => {
 
   const useStyles = makeStyles({
     list: {
-      maxHeight: '89vh',
+      maxHeight: '103vh',
       overflow: 'auto'
     }
   });
