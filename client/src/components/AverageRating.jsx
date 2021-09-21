@@ -68,15 +68,20 @@ const getRatingInfo = (ratings) => {
 
 
 const AverageRating = ({ productMeta , alwaysShow = false, totalRatingsSetter, averageRatingSetter }) => {
-  const [ratingInfo, setRatingInfo] = useState(getRatingInfo(productMeta.ratings))
+  const [ratingInfo, setRatingInfo] = useState({
+    average: 0,
+    total: 0
+  });
 
   useEffect(() => {
-      if (totalRatingsSetter) {
-        totalRatingsSetter(ratingInfo.total)
-      }
-      if (averageRatingSetter) {
-        averageRatingSetter(ratingInfo.average)
-      }
+    let newRatingInfo = getRatingInfo(productMeta.ratings);
+    if (totalRatingsSetter) {
+      totalRatingsSetter(newRatingInfo.total)
+    }
+    if (averageRatingSetter) {
+      averageRatingSetter(newRatingInfo.average)
+    }
+    setRatingInfo(newRatingInfo)
   }, [productMeta]);
 
 
