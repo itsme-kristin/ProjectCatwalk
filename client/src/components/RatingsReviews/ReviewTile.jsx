@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import moment from 'moment';
-import { Grid, Divider, Typography } from '@material-ui/core';
+import { Grid, Divider, Typography, Button } from '@material-ui/core';
 import Rating from '@material-ui/lab/Rating';
 import { makeStyles } from '@material-ui/core/styles';
 import FeedbackButton from './FeedbackButton.jsx';
@@ -24,6 +24,7 @@ const useStyles = makeStyles({
 });
 
 const ReviewTile = ({ review }) => {
+  const [showFullBody, setShowFullBody] = useState(false);
   const classes = useStyles();
   const recommend = review.recommend ? 'I recommend this product' : null;
   const date = review.date.substring(0, 10);
@@ -44,6 +45,16 @@ const ReviewTile = ({ review }) => {
       </Grid>
     </Grid>
   ) : null;
+
+  const body =
+    review.body.length > 250 && !showFullBody ? (
+      <React.Fragment>
+        <Typography>{review.body.slice(0, 250)}</Typography>
+        <Button variant='outlined' onClick={() => setShowFullBody(true)}>Show More</Button>
+      </React.Fragment>
+    ) : (
+      <Typography>{review.body}</Typography>
+    );
 
   return (
     <Grid className={classes.root} container spacing={3} direction='column'>
@@ -66,7 +77,7 @@ const ReviewTile = ({ review }) => {
         <Typography className={classes.summary}>{review.summary}</Typography>
       </Grid>
       <Grid item xs={12}>
-        <Typography>{review.body}</Typography>
+        {body}
       </Grid>
       <Grid item xs={12}>
         <Typography>{recommend}</Typography>
