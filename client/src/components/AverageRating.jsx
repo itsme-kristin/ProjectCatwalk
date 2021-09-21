@@ -80,7 +80,7 @@ const AverageRating = ({ productMeta , alwaysShow = false, totalRatingsSetter, a
   }, [productMeta]);
 
 
-  if (ratingInfo.average === 0 && !alwaysShow) {
+  if (ratingInfo.total === 0 && !alwaysShow) {
     return null
   }
 
