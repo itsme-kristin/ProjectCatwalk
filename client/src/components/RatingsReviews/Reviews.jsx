@@ -70,6 +70,20 @@ const Reviews = ({ currentProduct, productMeta }) => {
       </Button>
     ) : null;
 
+  const filterMessage =
+    filters.length > 0 ? (
+      <Typography>
+        Applied filter(s){': '}
+        {filters.map((filter, index) => {
+          if (index === filters.length - 1) {
+            return `${filter}`
+          } else {
+            return `${filter}, `;
+          }
+        })}
+      </Typography>
+    ) : null;
+
   if (reviews.length === 0) {
     return (
       <React.Fragment>
@@ -95,6 +109,9 @@ const Reviews = ({ currentProduct, productMeta }) => {
                 productMeta={productMeta}
                 filterReviews={filterReviews}
               />
+            </Grid>
+            <Grid item xs={12}>
+              {filterMessage}
             </Grid>
             <Grid item xs={12}>
               {removeFiltersButton}
