@@ -3,6 +3,7 @@ import moment from 'moment';
 import { Grid, Divider, Typography, Button } from '@material-ui/core';
 import Rating from '@material-ui/lab/Rating';
 import { makeStyles } from '@material-ui/core/styles';
+import CheckIcon from '@material-ui/icons/Check';
 import FeedbackButton from './FeedbackButton.jsx';
 import ReviewPhoto from './ReviewPhoto.jsx';
 
@@ -27,17 +28,27 @@ const useStyles = makeStyles({
 const ReviewTile = ({ review }) => {
   const [showFullBody, setShowFullBody] = useState(false);
   const classes = useStyles();
-  const recommend = review.recommend ? 'I recommend this product' : null;
+  const recommend = review.recommend ? (
+    <React.Fragment>
+      <Grid item xs={1}>
+        <CheckIcon />
+      </Grid>
+      <Grid item xs={11}>
+        <Typography>I recommend this product</Typography>
+      </Grid>
+    </React.Fragment>
+  ) : null;
+
   const date = review.date.substring(0, 10);
   const formattedDate = moment(date, 'YYYY-MM-DD').format('MMMM D, YYYY');
   const response = review.response ? (
     <Grid
-      className={classes.response}
-      item
-      xs={12}
-      container
-      direction='column'
-    >
+        className={classes.response}
+        item
+        xs={12}
+        container
+        direction='column'
+      >
       <Grid item xs={12}>
         <Typography>Response from seller:</Typography>
       </Grid>
@@ -89,8 +100,8 @@ const ReviewTile = ({ review }) => {
         {renderedPhotos}
         {body}
       </Grid>
-      <Grid item xs={12}>
-        <Typography>{recommend}</Typography>
+      <Grid item xs={12} container>
+        {recommend}
       </Grid>
       {response}
       <Grid item xs={12} container>
