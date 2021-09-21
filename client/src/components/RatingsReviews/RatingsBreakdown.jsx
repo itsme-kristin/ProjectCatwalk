@@ -10,10 +10,8 @@ const useStyles = makeStyles({
 });
 
 const RatingsBreakdown = ({ currentProduct, reviewData, filterReviews }) => {
-  const [ratingsInfo, setRatingsInfo] = useState({
-    avgProductRating: 0,
-    totalRatings: 0
-  });
+  const [totalRatings, setTotalRatings] = useState(0);
+  const [avgRating, setAvgRating] = useState(0);
   const classes = useStyles();
 
   const handleClick = (rating) => {
@@ -25,14 +23,14 @@ const RatingsBreakdown = ({ currentProduct, reviewData, filterReviews }) => {
       <Grid item xs={12} container>
         <Grid item xs={12} md={3} >
           <Typography variant='h3'>
-            {Math.round(ratingsInfo.avgProductRating * 10) / 10}
+            {avgRating}
           </Typography>
         </Grid>
         <Grid item xs={12} md={9}>
           <AverageRating
-            productId={currentProduct.id}
-            avgProductRating={ratingsInfo.avgProductRating}
-            setRatingsInfo={setRatingsInfo}
+            productMeta={reviewData}
+            totalRatingsSetter={setTotalRatings}
+            averageRatingSetter={setAvgRating}
           />
         </Grid>
       </Grid>
@@ -53,7 +51,7 @@ const RatingsBreakdown = ({ currentProduct, reviewData, filterReviews }) => {
           <Slider
             value={Number(reviewData.ratings['5'])}
             min={1}
-            max={ratingsInfo.totalRatings}
+            max={totalRatings}
             disabled
           />
         </Grid>
@@ -75,7 +73,7 @@ const RatingsBreakdown = ({ currentProduct, reviewData, filterReviews }) => {
           <Slider
             value={Number(reviewData.ratings['4'])}
             min={1}
-            max={ratingsInfo.totalRatings}
+            max={totalRatings}
             disabled
           />
         </Grid>
@@ -97,7 +95,7 @@ const RatingsBreakdown = ({ currentProduct, reviewData, filterReviews }) => {
           <Slider
             value={Number(reviewData.ratings['3'])}
             min={1}
-            max={ratingsInfo.totalRatings}
+            max={totalRatings}
             disabled
           />
         </Grid>
@@ -119,7 +117,7 @@ const RatingsBreakdown = ({ currentProduct, reviewData, filterReviews }) => {
           <Slider
             value={Number(reviewData.ratings['2'])}
             min={1}
-            max={ratingsInfo.totalRatings}
+            max={totalRatings}
             disabled
           />
         </Grid>
@@ -141,14 +139,13 @@ const RatingsBreakdown = ({ currentProduct, reviewData, filterReviews }) => {
           <Slider
             value={Number(reviewData.ratings['1'])}
             min={1}
-            max={ratingsInfo.totalRatings}
+            max={totalRatings}
             disabled
           />
         </Grid>
       </Grid>
     </Grid>
   );
-
 };
 
 export default RatingsBreakdown;
