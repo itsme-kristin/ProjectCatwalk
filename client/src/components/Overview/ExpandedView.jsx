@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import InnerImageZoom from 'react-inner-image-zoom'
 
 import { makeStyles } from '@material-ui/core/styles';
-import { Grid, Typography, Paper} from '@material-ui/core';
+import { Grid, Typography, Paper, Button} from '@material-ui/core';
 
 const useStyles = makeStyles({
   viewModal: {
@@ -10,13 +10,19 @@ const useStyles = makeStyles({
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
+    backgroundColor: 'rgba(0, 0, 0, 0.7)',
   },
 
   viewImage: {
-    maxHeight: '800px',
-    width: 'auto',
-    height: 'auto',
-    userSelect: 'none'
+    position: 'relative',
+    userSelect: 'none',
+  },
+
+  nav: {
+    position: 'absolute',
+    borderRadius: '10px',
+    backgroundColor: 'rgba(172, 172, 172, 0.5)',
+    padding: '5px'
   }
 });
 
@@ -56,55 +62,49 @@ const ExpandedView = React.forwardRef(({ photos, imgIndex, setImgIndex, close },
       cursor: 'pointer'
     },
 
-    closeDot: {
-      marginLeft: 'auto',
-      marginRight: '5%',
+    closeButton: {
+      paddingLeft: '10px',
       fontSize: iconSize,
       color: iconColor,
       opacity: iconOpacity,
       userSelect: 'none',
       cursor: 'pointer'
-    }
+    },
   }
   return (
     <Grid container className={classes.viewModal} direction="column">
       <Grid item xs={12}>
-        <Grid container justifyContent="flex-end">
-          <i className="material-icons"
-            style={inline.closeDot}
-            onClick={close}>cancel</i>
-        </Grid>
-      </Grid>
-      <Grid item xs={12} >
-        <Grid container className={classes.viewImage} justifyContent="center">
-          {/* <img className={classes.viewImage} src={photos[imgIndex].url}/> */}
-          <InnerImageZoom src={photos[imgIndex].url}/>
-        </Grid>
-      </Grid>
-      <Grid item xs={12}>
         <Grid container justifyContent="center">
-          <i className="material-icons"
-            style={inline.leftButton}
-            onClick={() => setImgIndex(imgIndex - 1)}>arrow_circle_left</i>
-          { photos.map((photo, index)=> {
-            if (index === imgIndex) {
-              return (
-                <i className="material-icons"
-                  key={index}
-                  style={inline.dot}>radio_button_checked</i>
-              )
-            } else {
-              return (
-                <i className="material-icons"
-                  key={index}
-                  style={inline.dot}
-                  onClick={() => setImgIndex(index)}>radio_button_unchecked</i>
-              )
-            }
-          })}
-          <i className="material-icons"
-            style={inline.rightButton}
-            onClick={() => setImgIndex(imgIndex + 1)}>arrow_circle_right</i>
+          <InnerImageZoom className={classes.viewImage} src={photos[imgIndex].url}/>
+          <Grid className={classes.nav} item>
+              <i className="material-icons"
+                style={inline.leftButton}
+                onClick={() => setImgIndex(imgIndex - 1)}>arrow_circle_left</i>
+
+              { photos.map((photo, index)=> {
+                if (index === imgIndex) {
+                  return (
+                    <i className="material-icons"
+                      key={index}
+                      style={inline.dot}>radio_button_checked</i>
+                  )
+                } else {
+                  return (
+                    <i className="material-icons"
+                      key={index}
+                      style={inline.dot}
+                      onClick={() => setImgIndex(index)}>radio_button_unchecked</i>
+                  )
+                }
+              })}
+
+              <i className="material-icons"
+                style={inline.rightButton}
+                onClick={() => setImgIndex(imgIndex + 1)}>arrow_circle_right</i>
+              <i className="material-icons"
+                style={inline.closeButton}
+                onClick={close}>cancel</i>
+          </Grid>
         </Grid>
       </Grid>
     </Grid>
