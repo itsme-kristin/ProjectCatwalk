@@ -8,7 +8,14 @@ import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) => ({
   title: {
-    fontSize: 20,
+    fontSize: '20px',
+    padding: '10px',
+    margin: '10px',
+  },
+  button: {
+    color: "white",
+    cursor: "pointer",
+    backgroundColor: "rgb(63, 81, 181)",
   }
 }));
 
@@ -16,7 +23,7 @@ const YourOutfit = ({ currentProduct, outfitList, setOutfitList }) => {
   const classes = useStyles();
   const [isDeleting, setIsDeleting] = useState(false);
   const [activeItemIndex, setActiveItemIndex] = useState(0);
-  const chevronWidth = 40;
+  const chevronWidth = 60;
 
   useEffect(() => {
     setIsDeleting(true);
@@ -68,8 +75,8 @@ const YourOutfit = ({ currentProduct, outfitList, setOutfitList }) => {
                 activeItemIndex={activeItemIndex}
                 numberOfCards={3}
                 gutter={20}
-                leftChevron={<button>{'<'}</button>}
-                rightChevron={<button>{'>'}</button>}
+                leftChevron={<button className={classes.button}>{'<'}</button>}
+                rightChevron={<button className={classes.button}>{'>'}</button>}
                 outsideChevron
                 chevronWidth={chevronWidth}
               >
