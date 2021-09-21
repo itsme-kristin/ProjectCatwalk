@@ -18,9 +18,22 @@ const RatingsBreakdown = ({ productMeta, filterReviews }) => {
     filterReviews(rating);
   };
 
+  const recommendPercentage = totalRatings > 0 ? Math.ceil((Number(productMeta.recommended.true) / totalRatings) * 100) : null;
+
+  const totalRatingsAtValue = rating => {
+    if (!productMeta.ratings[rating]) {
+      return <Typography variant='caption'>{`(0)`}</Typography>;
+    } else {
+      return (
+        <Typography variant='caption'>{`(${productMeta.ratings[rating]})`}</Typography>
+      );
+    }
+  };
+
   return (
     <Grid container direction='column'>
       <Grid item xs={12} container>
+        <Grid item xs={12}><Typography>{`${recommendPercentage}% recommend this product`}</Typography></Grid>
         <Grid item xs={12} md={3}>
           <Typography variant='h3'>{avgRating}</Typography>
         </Grid>
@@ -53,6 +66,9 @@ const RatingsBreakdown = ({ productMeta, filterReviews }) => {
             disabled
           />
         </Grid>
+        <Grid className={classes.caption} item xs={2}>
+          {totalRatingsAtValue(5)}
+        </Grid>
       </Grid>
       <Grid item xs={12} container>
         <Grid className={classes.caption} item xs={2}>
@@ -74,6 +90,9 @@ const RatingsBreakdown = ({ productMeta, filterReviews }) => {
             max={totalRatings}
             disabled
           />
+        </Grid>
+        <Grid className={classes.caption} item xs={2}>
+          {totalRatingsAtValue(4)}
         </Grid>
       </Grid>
       <Grid item xs={12} container>
@@ -97,6 +116,9 @@ const RatingsBreakdown = ({ productMeta, filterReviews }) => {
             disabled
           />
         </Grid>
+        <Grid className={classes.caption} item xs={2}>
+          {totalRatingsAtValue(3)}
+        </Grid>
       </Grid>
       <Grid item xs={12} container>
         <Grid className={classes.caption} item xs={2}>
@@ -119,6 +141,9 @@ const RatingsBreakdown = ({ productMeta, filterReviews }) => {
             disabled
           />
         </Grid>
+        <Grid className={classes.caption} item xs={2}>
+          {totalRatingsAtValue(2)}
+        </Grid>
       </Grid>
       <Grid item xs={12} container>
         <Grid className={classes.caption} item xs={2}>
@@ -140,6 +165,9 @@ const RatingsBreakdown = ({ productMeta, filterReviews }) => {
             max={totalRatings}
             disabled
           />
+        </Grid>
+        <Grid className={classes.caption} item xs={2}>
+          {totalRatingsAtValue(1)}
         </Grid>
       </Grid>
     </Grid>
