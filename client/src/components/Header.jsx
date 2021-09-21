@@ -6,6 +6,7 @@ import { makeStyles } from '@material-ui/core/styles';
 const useStyles = makeStyles(() => ({
   header: {
     backgroundColor: "rgb(63, 81, 181)",
+    margin: "0px 0px 20px 0px",
   },
   logo: {
     fontFamily: "'Special Elite', cursive",
@@ -13,15 +14,12 @@ const useStyles = makeStyles(() => ({
     fontSize: "40px",
     color: "white",
     textAlign: "left",
+    letterSpacing: "1px"
   },
 }));
 
 const Header = () => {
   const classes = useStyles();
-
-  const displayDesktop = () => {
-    return <Toolbar>{klosetLogo}</Toolbar>;
-  };
 
   const klosetLogo = (
     <h1 className={classes.logo}>
@@ -31,7 +29,9 @@ const Header = () => {
 
   return (
     <header>
-      <AppBar position="sticky" className={classes.header}>{displayDesktop()}</AppBar>
+      <AppBar position="sticky" className={classes.header}>
+        <Toolbar>{klosetLogo}</Toolbar>
+      </AppBar>
     </header>
   );
 }
