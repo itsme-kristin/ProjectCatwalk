@@ -32,13 +32,9 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const ProductCard = ({ currentProduct, cardId, setProductId }) => {
+const ProductCard = ({ currentProduct, cardId, setProductId, productMeta }) => {
   const [productCardInfo, setProductCardInfo] = useState(null);
   const [productCardPhoto, setProductCardPhoto] = useState(null);
-  const [ratingsInfo, setRatingsInfo] = useState({
-    avgProductRating: 0,
-    totalRatings: 0
-  });
   const [showComparison, setShowComparison] = useState(false);
   const [featureData, setFeatureData] = useState(null);
   const classes = useStyles();
@@ -47,8 +43,8 @@ const ProductCard = ({ currentProduct, cardId, setProductId }) => {
   const getFeatureData = () => {
     const featureData = {};
 
-    for (let i = 0; i < currentProductInfo.features.length; i++) {
-      let currentFeatureObject = currentProductInfo.features[i];
+    for (let i = 0; i < currentProduct.features.length; i++) {
+      let currentFeatureObject = currentProduct.features[i];
       let currentFeatureValue = [];
       if (currentFeatureObject.value === null) {
         currentFeatureValue.push('yes!');
@@ -112,7 +108,7 @@ const ProductCard = ({ currentProduct, cardId, setProductId }) => {
       <Card className={classes.root} variant="outlined">
         <Grid container>
           <Grid item align="right" xs={12}>
-            <Icon onClick={openShowComparison} sx={{ fontSize: 10 }} className={classes.icon}>grade</Icon>
+            <Icon onClick={openShowComparison} xs={{ fontSize: 10 }} className={classes.icon}>grade</Icon>
           </Grid>
         </Grid>
         <CardMedia
@@ -134,9 +130,10 @@ const ProductCard = ({ currentProduct, cardId, setProductId }) => {
           </Typography>
           <div>
             <AverageRating
-              productId={cardId}
-              avgProductRating={ratingsInfo.avgProductRating}
-              setRatingsInfo={setRatingsInfo}
+              productMeta={productMeta}
+              // productId={cardId}
+              // avgProductRating={ratingsInfo.avgProductRating}
+              // setRatingsInfo={setRatingsInfo}
             />
           </div>
         </CardContent>
