@@ -42,14 +42,20 @@ const ReviewTile = ({ review }) => {
   const date = review.date.substring(0, 10);
   const formattedDate = moment(date, 'YYYY-MM-DD').format('MMMM D, YYYY');
   const response = review.response ? (
-    <React.Fragment>
+    <Grid
+        className={classes.response}
+        item
+        xs={12}
+        container
+        direction='column'
+      >
       <Grid item xs={12}>
         <Typography>Response from seller:</Typography>
       </Grid>
       <Grid item xs={12}>
         <Typography>{review.response}</Typography>
       </Grid>
-    </React.Fragment>
+    </Grid>
   ) : null;
 
   const body =
@@ -97,15 +103,7 @@ const ReviewTile = ({ review }) => {
       <Grid item xs={12} container>
         {recommend}
       </Grid>
-      <Grid
-        className={classes.response}
-        item
-        xs={12}
-        container
-        direction='column'
-      >
-        {response}
-      </Grid>
+      {response}
       <Grid item xs={12} container>
         <Grid className={classes.feedback} item xs={4}>
           <Typography>Was this helpful?</Typography>
