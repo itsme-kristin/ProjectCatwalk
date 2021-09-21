@@ -11,7 +11,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const RelatedProducts = ({ currentProduct, setProductId, productMeta }) => {
+const RelatedProducts = ({ currentProduct, setProductId }) => {
   const classes = useStyles();
   const [relatedProductsList, setRelatedProductsList] = useState(null);
   const [doneSearching, setDoneSearching] = useState(false);
@@ -48,7 +48,7 @@ const RelatedProducts = ({ currentProduct, setProductId, productMeta }) => {
           chevronWidth={chevronWidth}
           >
             {relatedProductsList.map((productId, index) => {
-              return <ProductCard currentProduct={currentProduct} productMeta={productMeta} cardId={productId} key={index} setProductId={setProductId}/>
+              return <ProductCard currentProduct={currentProduct} cardId={productId} key={index} setProductId={setProductId}/>
             })}
         </ItemsCarousel>
       </div>

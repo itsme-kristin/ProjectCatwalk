@@ -30,9 +30,10 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const OutfitCard = ({ handleDeleteOutfitClick, product, productMeta }) => {
+const OutfitCard = ({ handleDeleteOutfitClick, product }) => {
   const [outfitCardInfo, setOutfitCardInfo] = useState(null);
   const [outfitCardPhoto, setOutfitCardPhoto] = useState(null);
+  const [outfitCardMeta, setOutfitCardMeta] = useState(null);
   const classes = useStyles();
 
   useEffect(() => {
@@ -42,6 +43,9 @@ const OutfitCard = ({ handleDeleteOutfitClick, product, productMeta }) => {
         return axios.get(`/api/products/${product.id}/styles`)
       }).then(stylesInfo => {
           setOutfitCardPhoto(stylesInfo.data.results[0]);
+          return axios.get(`/api/reviews/meta?product_id=${product.id}`)
+      }).then(meta => {
+          setOutfitCardMeta(meta.data)
       })
       .catch(err => {
         console.info('There was an error retrieving product information and photo from the server.');
@@ -49,7 +53,7 @@ const OutfitCard = ({ handleDeleteOutfitClick, product, productMeta }) => {
   }, []);
 
 
-  return outfitCardPhoto && outfitCardInfo && (
+  return outfitCardPhoto && outfitCardInfo && outfitCardMeta && (
     <React.Fragment>
       <Card className={classes.root} variant="outlined">
         <Grid container>
@@ -75,7 +79,7 @@ const OutfitCard = ({ handleDeleteOutfitClick, product, productMeta }) => {
           </Typography>
           <div>
             <AverageRating
-                productMeta={productMeta}
+                productMeta={outfitCardMeta}
             />
           </div>
         </CardContent>
