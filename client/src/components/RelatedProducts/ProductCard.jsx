@@ -32,13 +32,9 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const ProductCard = ({ currentProduct, cardId, setProductId }) => {
+const ProductCard = ({ currentProduct, cardId, setProductId, productMeta }) => {
   const [productCardInfo, setProductCardInfo] = useState(null);
   const [productCardPhoto, setProductCardPhoto] = useState(null);
-  const [ratingsInfo, setRatingsInfo] = useState({
-    avgProductRating: 0,
-    totalRatings: 0
-  });
   const [showComparison, setShowComparison] = useState(false);
   const [featureData, setFeatureData] = useState(null);
   const classes = useStyles();
@@ -134,9 +130,10 @@ const ProductCard = ({ currentProduct, cardId, setProductId }) => {
           </Typography>
           <div>
             <AverageRating
-              productId={cardId}
-              avgProductRating={ratingsInfo.avgProductRating}
-              setRatingsInfo={setRatingsInfo}
+              productMeta={productMeta}
+              // productId={cardId}
+              // avgProductRating={ratingsInfo.avgProductRating}
+              // setRatingsInfo={setRatingsInfo}
             />
           </div>
         </CardContent>

@@ -30,13 +30,9 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const OutfitCard = ({ handleDeleteOutfitClick, product }) => {
+const OutfitCard = ({ handleDeleteOutfitClick, product, productMeta }) => {
   const [outfitCardInfo, setOutfitCardInfo] = useState(null);
   const [outfitCardPhoto, setOutfitCardPhoto] = useState(null);
-  const [ratingsInfo, setRatingsInfo] = useState({
-    avgProductRating: 0,
-    totalRatings: 0
-    });
   const classes = useStyles();
 
   useEffect(() => {
@@ -79,9 +75,7 @@ const OutfitCard = ({ handleDeleteOutfitClick, product }) => {
           </Typography>
           <div>
             <AverageRating
-                productId={outfitCardInfo.id}
-                avgProductRating={ratingsInfo.avgProductRating}
-                setRatingsInfo={setRatingsInfo}
+                productMeta={productMeta}
             />
           </div>
         </CardContent>
