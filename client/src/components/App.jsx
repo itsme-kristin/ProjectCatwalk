@@ -38,8 +38,8 @@ const App = () => {
         <h1>{product.name}</h1>
         <Overview product={product} productMeta={productMeta}/>
         <RelatedProducts currentProduct={product} setProductId={setProductId} />
-        <YourOutfit currentProduct={product} outfitList={outfitList} setOutfitList={setOutfitList} productMeta={productMeta}/>
-        {/* <Reviews currentProduct={product} productMeta={productMeta} /> */}
+        <YourOutfit currentProduct={product} outfitList={outfitList} setOutfitList={setOutfitList}/>
+        <Reviews currentProduct={product} productMeta={productMeta} />
         </React.Fragment>
       </Container>
     );

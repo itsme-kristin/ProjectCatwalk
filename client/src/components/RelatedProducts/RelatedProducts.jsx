@@ -11,7 +11,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const RelatedProducts = ({ currentProduct, setProductId, productMeta }) => {
+const RelatedProducts = ({ currentProduct, setProductId }) => {
   const classes = useStyles();
   const [relatedProductsList, setRelatedProductsList] = useState(null);
   const [doneSearching, setDoneSearching] = useState(false);

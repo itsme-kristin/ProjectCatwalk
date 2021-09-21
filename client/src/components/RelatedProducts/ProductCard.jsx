@@ -135,9 +135,6 @@ const ProductCard = ({ currentProduct, cardId, setProductId }) => {
           <div>
             <AverageRating
               productMeta={productCardMeta}
-              // productId={cardId}
-              // avgProductRating={ratingsInfo.avgProductRating}
-              // setRatingsInfo={setRatingsInfo}
             />
           </div>
         </CardContent>
