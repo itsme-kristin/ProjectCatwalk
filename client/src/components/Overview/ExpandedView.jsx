@@ -90,11 +90,13 @@ const ExpandedView = React.forwardRef(({ photos, imgIndex, setImgIndex, close },
             if (index === imgIndex) {
               return (
                 <i className="material-icons"
+                  key={index}
                   style={inline.dot}>radio_button_checked</i>
               )
             } else {
               return (
                 <i className="material-icons"
+                  key={index}
                   style={inline.dot}
                   onClick={() => setImgIndex(index)}>radio_button_unchecked</i>
               )
