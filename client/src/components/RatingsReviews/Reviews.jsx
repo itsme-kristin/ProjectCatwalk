@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Grid, Button, Typography } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
 import ReviewList from './ReviewList.jsx';
 import ProductBreakdown from './ProductBreakdown.jsx';
 import RatingsBreakdown from './RatingsBreakdown.jsx';
@@ -12,6 +13,15 @@ const Reviews = ({ currentProduct, productMeta }) => {
   const [filteredReviews, setFilteredReviews] = useState([]);
   const [filters, setFilters] = useState([]);
   const [selected, setSelected] = useState('relevant');
+
+  const useStyles = makeStyles({
+    list: {
+      maxHeight: '89vh',
+      overflow: 'auto'
+    }
+  });
+
+  const classes = useStyles();
 
   useEffect(() => {
     const totalReviews = Object.values(productMeta.ratings).reduce(
@@ -93,7 +103,7 @@ const Reviews = ({ currentProduct, productMeta }) => {
               <ProductBreakdown productMeta={productMeta} />
             </Grid>
           </Grid>
-          <Grid item xs={9}>
+          <Grid className={classes.list} item xs={9}>
             <SortingDropdown selected={selected} setSelected={setSelected} />
             <ReviewList
               reviews={filteredReviews}
