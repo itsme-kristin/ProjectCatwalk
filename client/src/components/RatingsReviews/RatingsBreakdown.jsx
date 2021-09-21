@@ -18,6 +18,8 @@ const RatingsBreakdown = ({ productMeta, filterReviews }) => {
     filterReviews(rating);
   };
 
+  const recommendPercentage = totalRatings > 0 ? Math.ceil((Number(productMeta.recommended.true) / totalRatings) * 100) : null;
+
   const totalRatingsAtValue = rating => {
     if (!productMeta.ratings[rating]) {
       return <Typography variant='caption'>{`(0)`}</Typography>;
@@ -31,6 +33,7 @@ const RatingsBreakdown = ({ productMeta, filterReviews }) => {
   return (
     <Grid container direction='column'>
       <Grid item xs={12} container>
+        <Grid item xs={12}><Typography>{`${recommendPercentage}% recommend this product`}</Typography></Grid>
         <Grid item xs={12} md={3}>
           <Typography variant='h3'>{avgRating}</Typography>
         </Grid>
