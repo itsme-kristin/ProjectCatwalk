@@ -18,6 +18,16 @@ const RatingsBreakdown = ({ productMeta, filterReviews }) => {
     filterReviews(rating);
   };
 
+  const totalRatingsAtValue = rating => {
+    if (!productMeta.ratings[rating]) {
+      return <Typography variant='caption'>{`(0)`}</Typography>;
+    } else {
+      return (
+        <Typography variant='caption'>{`(${productMeta.ratings[rating]})`}</Typography>
+      );
+    }
+  };
+
   return (
     <Grid container direction='column'>
       <Grid item xs={12} container>
@@ -53,6 +63,9 @@ const RatingsBreakdown = ({ productMeta, filterReviews }) => {
             disabled
           />
         </Grid>
+        <Grid className={classes.caption} item xs={2}>
+          {totalRatingsAtValue(5)}
+        </Grid>
       </Grid>
       <Grid item xs={12} container>
         <Grid className={classes.caption} item xs={2}>
@@ -74,6 +87,9 @@ const RatingsBreakdown = ({ productMeta, filterReviews }) => {
             max={totalRatings}
             disabled
           />
+        </Grid>
+        <Grid className={classes.caption} item xs={2}>
+          {totalRatingsAtValue(4)}
         </Grid>
       </Grid>
       <Grid item xs={12} container>
@@ -97,6 +113,9 @@ const RatingsBreakdown = ({ productMeta, filterReviews }) => {
             disabled
           />
         </Grid>
+        <Grid className={classes.caption} item xs={2}>
+          {totalRatingsAtValue(3)}
+        </Grid>
       </Grid>
       <Grid item xs={12} container>
         <Grid className={classes.caption} item xs={2}>
@@ -119,6 +138,9 @@ const RatingsBreakdown = ({ productMeta, filterReviews }) => {
             disabled
           />
         </Grid>
+        <Grid className={classes.caption} item xs={2}>
+          {totalRatingsAtValue(2)}
+        </Grid>
       </Grid>
       <Grid item xs={12} container>
         <Grid className={classes.caption} item xs={2}>
@@ -140,6 +162,9 @@ const RatingsBreakdown = ({ productMeta, filterReviews }) => {
             max={totalRatings}
             disabled
           />
+        </Grid>
+        <Grid className={classes.caption} item xs={2}>
+          {totalRatingsAtValue(1)}
         </Grid>
       </Grid>
     </Grid>
