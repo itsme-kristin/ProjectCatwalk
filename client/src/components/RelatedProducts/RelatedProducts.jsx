@@ -53,7 +53,7 @@ const RelatedProducts = ({ currentProduct, setProductId }) => {
       <Typography className={classes.title} variant="h4" gutterBottom>
         RELATED PRODUCTS
       </Typography>
-      <div style={{ padding: `0 ${chevronWidth}px` }}>
+      <div style={{ minHeight: "380px", padding: `0 ${chevronWidth}px` }}>
         <ItemsCarousel
           requestToChangeActive={setActiveItemIndex}
           activeItemIndex={activeItemIndex}
@@ -73,11 +73,18 @@ const RelatedProducts = ({ currentProduct, setProductId }) => {
     );
   } else {
     return (
-      <Card className={classes.root} >
-        <CardContent className={classes.content}>
-          <CircularProgress />
-        </CardContent>
-      </Card>
+      <React.Fragment>
+        <Typography className={classes.title} variant="h4" gutterBottom>
+          RELATED PRODUCTS
+        </Typography>
+        <div style={{ minHeight: "380px", padding: `0 ${chevronWidth}px` }}>
+          <Card className={classes.root} >
+            <CardContent className={classes.content}>
+              <CircularProgress />
+            </CardContent>
+          </Card>
+        </div>
+      </React.Fragment>
     );
   }
 };
