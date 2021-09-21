@@ -11,7 +11,6 @@ const Reviews = ({ currentProduct, productMeta }) => {
   const [reviews, setReviews] = useState([]);
   const [filteredReviews, setFilteredReviews] = useState([]);
   const [filters, setFilters] = useState([]);
-  const [reviewData, setReviewData] = useState(null);
   const [selected, setSelected] = useState('relevant');
 
   useEffect(() => {
@@ -19,7 +18,6 @@ const Reviews = ({ currentProduct, productMeta }) => {
       (sum, val) => sum + Number(val),
       0
     );
-
     axios
       .get(
         `/api/reviews?product_id=${currentProduct.id}&count=${totalReviews}&sort=${selected}`
@@ -31,7 +29,7 @@ const Reviews = ({ currentProduct, productMeta }) => {
       .catch(() => {
         console.log('error getting reviews');
       });
-  }, [currentProduct, selected]);
+  }, [productMeta, selected]);
 
   useEffect(() => {
     const reviewsToRender = [...reviews].filter(review => {
@@ -106,6 +104,7 @@ const Reviews = ({ currentProduct, productMeta }) => {
       </div>
     );
   }
+
 };
 
 export default Reviews;
