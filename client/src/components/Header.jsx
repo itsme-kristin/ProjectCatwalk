@@ -7,6 +7,7 @@ const useStyles = makeStyles(() => ({
   header: {
     backgroundColor: "rgb(63, 81, 181)",
     margin: "0px 0px 20px 0px",
+    width: '100vw',
   },
   logo: {
     fontFamily: "'Special Elite', cursive",

@@ -17,7 +17,7 @@ import Button from '@material-ui/core/Button';
 
 const useStyles = makeStyles({
   root: {
-    padding: "20px"
+    padding: "0 20px 0 20px"
   },
 
   category: {
@@ -191,7 +191,7 @@ const ProductDetails = ({product, productMeta, styles, styleIndex, setStyleIndex
       <Grid container alignItems="center" className={classes.rating}>
         <AverageRating productMeta={productMeta} totalRatingsSetter={setTotalRatings}/>
         <Typography variant="caption" className={classes.reviewsLink}>
-           <a href="#reviews">Read all {totalRatings} reviews</a>
+          { totalRatings !== 0 ? <a href="#reviews">Read all {totalRatings} reviews</a> : null }
         </Typography>
       </Grid>
       <Typography variant="h6">

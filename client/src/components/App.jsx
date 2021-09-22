@@ -10,14 +10,7 @@ import Header from './Header.jsx';
 import { makeStyles } from '@material-ui/core/styles';
 import { Container, CircularProgress } from '@material-ui/core';
 
-const useStyles = makeStyles({
-  root: {
-    border: "dotted 1px grey"
-  },
-})
-
 const App = () => {
-  const classes = useStyles();
   const [productId, setProductId] = useState(38322);
   const [product, setProduct] = useState(null);
   const [productMeta, setProductMeta] = useState(null);
@@ -50,13 +43,15 @@ const App = () => {
 
   if (product && productMeta) {
     return (
-      <Container maxWidth="lg" className={classes.root}>
+      <React.Fragment>
         <Header handleClick={handleClick} />
-        <Overview handleClick={handleClick} product={product} productMeta={productMeta}/>
-        <RelatedProducts handleClick={handleClick} currentProduct={product} setProductId={setProductId} />
-        <YourOutfit handleClick={handleClick} currentProduct={product} outfitList={outfitList} setOutfitList={setOutfitList}/>
-        <Reviews handleClick={handleClick} currentProduct={product} productMeta={productMeta} />
-      </Container>
+        <Container maxWidth="lg">
+          <Overview handleClick={handleClick} product={product} productMeta={productMeta}/>
+          <RelatedProducts handleClick={handleClick} currentProduct={product} setProductId={setProductId} />
+          <YourOutfit handleClick={handleClick} currentProduct={product} outfitList={outfitList} setOutfitList={setOutfitList}/>
+          <Reviews handleClick={handleClick} currentProduct={product} productMeta={productMeta} />
+        </Container>
+      </React.Fragment>
     );
   }
   else {
