@@ -17,7 +17,8 @@ import Button from '@material-ui/core/Button';
 
 const useStyles = makeStyles({
   root: {
-    padding: "0 20px 0 20px"
+    padding: "0 20px 0 20px",
+    maxWidth: '400px'
   },
 
   category: {
@@ -209,16 +210,16 @@ const ProductDetails = ({product, productMeta, styles, styleIndex, setStyleIndex
         setStyleIndex={setStyleIndex}
       />
       <Grid container spacing={1}>
-        <Grid item xs={8}>
+        <Grid item xs={12} md={7}>
           {sizeSelection()}
         </Grid>
-        <Grid item xs={4}>
+        <Grid item xs={12} md={5}>
           {qtySelection()}
         </Grid>
-        <Grid item xs={12} md={8}>
+        <Grid item xs={12} md={7}>
           {addToCartButton()}
         </Grid>
-        <Grid item xs={12} md={4}>
+        <Grid item xs={12} md={5}>
           <SocialMediaShare
             productName={product.name}
             photoUrl={styles[styleIndex]["photos"][0]["thumbnail_url"]}
