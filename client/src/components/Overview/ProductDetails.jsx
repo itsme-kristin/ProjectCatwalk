@@ -58,6 +58,9 @@ const ProductDetails = ({product, productMeta, styles, styleIndex, setStyleIndex
     var skus = {...styles[styleIndex]["skus"]};
     var availableStock = [];
     for (var sku in skus) {
+      if (sku === 'null') {
+        continue;
+      }
       if (skus[sku].quantity !== 0) {
         availableStock.push({
           sku_id: sku,
@@ -70,7 +73,7 @@ const ProductDetails = ({product, productMeta, styles, styleIndex, setStyleIndex
     setSkuIndex('');
     setSelectedSku(null);
     setSelectedQty(null);
-  }, [styleIndex])
+  }, [styles, styleIndex])
 
   const displayPrice = () => {
     if (styles[styleIndex]["sale_price"]) {
