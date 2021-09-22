@@ -7,7 +7,7 @@ import Typography from '@material-ui/core/Typography';
 
 const useStyles = makeStyles({
   root: {
-    marginBottom: "20px"
+    marginBottom: "20px",
   },
 
   selector: {
@@ -28,7 +28,7 @@ const StyleSelector = ({ styles, styleIndex, setStyleIndex }) => {
           Style > {styles[styleIndex]["name"]}
         </Typography>
       </Grid>
-      {styles.map((productStyle, index) => {
+      { styles.map((productStyle, index) => {
         var styleBG = {
           backgroundImage: `url(${productStyle["photos"][0]["thumbnail_url"]})`,
           backgroundRepeat: 'no-repeat',
@@ -45,7 +45,7 @@ const StyleSelector = ({ styles, styleIndex, setStyleIndex }) => {
 
         if (index === styleIndex) {
           return (
-            <Grid item xs={3} key={index}>
+            <Grid item xs={6} sm={4} md={3} key={index}>
               <Paper className={classes.selector} elevation={3} style={styleBG}>
                 <i className="material-icons" style={check}>check_circle</i>
               </Paper>
@@ -53,7 +53,7 @@ const StyleSelector = ({ styles, styleIndex, setStyleIndex }) => {
           )
         } else {
           return (
-            <Grid item xs={3} key={index}>
+            <Grid item xs={6} sm={4} md={3} key={index}>
               <Paper
                 className={classes.selector}
                 elevation={3}

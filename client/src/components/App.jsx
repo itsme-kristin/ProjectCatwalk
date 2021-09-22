@@ -12,8 +12,9 @@ import { Container, CircularProgress } from '@material-ui/core';
 
 const useStyles = makeStyles({
   root: {
-    border: "dotted 1px grey"
-  },
+    paddingTop: '20px',
+    backgroundColor: 'white',
+  }
 })
 
 const App = () => {
@@ -50,13 +51,15 @@ const App = () => {
 
   if (product && productMeta) {
     return (
-      <Container maxWidth="lg" className={classes.root}>
+      <React.Fragment>
         <Header handleClick={handleClick} />
-        <Overview handleClick={handleClick} product={product} productMeta={productMeta}/>
-        <RelatedProducts handleClick={handleClick} currentProduct={product} setProductId={setProductId} />
-        <YourOutfit handleClick={handleClick} currentProduct={product} outfitList={outfitList} setOutfitList={setOutfitList}/>
-        <Reviews handleClick={handleClick} currentProduct={product} productMeta={productMeta} />
-      </Container>
+        <Container maxWidth="lg" className={classes.root}>
+          <Overview handleClick={handleClick} product={product} productMeta={productMeta}/>
+          <RelatedProducts handleClick={handleClick} currentProduct={product} setProductId={setProductId} />
+          <YourOutfit handleClick={handleClick} currentProduct={product} outfitList={outfitList} setOutfitList={setOutfitList}/>
+          <Reviews handleClick={handleClick} currentProduct={product} productMeta={productMeta} />
+        </Container>
+      </React.Fragment>
     );
   }
   else {

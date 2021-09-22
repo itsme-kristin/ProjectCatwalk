@@ -56,7 +56,7 @@ const Overview = ({ handleClick, product, productMeta }) => {
     if (!!slogan || !!description || !!features ) {
       return (
         <Grid container className={classes.root}>
-          <Grid item xs={7} className={classes.prodOverview}>
+          <Grid item xs={12} lg={7} className={classes.prodOverview}>
             <Typography variant="h5" gutterBottom>
               {slogan}
             </Typography>
@@ -64,7 +64,7 @@ const Overview = ({ handleClick, product, productMeta }) => {
               {description}
             </Typography>
           </Grid>
-          <Grid item xs={5} className={classes.featureList}>
+          <Grid item xs={12} lg={5} className={classes.featureList}>
             <List component="nav">
               {features.map(({ feature, value }, featureIndex) => {
                 return (
@@ -91,12 +91,12 @@ const Overview = ({ handleClick, product, productMeta }) => {
         container
         alignItems="flex-start"
       >
-        <Grid item xs={7}>
+        <Grid item xs={12} lg={7}>
           <ImageGallery
           photos={styles[styleIndex].photos}
           />
         </Grid>
-        <Grid item xs={5}>
+        <Grid item xs={12} lg={5}>
           <ProductDetails
             product={product}
             productMeta={productMeta}
