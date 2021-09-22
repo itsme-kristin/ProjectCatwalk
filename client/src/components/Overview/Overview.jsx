@@ -46,14 +46,14 @@ const Overview = ({ handleClick, product, productMeta }) => {
   }, [product])
 
 
-  if (styles.length === 0) {
+  if ( !styles?.length || !styles[styleIndex]?.photos ) {
     return <CircularProgress />
   }
 
   const showDetails = () => {
     let { slogan, description, features } = product;
 
-    if (!!slogan || !!description || features.length !== 0) {
+    if (!!slogan || !!description || !!features ) {
       return (
         <Grid container className={classes.root}>
           <Grid item xs={7} className={classes.prodOverview}>
