@@ -4,12 +4,14 @@ import {
   FormControl,
   FormControlLabel,
   FormLabel,
+  FormHelperText,
   Radio,
   RadioGroup
 } from '@material-ui/core';
 
 const CharacteristicsRadio = ({ char, handleFormChange }) => {
   const [val, setVal] = useState(0);
+  const [error, setError] = useState('Select an option');
   let labels = [];
 
   if (char[0] === 'Fit') {
@@ -70,9 +72,20 @@ const CharacteristicsRadio = ({ char, handleFormChange }) => {
 
   const label = labels[val - 1];
 
+  const handleChange = (e) => {
+    setError('');
+    setVal(Number(e.target.value))
+    handleFormChange('characteristics', Number(e.target.value), char[1].id)
+  }
+
+  const helperText = error.length > 0 ? (
+    <FormHelperText error>{error}</FormHelperText>
+  ) : null;
+
   return (
     <FormControl component='fieldset' required>
       <FormLabel component='legend'>{char[0]}</FormLabel>
+      {helperText}
       <Typography variant='caption'>{labels[val]}</Typography>
       <RadioGroup
         row

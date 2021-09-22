@@ -20,7 +20,9 @@ import FormRating from './Form/FormRating.jsx';
 import FormSummary from './Form/FormSummary.jsx';
 import FormBody from './Form/FormBody.jsx';
 import FormRecommend from './Form/FormRecommend.jsx';
+import FormCharacteristics from './Form/FormCharacteristics.jsx';
 import FormName from './Form/FormName.jsx';
+import FormEmail from './Form/FormEmail.jsx';
 
 const useStyles = makeStyles({
   modal: {
@@ -78,15 +80,6 @@ const NewReview = ({ productId, characteristics }) => {
   };
 
   const charArray = Object.entries(characteristics);
-  const renderedChars = charArray.map((char, index) => {
-    return (
-      <CharacteristicsRadio
-        key={index}
-        char={char}
-        handleFormChange={handleFormChange}
-      />
-    );
-  });
 
   return (
     <React.Fragment>
@@ -107,16 +100,7 @@ const NewReview = ({ productId, characteristics }) => {
               <FormRecommend recommend={review.recommend} handleFormChange={handleFormChange} />
             </Grid>
             <Grid item xs={12}>
-              <FormControl component='fieldset' required>
-                <FormLabel component='legend'>Characteristics</FormLabel>
-                <RadioGroup
-                  aria-label='characteristics'
-                  name='characteristics'
-                  value={review.characteristics}
-                >
-                  {renderedChars}
-                </RadioGroup>
-              </FormControl>
+              <FormCharacteristics charArray={charArray} characteristics={review.characteristics} handleFormChange={handleFormChange} />
             </Grid>
             <Grid item xs={12}>
               <FormControl component='fieldset'>
