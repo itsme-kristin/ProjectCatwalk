@@ -128,13 +128,7 @@ const NewReview = ({ productId, characteristics }) => {
               <FormName name={review.name} handleFormChange={handleFormChange} />
             </Grid>
             <Grid item xs={12}>
-              <TextField
-                required
-                name='email'
-                label='Email'
-                value={review.email}
-                onChange={e => handleFormChange('email', e.target.value)}
-              />
+              <FormEmail email={review.email} handleFormChange={handleFormChange} />
             </Grid>
             <Grid item xs={12}>
               <Button variant='outlined' type='submit'>
