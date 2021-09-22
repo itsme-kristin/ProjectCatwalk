@@ -3,25 +3,30 @@ import {
   FormControl,
   FormControlLabel,
   FormLabel,
+  FormHelperText,
   RadioGroup,
   Radio
 } from '@material-ui/core';
 
 const FormRecommend = ({ recommend, handleFormChange }) => {
-  const [error, setError] = useState(false);
+  const [error, setError] = useState('Select an option');
 
   const handleChange = (e) => {
-    setError(false);
+    setError('');
     handleFormChange('recommend', e.target.value === 'true')
   }
+
+  const helperText = error.length > 0 ? (
+    <FormHelperText error>{error}</FormHelperText>
+  ) : null;
 
   return (
     <FormControl
       component='fieldset'
       required
-      error={Boolean(error)}
     >
       <FormLabel component='legend'>Do you recommend this product?</FormLabel>
+      {helperText}
       <RadioGroup
         aria-label='recommend'
         name='recommend'
