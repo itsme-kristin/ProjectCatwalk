@@ -8,6 +8,7 @@ import Icon from '@material-ui/core/Icon';
 const useStyles = makeStyles({
   title: {
     fontWeight: '700',
+    color: 'rgb(63, 81, 181)',
   },
 
   comparisonHeaderBox: {
