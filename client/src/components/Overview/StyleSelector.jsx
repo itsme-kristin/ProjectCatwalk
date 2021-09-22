@@ -7,7 +7,6 @@ import Typography from '@material-ui/core/Typography';
 
 const useStyles = makeStyles({
   root: {
-    border: 'solid 1px black',
     marginBottom: "20px",
   },
 
