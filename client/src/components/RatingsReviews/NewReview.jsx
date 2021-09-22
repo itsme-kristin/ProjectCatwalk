@@ -2,19 +2,13 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import {
   Grid,
-  TextField,
   Modal,
   Button,
   Typography,
-  Radio,
-  RadioGroup,
   FormControl,
-  FormControlLabel,
   FormLabel
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import Rating from '@material-ui/lab/Rating';
-import CharacteristicsRadio from './CharacteristicsRadio.jsx';
 import UploadPhotos from './UploadPhotos.jsx';
 import FormRating from './Form/FormRating.jsx';
 import FormSummary from './Form/FormSummary.jsx';
@@ -88,19 +82,35 @@ const NewReview = ({ productId, characteristics }) => {
         <form onSubmit={e => handleSubmit(e)}>
           <Grid className={classes.modal} container spacing={2}>
             <Grid item xs={12}>
-              <FormRating rating={review.rating} handleFormChange={handleFormChange} />
+              <FormRating
+                rating={review.rating}
+                handleFormChange={handleFormChange}
+              />
             </Grid>
             <Grid item xs={12}>
-              <FormSummary summary={review.summary} handleFormChange={handleFormChange} />
+              <FormSummary
+                summary={review.summary}
+                handleFormChange={handleFormChange}
+              />
             </Grid>
             <Grid item xs={12}>
-              <FormBody body={review.body} handleFormChange={handleFormChange} />
+              <FormBody
+                body={review.body}
+                handleFormChange={handleFormChange}
+              />
             </Grid>
             <Grid item xs={12}>
-              <FormRecommend recommend={review.recommend} handleFormChange={handleFormChange} />
+              <FormRecommend
+                recommend={review.recommend}
+                handleFormChange={handleFormChange}
+              />
             </Grid>
             <Grid item xs={12}>
-              <FormCharacteristics charArray={charArray} characteristics={review.characteristics} handleFormChange={handleFormChange} />
+              <FormCharacteristics
+                charArray={charArray}
+                characteristics={review.characteristics}
+                handleFormChange={handleFormChange}
+              />
             </Grid>
             <Grid item xs={12}>
               <FormControl component='fieldset'>
@@ -109,10 +119,16 @@ const NewReview = ({ productId, characteristics }) => {
               </FormControl>
             </Grid>
             <Grid item xs={12}>
-              <FormName name={review.name} handleFormChange={handleFormChange} />
+              <FormName
+                name={review.name}
+                handleFormChange={handleFormChange}
+              />
             </Grid>
             <Grid item xs={12}>
-              <FormEmail email={review.email} handleFormChange={handleFormChange} />
+              <FormEmail
+                email={review.email}
+                handleFormChange={handleFormChange}
+              />
             </Grid>
             <Grid item xs={12}>
               <Button variant='outlined' type='submit'>
