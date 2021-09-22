@@ -17,7 +17,8 @@ import Button from '@material-ui/core/Button';
 
 const useStyles = makeStyles({
   root: {
-    padding: "20px"
+    padding: "0 20px 0 20px",
+    maxWidth: '400px'
   },
 
   category: {
@@ -58,6 +59,9 @@ const ProductDetails = ({product, productMeta, styles, styleIndex, setStyleIndex
     var skus = {...styles[styleIndex]["skus"]};
     var availableStock = [];
     for (var sku in skus) {
+      if (sku === 'null') {
+        continue;
+      }
       if (skus[sku].quantity !== 0) {
         availableStock.push({
           sku_id: sku,
@@ -70,7 +74,7 @@ const ProductDetails = ({product, productMeta, styles, styleIndex, setStyleIndex
     setSkuIndex('');
     setSelectedSku(null);
     setSelectedQty(null);
-  }, [styleIndex])
+  }, [styles, styleIndex])
 
   const displayPrice = () => {
     if (styles[styleIndex]["sale_price"]) {
@@ -188,7 +192,7 @@ const ProductDetails = ({product, productMeta, styles, styleIndex, setStyleIndex
       <Grid container alignItems="center" className={classes.rating}>
         <AverageRating productMeta={productMeta} totalRatingsSetter={setTotalRatings}/>
         <Typography variant="caption" className={classes.reviewsLink}>
-           <a href="#reviews">Read all {totalRatings} reviews</a>
+          { totalRatings !== 0 ? <a href="#reviews">Read all {totalRatings} reviews</a> : null }
         </Typography>
       </Grid>
       <Typography variant="h6">
@@ -206,16 +210,16 @@ const ProductDetails = ({product, productMeta, styles, styleIndex, setStyleIndex
         setStyleIndex={setStyleIndex}
       />
       <Grid container spacing={1}>
-        <Grid item xs={8}>
+        <Grid item xs={12} md={7}>
           {sizeSelection()}
         </Grid>
-        <Grid item xs={4}>
+        <Grid item xs={12} md={5}>
           {qtySelection()}
         </Grid>
-        <Grid item xs={12} md={8}>
+        <Grid item xs={12} md={7}>
           {addToCartButton()}
         </Grid>
-        <Grid item xs={12} md={4}>
+        <Grid item xs={12} md={5}>
           <SocialMediaShare
             productName={product.name}
             photoUrl={styles[styleIndex]["photos"][0]["thumbnail_url"]}

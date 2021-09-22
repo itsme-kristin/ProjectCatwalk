@@ -48,11 +48,15 @@ const ImageGallery = ({ photos }) => {
 
     if (imgIndex > photos.length - 1) {
       setImgIndex(photos.length - 1)
+      return null
+    }
+
+    if (photos[imgIndex].url === null) {
       return (
         <Grid container justifyContent="center" alignItems="center" className={classes.noMedia}>
           <Paper>
             <Typography variant="h6" className={classes.message}>
-              Please select an image.
+              Sorry, no image is currently available...
             </Typography>
           </Paper>
         </Grid>
