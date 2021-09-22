@@ -10,7 +10,15 @@ import Header from './Header.jsx';
 import { makeStyles } from '@material-ui/core/styles';
 import { Container, CircularProgress } from '@material-ui/core';
 
+const useStyles = makeStyles({
+  root: {
+    paddingTop: '20px',
+    backgroundColor: 'white',
+  }
+})
+
 const App = () => {
+  const classes = useStyles();
   const [productId, setProductId] = useState(38322);
   const [product, setProduct] = useState(null);
   const [productMeta, setProductMeta] = useState(null);
@@ -45,7 +53,7 @@ const App = () => {
     return (
       <React.Fragment>
         <Header handleClick={handleClick} />
-        <Container maxWidth="lg">
+        <Container maxWidth="lg" className={classes.root}>
           <Overview handleClick={handleClick} product={product} productMeta={productMeta}/>
           <RelatedProducts handleClick={handleClick} currentProduct={product} setProductId={setProductId} />
           <YourOutfit handleClick={handleClick} currentProduct={product} outfitList={outfitList} setOutfitList={setOutfitList}/>
