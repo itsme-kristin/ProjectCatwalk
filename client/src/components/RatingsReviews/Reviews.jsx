@@ -8,7 +8,7 @@ import RatingsBreakdown from './RatingsBreakdown.jsx';
 import SortingDropdown from './SortingDropdown.jsx';
 import NewReview from './NewReview.jsx';
 
-const Reviews = ({ currentProduct, productMeta }) => {
+const Reviews = ({ handleClick, currentProduct, productMeta }) => {
   const [reviews, setReviews] = useState([]);
   const [filteredReviews, setFilteredReviews] = useState([]);
   const [filters, setFilters] = useState([]);
@@ -86,17 +86,17 @@ const Reviews = ({ currentProduct, productMeta }) => {
 
   if (reviews.length === 0) {
     return (
-      <React.Fragment>
+      <div onClick={(e) => handleClick(e, 'Reviews')}>
         <Typography id='reviews'>Ratings & Reviews</Typography>
         <NewReview
           productId={currentProduct.id}
           characteristics={productMeta.characteristics}
         />
-      </React.Fragment>
+      </div>
     );
   } else {
     return (
-      <React.Fragment>
+      <div onClick={(e) => handleClick(e, 'Reviews')}>
         <Typography id='reviews'>Ratings & Reviews</Typography>
         <NewReview
           productId={currentProduct.id}
@@ -129,7 +129,7 @@ const Reviews = ({ currentProduct, productMeta }) => {
             />
           </Grid>
         </Grid>
-      </React.Fragment>
+      </div>
     );
   }
 };

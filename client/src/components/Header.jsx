@@ -18,7 +18,7 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-const Header = () => {
+const Header = ({ handleClick }) => {
   const classes = useStyles();
 
   const klosetLogo = (
@@ -28,7 +28,7 @@ const Header = () => {
   );
 
   return (
-    <header>
+    <header onClick={(e) => handleClick(e, 'Header')}>
       <AppBar position="sticky" className={classes.header}>
         <Toolbar>{klosetLogo}</Toolbar>
       </AppBar>

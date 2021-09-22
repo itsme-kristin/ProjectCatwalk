@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const YourOutfit = ({ currentProduct, outfitList, setOutfitList }) => {
+const YourOutfit = ({ handleClick, currentProduct, outfitList, setOutfitList }) => {
   const classes = useStyles();
   const [isDeleting, setIsDeleting] = useState(false);
   const [activeItemIndex, setActiveItemIndex] = useState(0);
@@ -60,7 +60,7 @@ const YourOutfit = ({ currentProduct, outfitList, setOutfitList }) => {
   }
   if (outfitList && isDeleting) {
     return (
-      <React.Fragment>
+      <div onClick={(e) => handleClick(e, 'Outfit List')}>
         <Typography className={classes.title} variant="h4" gutterBottom>
           YOUR OUTFIT
         </Typography>
@@ -89,7 +89,7 @@ const YourOutfit = ({ currentProduct, outfitList, setOutfitList }) => {
             </div>
           </Grid>
         </Grid>
-      </React.Fragment>
+      </div>
     )
   } else {
     return null;
