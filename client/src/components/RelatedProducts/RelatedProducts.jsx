@@ -39,7 +39,8 @@ const RelatedProducts = ({ handleClick, currentProduct, setProductId }) => {
     setDoneSearching(false);
     axios.get(`/api/products/${currentProduct.id}/related`)
       .then(productIds => {
-        setRelatedProductsList(productIds.data);
+        const unique = [...new Set(productIds.data)];
+        setRelatedProductsList(unique);
         setDoneSearching(true);
       })
       .catch(err => {
@@ -48,6 +49,7 @@ const RelatedProducts = ({ handleClick, currentProduct, setProductId }) => {
   }, [currentProduct]);
 
   if (doneSearching) {
+    console.log(relatedProductsList);
     return (
       <div onClick={(e) => handleClick(e, 'Related Products List')}>
       <Typography className={classes.title} variant="h4" gutterBottom>
