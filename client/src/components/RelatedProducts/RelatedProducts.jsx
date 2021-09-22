@@ -39,7 +39,8 @@ const RelatedProducts = ({ handleClick, currentProduct, setProductId }) => {
     setDoneSearching(false);
     axios.get(`/api/products/${currentProduct.id}/related`)
       .then(productIds => {
-        setRelatedProductsList(productIds.data);
+        const unique = [...new Set(productIds.data)];
+        setRelatedProductsList(unique);
         setDoneSearching(true);
       })
       .catch(err => {
