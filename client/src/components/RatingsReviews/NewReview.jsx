@@ -18,6 +18,7 @@ import CharacteristicsRadio from './CharacteristicsRadio.jsx';
 import UploadPhotos from './UploadPhotos.jsx';
 import FormSummary from './Form/FormSummary.jsx';
 import FormBody from './Form/FormBody.jsx';
+import FormRecommend from './Form/FormRecommend.jsx';
 
 const useStyles = makeStyles({
   modal: {
@@ -112,31 +113,7 @@ const NewReview = ({ productId, characteristics }) => {
               <FormBody body={review.body} handleFormChange={handleFormChange} />
             </Grid>
             <Grid item xs={12}>
-              <FormControl component='fieldset' required>
-                <FormLabel component='legend'>
-                  Do you recommend this product?
-                </FormLabel>
-                <RadioGroup
-                  aria-label='recommend'
-                  name='recommend'
-                  row
-                  value={review.recommend}
-                  onChange={e => {
-                    handleFormChange('recommend', e.target.value === 'true');
-                  }}
-                >
-                  <FormControlLabel
-                    value={true}
-                    control={<Radio />}
-                    label='Yes'
-                  />
-                  <FormControlLabel
-                    value={false}
-                    control={<Radio />}
-                    label='No'
-                  />
-                </RadioGroup>
-              </FormControl>
+              <FormRecommend recommend={review.recommend} handleFormChange={handleFormChange} />
             </Grid>
             <Grid item xs={12}>
               <FormControl component='fieldset' required>
