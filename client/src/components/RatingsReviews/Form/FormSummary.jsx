@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { TextField } from '@material-ui/core';
 
-const ReviewSummary = ({ summary, handleFormChange }) => {
+const FormSummary = ({ summary, handleFormChange }) => {
   const [error, setError] = useState('');
 
   const handleChange = e => {
@@ -24,4 +24,4 @@ const ReviewSummary = ({ summary, handleFormChange }) => {
   );
 };
 
-export default ReviewSummary;
+export default FormSummary;

@@ -16,7 +16,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import Rating from '@material-ui/lab/Rating';
 import CharacteristicsRadio from './CharacteristicsRadio.jsx';
 import UploadPhotos from './UploadPhotos.jsx';
-import ReviewSummary from './Form/ReviewSummary.jsx';
+import FormSummary from './Form/FormSummary.jsx';
+import FormBody from './Form/FormBody.jsx';
 
 const useStyles = makeStyles({
   modal: {
@@ -105,17 +106,10 @@ const NewReview = ({ productId, characteristics }) => {
               </FormControl>
             </Grid>
             <Grid item xs={12}>
-              <ReviewSummary summary={review.summary} handleFormChange={handleFormChange} />
+              <FormSummary summary={review.summary} handleFormChange={handleFormChange} />
             </Grid>
             <Grid item xs={12}>
-              <TextField
-                required
-                multiline
-                name='body'
-                label='Body'
-                value={review.body}
-                onChange={e => handleFormChange('body', e.target.value)}
-              />
+              <FormBody body={review.body} handleFormChange={handleFormChange} />
             </Grid>
             <Grid item xs={12}>
               <FormControl component='fieldset' required>
