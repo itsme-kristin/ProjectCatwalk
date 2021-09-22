@@ -19,13 +19,15 @@ const useStyles = makeStyles((theme) => ({
   },
   media: {
     paddingTop: '70.25%',
+    cursor: 'pointer',
   },
   content: {
-    paddingTop: '10%',
+    cursor: 'pointer',
   },
   icon: {
     position: 'relative to parent',
     top: 5,
+    cursor: 'pointer',
   },
   title: {
     fontWeight: '700',
@@ -122,7 +124,7 @@ const ProductCard = ({ currentProduct, cardId, setProductId }) => {
           title={productCardInfo.name}
           onClick={() => handleProductCardClick()}
         />
-        <CardContent onClick={() => handleProductCardClick()}>
+        <CardContent onClick={() => handleProductCardClick()} className={classes.content}>
           <Typography >
             {productCardInfo.category}
           </Typography>
