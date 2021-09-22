@@ -18,12 +18,10 @@ const useStyles = makeStyles((theme) => ({
   media: {
     paddingTop: '70.25%',
   },
-  content: {
-    paddingTop: '10%',
-  },
   icon: {
     position: "relative to parent",
     top: 5,
+    cursor: 'pointer',
   },
   title: {
     fontWeight: '700',

@@ -16,7 +16,8 @@ const useStyles = makeStyles((theme) => ({
     },
     width: 200,
     height: 330,
-    border: "solid 3px black"
+    border: "solid 3px black",
+    cursor: "pointer",
   },
   title: {
     fontSize: 35,
