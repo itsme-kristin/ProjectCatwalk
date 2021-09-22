@@ -20,6 +20,7 @@ import FormRating from './Form/FormRating.jsx';
 import FormSummary from './Form/FormSummary.jsx';
 import FormBody from './Form/FormBody.jsx';
 import FormRecommend from './Form/FormRecommend.jsx';
+import FormName from './Form/FormName.jsx';
 
 const useStyles = makeStyles({
   modal: {
@@ -124,13 +125,7 @@ const NewReview = ({ productId, characteristics }) => {
               </FormControl>
             </Grid>
             <Grid item xs={12}>
-              <TextField
-                required
-                label='Nickname'
-                name='name'
-                value={review.name}
-                onChange={e => handleFormChange('name', e.target.value)}
-              />
+              <FormName name={review.name} handleFormChange={handleFormChange} />
             </Grid>
             <Grid item xs={12}>
               <TextField
