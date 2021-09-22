@@ -21,7 +21,11 @@ const useStyles = makeStyles((theme) => ({
   },
   title: {
     fontSize: 35,
+    color: "rgb(63, 81, 181)",
   },
+  icon: {
+    color: "rgb(63, 81, 181)",
+  }
   }));
 
 const AddOutfitButton = (props) => {
@@ -48,7 +52,7 @@ const AddOutfitButton = (props) => {
               <Grid item xs={2}>
               </Grid>
               <Grid item xs={4}>
-                  <Icon style={{ fontSize: 100}}>add_circle</Icon>
+                  <Icon className={classes.icon} style={{ fontSize: 100}}>add_circle</Icon>
               </Grid>
               <Grid item xs={6}>
               </Grid>
