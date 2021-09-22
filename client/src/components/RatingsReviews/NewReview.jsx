@@ -16,6 +16,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Rating from '@material-ui/lab/Rating';
 import CharacteristicsRadio from './CharacteristicsRadio.jsx';
 import UploadPhotos from './UploadPhotos.jsx';
+import FormRating from './Form/FormRating.jsx';
 import FormSummary from './Form/FormSummary.jsx';
 import FormBody from './Form/FormBody.jsx';
 import FormRecommend from './Form/FormRecommend.jsx';
@@ -93,18 +94,7 @@ const NewReview = ({ productId, characteristics }) => {
         <form onSubmit={e => handleSubmit(e)}>
           <Grid className={classes.modal} container spacing={2}>
             <Grid item xs={12}>
-              <FormControl component='fieldset' required>
-                <FormLabel component='legend'>
-                  How do you rate this product?
-                </FormLabel>
-                <Rating
-                  name='overall-rating'
-                  value={review.rating}
-                  onChange={(e, newValue) => {
-                    handleFormChange('rating', newValue);
-                  }}
-                />
-              </FormControl>
+              <FormRating rating={review.rating} handleFormChange={handleFormChange} />
             </Grid>
             <Grid item xs={12}>
               <FormSummary summary={review.summary} handleFormChange={handleFormChange} />
