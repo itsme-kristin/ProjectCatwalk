@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import moment from 'moment';
 import RelatedProducts from './RelatedProducts/RelatedProducts.jsx';
 import Reviews from './RatingsReviews/Reviews.jsx';
 import YourOutfit from './YourOutfit/YourOutfit.jsx';
@@ -32,14 +33,29 @@ const App = () => {
       });
   }, [productId]);
 
+  const handleClick = (e, widget) => {
+    const data = {
+      element: e.target.outerHTML,
+      widget,
+      time: moment().toString()
+    }
+    axios.post('/api/interactions', data)
+      .then(() => {
+        console.log('Posted interactions')
+      })
+      .catch(() => {
+        console.log('Error posting interactions')
+      })
+  }
+
   if (product && productMeta) {
     return (
       <Container maxWidth="lg" className={classes.root}>
-        <Header />
-        <Overview product={product} productMeta={productMeta}/>
-        <RelatedProducts currentProduct={product} setProductId={setProductId} />
-        <YourOutfit currentProduct={product} outfitList={outfitList} setOutfitList={setOutfitList}/>
-        <Reviews currentProduct={product} productMeta={productMeta} />
+        <Header handleClick={handleClick} />
+        <Overview handleClick={handleClick} product={product} productMeta={productMeta}/>
+        <RelatedProducts handleClick={handleClick} currentProduct={product} setProductId={setProductId} />
+        <YourOutfit handleClick={handleClick} currentProduct={product} outfitList={outfitList} setOutfitList={setOutfitList}/>
+        <Reviews handleClick={handleClick} currentProduct={product} productMeta={productMeta} />
       </Container>
     );
   }

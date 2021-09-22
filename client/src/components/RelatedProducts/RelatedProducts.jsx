@@ -28,7 +28,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const RelatedProducts = ({ currentProduct, setProductId }) => {
+const RelatedProducts = ({ handleClick, currentProduct, setProductId }) => {
   const classes = useStyles();
   const [relatedProductsList, setRelatedProductsList] = useState(null);
   const [doneSearching, setDoneSearching] = useState(false);
@@ -49,7 +49,7 @@ const RelatedProducts = ({ currentProduct, setProductId }) => {
 
   if (doneSearching) {
     return (
-    <React.Fragment>
+      <div onClick={(e) => handleClick(e, 'Related Products List')}>
       <Typography className={classes.title} variant="h4" gutterBottom>
         RELATED PRODUCTS
       </Typography>
@@ -69,11 +69,11 @@ const RelatedProducts = ({ currentProduct, setProductId }) => {
             })}
         </ItemsCarousel>
       </div>
-    </React.Fragment>
+    </div>
     );
   } else {
     return (
-      <React.Fragment>
+      <div onClick={(e) => handleClick(e, 'Related Products List')}>
         <Typography className={classes.title} variant="h4" gutterBottom>
           RELATED PRODUCTS
         </Typography>
@@ -84,7 +84,7 @@ const RelatedProducts = ({ currentProduct, setProductId }) => {
             </CardContent>
           </Card>
         </div>
-      </React.Fragment>
+      </div>
     );
   }
 };

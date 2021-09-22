@@ -30,7 +30,7 @@ const useStyles = makeStyles({
 });
 
 
-const Overview = ({ product, productMeta }) => {
+const Overview = ({ handleClick, product, productMeta }) => {
   const classes = useStyles();
   const [styles, setStyles] = useState([]);
   const [styleIndex, setStyleIndex] = useState(0);
@@ -87,6 +87,7 @@ const Overview = ({ product, productMeta }) => {
 
   return (
       <Grid
+        onClick={(e) => handleClick(e, 'Overview')}
         container
         alignItems="flex-start"
       >
