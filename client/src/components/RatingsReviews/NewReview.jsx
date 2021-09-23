@@ -93,7 +93,7 @@ const NewReview = ({ productId, characteristics }) => {
 
   return (
     <React.Fragment>
-      <Button onClick={() => setOpen(true)}>Write New Review</Button>
+      <Button variant='outlined' onClick={() => setOpen(true)}>Write New Review</Button>
       <Modal open={open} onClose={() => setOpen(false)}>
         <Grid className={classes.modal} container spacing={2}>
           <Formik
