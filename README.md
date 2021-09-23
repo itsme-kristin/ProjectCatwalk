@@ -31,6 +31,8 @@
 
 ## About this project<a name="about"></a>
 
+<img src="./client/data/gifs/projectOverview.gif" alt="project overview" width="450"/>
+
 **Description of the Project**
 
 >Our Front End Capstone project was designed to emulate real life development work in a team. This project is a foray into **real development work** - building key components of a complex whole and integrating those with the rest of the system. The project offers exposure to new technical and project management challenges alongside shifting team dynamics and fewer clear-cut answers.
@@ -45,7 +47,7 @@
 >Issues and Feedback can be reported through our GitHub Repository: [ProjectCatwalk Issues](https://github.com/HR-TeamBrie-FEC/ProjectCatwalk/issues)
 
 ## Workflow <a name="workflow"></a>
-Our team used Agile workflow for this sprint. 
+Our team used Agile workflow for this sprint.
 - [Trello](https://trello.com/b/8S1rf86v) for ticket management using the Kanban template.
 - [GitHub](https://github.com/HR-TeamBrie-FEC/ProjectCatwalk) for source code versioning and Management
 - [VSCode](https://code.visualstudio.com/) for source code editing
@@ -60,7 +62,7 @@ git clone https://github.com/HR-TeamBrie-FEC/ProjectCatwalk.git
 ```
 2. Install dependencies
 ```
-npm install 
+npm install
 ```
 3. Create a `config.js` file in the root directory, store your GitHub token like so:
 ```
@@ -95,6 +97,15 @@ npm start
 ## Product Overview (Don V.) <a name="overview"></a>
 
 ## Related Products & Outfit List (Kristin G.) <a name="products"></a>
+**Related Products List Features**
+* *Related Products List*: A carousel that displays four related product cards at a time and changes when the main product is changed. It has arrows that show up if more than four cards are provided that allow you to scroll through the list.
+* *Product Card*: A card that displays the default image for the product, the category, the name of the product, the price, and the average rating. Clicking on a product card will change the main product featured on the page.
+* *Comparison Modal*: When you click on the star icon located at the top of a product card, a comparison modal will appear comparing the product card's features to the main product's features.
+
+**Outfit List Features**
+* *Outfit List*: A carousel that displays three outfit cards at a time and is manipulated by the user. It has arrows that show up if more than three cards are chosen that allow you to scroll through the list.
+* *Outfit Card*: The appearance of this card is very similar to the product card in the related products list. Instead of a star in the top right corner, it has an "x". When the "x" is clicked, the outfit card will be deleted from the outfit list.
+* *Add Outfit Button*: Clicking on this button will add an outfit card for the main product into your outfit list carousel.
 
 ## Ratings and Reviews (Ben K.) <a name="reviews"></a>
 
