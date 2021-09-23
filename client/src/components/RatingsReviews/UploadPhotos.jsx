@@ -3,7 +3,7 @@ import { Button, Modal, Grid, TextField, Paper } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import ReviewPhoto from './ReviewPhoto.jsx'
 
-const UploadPhotos = ({ handleFormChange }) => {
+const UploadPhotos = ({ setFieldValue }) => {
   const [photos, setPhotos] = useState([]);
   const [url, setUrl] = useState('');
   const [open, setOpen] = useState(false);
@@ -34,7 +34,7 @@ const UploadPhotos = ({ handleFormChange }) => {
     ) : null;
 
   const handleClick = () => {
-    handleFormChange('photos', photos);
+    setFieldValue('photos', photos);
     setOpen(false);
   };
 

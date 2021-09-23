@@ -93,6 +93,7 @@ const CharacteristicsRadio = ({ char, handleFormChange }) => {
         name={char[0]}
         value={val}
         onChange={e => {
+          setError('');
           setVal(Number(e.target.value));
           handleFormChange(`characteristics`, Number(e.target.value), char[1].id)
         }}
