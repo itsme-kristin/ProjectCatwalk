@@ -7,7 +7,7 @@ const useStyles = makeStyles({
   caption: {
     padding: '3px 0px',
     'text-align': 'center'
-  },
+  }
 });
 
 const RatingsBreakdown = ({ productMeta, filterReviews }) => {
@@ -19,7 +19,10 @@ const RatingsBreakdown = ({ productMeta, filterReviews }) => {
     filterReviews(rating);
   };
 
-  const recommendPercentage = totalRatings > 0 ? Math.ceil((Number(productMeta.recommended.true) / totalRatings) * 100) : null;
+  const recommendPercentage =
+    totalRatings > 0
+      ? Math.ceil((Number(productMeta.recommended.true) / totalRatings) * 100)
+      : null;
 
   const totalRatingsAtValue = rating => {
     if (!productMeta.ratings[rating]) {
@@ -44,7 +47,12 @@ const RatingsBreakdown = ({ productMeta, filterReviews }) => {
             averageRatingSetter={setAvgRating}
           />
         </Grid>
-        <Grid className={classes.caption} item xs={12}><Typography variant='body2' gutterBottom>{`${recommendPercentage}% of reviews recommend this product`}</Typography></Grid>
+        <Grid className={classes.caption} item xs={12}>
+          <Typography
+            variant='body2'
+            gutterBottom
+          >{`${recommendPercentage}% of reviews recommend this product`}</Typography>
+        </Grid>
       </Grid>
       <Grid item xs={12} container>
         <Grid className={classes.caption} item xs={3}>

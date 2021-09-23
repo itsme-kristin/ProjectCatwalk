@@ -6,15 +6,19 @@ const ProductBreakdown = ({ productMeta }) => {
     const charScales = Object.entries(productMeta.characteristics).map(
       (char, index) => {
         return (
-          <Grid key={index} item xs={9}>
-            <Typography variant='caption'>{char[0]}</Typography>
-            <Slider
-              value={Number(char[1].value)}
-              marks
-              min={1}
-              max={5}
-              disabled
-            />
+          <Grid key={index} style={{ marginLeft: '20px' }} item xs={12} container direction='column'>
+            <Grid item xs={2}>
+              <Typography variant='caption'>{char[0]}</Typography>
+            </Grid>
+            <Grid item xs={10}>
+              <Slider
+                value={Number(char[1].value)}
+                marks
+                min={1}
+                max={5}
+                disabled
+              />
+            </Grid>
           </Grid>
         );
       }
