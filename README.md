@@ -31,6 +31,8 @@
 
 ## About this project<a name="about"></a>
 
+![Project Overview](./client/data/gifs/projectOverview.gif)
+
 **Description of the Project**
 
 Our Front End Capstone project was designed to emulate real life development work in a team. This project is a foray into **real development work** - building key components of a complex whole and integrating those with the rest of the system. The project offers exposure to new technical and project management challenges alongside shifting team dynamics and fewer clear-cut answers.
@@ -47,7 +49,7 @@ Issues and Feedback can be reported through our GitHub Repository:
 [ProjectCatwalk Issues](https://github.com/HR-TeamBrie-FEC/ProjectCatwalk/issues)
 
 ## Workflow <a name="workflow"></a>
-Our team used Agile workflow for this sprint. 
+Our team used Agile workflow for this sprint.
 - Trello for ticket management using the Kanban template.
 - GitHub for source code versioning and Management
 - VSCode for source code editing
