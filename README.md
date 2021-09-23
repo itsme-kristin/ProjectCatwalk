@@ -97,6 +97,15 @@ npm start
 ## Product Overview (Don V.) <a name="overview"></a>
 
 ## Related Products & Outfit List (Kristin G.) <a name="products"></a>
+**Related Products List Features**
+* *Related Products List*: A carousel that displays four related product cards at a time and changes when the main product is changed. It has arrows that show up if more than four cards are provided that allow you to scroll through the list.
+* *Product Card*: A card that displays the default image for the product, the category, the name of the product, the price, and the average rating. Clicking on a product card will change the main product featured on the page.
+* *Comparison Modal*: When you click on the star icon located at the top of a product card, a comparison modal will appear comparing the product card's features to the main product's features.
+
+**Outfit List Features**
+* *Outfit List*: A carousel that displays three outfit cards at a time and is manipulated by the user. It has arrows that show up if more than three cards are chosen that allow you to scroll through the list.
+* *Outfit Card*: The appearance of this card is very similar to the product card in the related products list. Instead of a star in the top right corner, it has an "x". When the "x" is clicked, the outfit card will be deleted from the outfit list.
+* *Add Outfit Button*: Clicking on this button will add an outfit card for the main product into your outfit list carousel.
 
 ## Ratings and Reviews (Ben K.) <a name="reviews"></a>
 
