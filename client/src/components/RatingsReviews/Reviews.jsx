@@ -18,6 +18,11 @@ const Reviews = ({ handleClick, currentProduct, productMeta }) => {
     list: {
       maxHeight: '103vh',
       overflow: 'auto'
+    },
+    title: {
+      fontSize: '20px',
+      padding: '10px',
+      margin: '10px',
     }
   });
 
@@ -87,7 +92,7 @@ const Reviews = ({ handleClick, currentProduct, productMeta }) => {
   if (reviews.length === 0) {
     return (
       <div onClick={(e) => handleClick(e, 'Reviews')}>
-        <Typography id='reviews'>Ratings & Reviews</Typography>
+        <Typography className={classes.title} id='reviews' variant='h4' gutterBottom>RATINGS & REVIEWS</Typography>
         <NewReview
           productId={currentProduct.id}
           characteristics={productMeta.characteristics}
@@ -97,7 +102,7 @@ const Reviews = ({ handleClick, currentProduct, productMeta }) => {
   } else {
     return (
       <div onClick={(e) => handleClick(e, 'Reviews')}>
-        <Typography id='reviews'>Ratings & Reviews</Typography>
+        <Typography className={classes.title} id='reviews' variant='h4' gutterBottom>RATINGS & REVIEWS</Typography>
         <NewReview
           productId={currentProduct.id}
           characteristics={productMeta.characteristics}
