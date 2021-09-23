@@ -51,11 +51,29 @@ Our team used Agile workflow for this sprint.
 - [VSCode](https://code.visualstudio.com/) for source code editing
 
 ## Installation <a name="install"></a>
-- Installing NPM
-- Cloning
-- Installing Packages
-- API Token
-- Running
+
+ProjectCatwalk requires both NodeJs and npm to run
+
+1. Download the repo using git
+```
+git clone https://github.com/HR-TeamBrie-FEC/ProjectCatwalk.git
+```
+2. Install dependencies
+```
+npm install 
+```
+3. Create a `config.js` file in the root directory, store your GitHub token like so:
+```
+module.exports = {
+  TOKEN: 'YOUR TOKEN HERE',
+};
+```
+* Note, this file is ignored in .gitignore but is required in order to pull data from the API.
+
+4. Run the App
+```
+npm start
+```
 
 ## Technologies <a name="technologies"></a>
 - NodeJS (i)
