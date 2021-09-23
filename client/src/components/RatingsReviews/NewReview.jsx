@@ -92,12 +92,11 @@ const NewReview = ({ productId, characteristics }) => {
     recommend: yup.mixed().required('Must select an option'),
     name: yup.string().required('Name required').max(60, 'Must be less than 60 characters'),
     email: yup.string().required('Email required').email('Invalid email address').max(60, 'Must be less than 60 characters'),
-    // photos: yup.array().of(yup.string().url()),
   });
 
   return (
     <React.Fragment>
-      <Button className={classes.button} variant='outlined' onClick={() => setOpen(true)}>Write New Review</Button>
+      <Button className={classes.button} variant='outlined' onClick={() => setOpen(true)}>Write A Review</Button>
       <Modal open={open} onClose={() => setOpen(false)}>
         <Grid className={classes.modal} container spacing={2}>
           <Formik

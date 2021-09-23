@@ -2,8 +2,9 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Button } from '@material-ui/core';
 import ReviewTile from './ReviewTile.jsx';
+import NewReview from './NewReview.jsx';
 
-const ReviewList = ({ reviews, currentProduct, selected }) => {
+const ReviewList = ({ reviews, currentProduct, selected, characteristics }) => {
   const [numOfReviews, setNumOfReviews] = useState(2);
 
   const renderedReviews = reviews
@@ -27,6 +28,10 @@ const ReviewList = ({ reviews, currentProduct, selected }) => {
       {renderedReviews}
       <br />
       {showButton}
+      <NewReview
+        productId={currentProduct.id}
+        characteristics={characteristics}
+      />
     </div>
   );
 };

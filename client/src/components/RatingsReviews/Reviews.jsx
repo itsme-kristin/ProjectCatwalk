@@ -103,10 +103,6 @@ const Reviews = ({ handleClick, currentProduct, productMeta }) => {
     return (
       <div onClick={(e) => handleClick(e, 'Reviews')}>
         <Typography className={classes.title} id='reviews' variant='h4' gutterBottom>RATINGS & REVIEWS</Typography>
-        <NewReview
-          productId={currentProduct.id}
-          characteristics={productMeta.characteristics}
-        />
         <Grid container spacing={2}>
           <Grid item xs={3} container spacing={1}>
             <Grid item xs={12}>
@@ -125,13 +121,18 @@ const Reviews = ({ handleClick, currentProduct, productMeta }) => {
               <ProductBreakdown productMeta={productMeta} />
             </Grid>
           </Grid>
-          <Grid className={classes.list} item xs={9}>
+          <Grid className={classes.list} item xs={9} container>
+            <Grid item xs={12}>
             <SortingDropdown selected={selected} setSelected={setSelected} />
+            </Grid>
+            <Grid item xs={12}>
             <ReviewList
               reviews={filteredReviews}
               currentProduct={currentProduct}
               selected={selected}
+              characteristics={productMeta.characteristics}
             />
+            </Grid>
           </Grid>
         </Grid>
       </div>
