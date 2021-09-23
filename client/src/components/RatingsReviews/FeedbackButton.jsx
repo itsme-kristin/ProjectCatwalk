@@ -4,27 +4,35 @@ import { Button } from '@material-ui/core';
 
 const FeedbackButton = ({ helpfulness, id }) => {
   const [isDisabled, setIsDisabled] = useState(false);
+  const [no, setNo] = useState(0);
+  const [yes, setYes] = useState(helpfulness);
 
-  const handleClick = () => {
+  const handleYesClick = () => {
     axios
       .put(`/api/reviews/${id}/helpful`)
       .catch(() => {
         console.log('error updating helpfulness');
       })
       .then(() => {
+        setYes(yes + 1);
         setIsDisabled(true);
       });
   };
 
+  const handleNoClick = () => {
+    setNo(1);
+    setIsDisabled(true);
+  };
+
   return isDisabled ? (
     <React.Fragment>
-      <Button disabled>Yes ({helpfulness + 1})</Button>
-      <Button disabled>No (1)</Button>
+      <Button disabled>Yes ({yes})</Button>
+      <Button disabled>No ({no})</Button>
     </React.Fragment>
   ) : (
     <React.Fragment>
-      <Button onClick={() => handleClick()}>Yes ({helpfulness})</Button>
-      <Button onClick={() => handleClick()}>No (0)</Button>
+      <Button onClick={() => handleYesClick()}>Yes ({yes})</Button>
+      <Button onClick={() => handleNoClick()}>No ({no})</Button>
     </React.Fragment>
   );
 };
