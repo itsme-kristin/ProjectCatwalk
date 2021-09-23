@@ -15,6 +15,9 @@ const Reviews = ({ handleClick, currentProduct, productMeta }) => {
   const [selected, setSelected] = useState('relevant');
 
   const useStyles = makeStyles({
+    section: {
+      minHeight: '33vh'
+    },
     list: {
       maxHeight: '103vh',
       overflow: 'auto'
@@ -23,6 +26,12 @@ const Reviews = ({ handleClick, currentProduct, productMeta }) => {
       fontSize: '20px',
       padding: '10px',
       margin: '10px'
+    },
+    sliders: {
+      margin: 'auto'
+    },
+    message: {
+      'text-align': 'center'
     }
   });
 
@@ -71,7 +80,7 @@ const Reviews = ({ handleClick, currentProduct, productMeta }) => {
   const removeFiltersButton =
     filters.length > 0 ? (
       <Grid item xs={12}>
-        <Button variant='outlined' onClick={() => setFilters([])}>
+        <Button variant='outlined' size='small' onClick={() => setFilters([])}>
           Remove Filters
         </Button>
       </Grid>
@@ -79,8 +88,8 @@ const Reviews = ({ handleClick, currentProduct, productMeta }) => {
 
   const filterMessage =
     filters.length > 0 ? (
-      <Grid item xs={12}>
-        <Typography>
+      <Grid className={classes.message} item xs={12}>
+        <Typography variant='body2'>
           Applied filter(s){': '}
           {filters.map((filter, index) => {
             if (index === filters.length - 1) {
@@ -93,9 +102,9 @@ const Reviews = ({ handleClick, currentProduct, productMeta }) => {
       </Grid>
     ) : null;
 
-  if (reviews.length === 0) {
+  if (filteredReviews.length === 0) {
     return (
-      <div onClick={e => handleClick(e, 'Reviews')}>
+      <div className={classes.section} onClick={e => handleClick(e, 'Reviews')}>
         <Typography
           className={classes.title}
           id='reviews'
@@ -104,15 +113,17 @@ const Reviews = ({ handleClick, currentProduct, productMeta }) => {
         >
           RATINGS & REVIEWS
         </Typography>
-        <NewReview
-          productId={currentProduct.id}
-          characteristics={productMeta.characteristics}
-        />
+        <Grid container justifyContent='center'>
+          <NewReview
+            productId={currentProduct.id}
+            characteristics={productMeta.characteristics}
+          />
+        </Grid>
       </div>
     );
   } else {
     return (
-      <div onClick={e => handleClick(e, 'Reviews')}>
+      <div className={classes.section} onClick={e => handleClick(e, 'Reviews')}>
         <Typography
           className={classes.title}
           id='reviews'
@@ -131,9 +142,10 @@ const Reviews = ({ handleClick, currentProduct, productMeta }) => {
             </Grid>
             {filterMessage}
             {removeFiltersButton}
-            <Grid item xs={12}>
+            <Grid className={classes.productBreakdown} item xs={12}>
               <ProductBreakdown productMeta={productMeta} />
             </Grid>
+            <Grid item xs={12}></Grid>
           </Grid>
           <Grid
             className={classes.list}

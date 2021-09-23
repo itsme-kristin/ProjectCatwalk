@@ -6,8 +6,8 @@ const ProductBreakdown = ({ productMeta }) => {
     const charScales = Object.entries(productMeta.characteristics).map(
       (char, index) => {
         return (
-          <Grid key={index} item xs={12}>
-            <Typography>{char[0]}</Typography>
+          <Grid key={index} item xs={9}>
+            <Typography variant='caption'>{char[0]}</Typography>
             <Slider
               value={Number(char[1].value)}
               marks

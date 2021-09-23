@@ -6,6 +6,7 @@ const FormPhotos = ({ field, form }) => {
   return (
     <FormControl component='fieldset'>
       <FormLabel component='legend'>Photos</FormLabel>
+      <br/>
       <UploadPhotos setFieldValue={form.setFieldValue} />
     </FormControl>
   );
