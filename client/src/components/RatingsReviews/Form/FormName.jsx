@@ -9,8 +9,7 @@ const FormName = ({ field, form }) => {
       name='name'
       error={Boolean(form.errors.name)}
       helperText={form.errors.name}
-      value={field.value}
-      onChange={e => setFieldValue('name', e.target.value)}
+      onChange={e => form.setFieldValue('name', e.target.value)}
     />
   );
 };
