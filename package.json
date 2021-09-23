@@ -27,12 +27,16 @@
     "@material-ui/utils": "^4.11.2",
     "axios": "^0.21.0",
     "express": "^4.15.0",
+    "formik": "^2.2.9",
+    "formik-material-ui": "^4.0.0-alpha.1",
+    "formik-material-ui-lab": "^1.0.0-alpha.1",
     "jquery": "^3.1.1",
     "moment": "^2.29.1",
     "react": "^16.4",
     "react-dom": "^16.4",
     "react-inner-image-zoom": "^2.1.0",
     "react-items-carousel": "^2.8.0",
-    "react-share": "^4.4.0"
+    "react-share": "^4.4.0",
+    "yup": "^0.32.9"
   }
 }

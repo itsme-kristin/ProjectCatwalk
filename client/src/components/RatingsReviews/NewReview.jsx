@@ -6,9 +6,14 @@ import {
   Button,
   Typography,
   FormControl,
-  FormLabel
+  FormLabel,
+  FormHelperText,
+  TextField
 } from '@material-ui/core';
+import { Rating } from '@material-ui/lab';
 import { makeStyles } from '@material-ui/core/styles';
+import { Formik, Form, Field, ErrorMessage } from 'formik';
+import * as yup from 'yup';
 import UploadPhotos from './UploadPhotos.jsx';
 import FormRating from './Form/FormRating.jsx';
 import FormSummary from './Form/FormSummary.jsx';
@@ -17,6 +22,7 @@ import FormRecommend from './Form/FormRecommend.jsx';
 import FormCharacteristics from './Form/FormCharacteristics.jsx';
 import FormName from './Form/FormName.jsx';
 import FormEmail from './Form/FormEmail.jsx';
+import FormPhotos from './Form/FormPhotos.jsx';
 
 const useStyles = makeStyles({
   modal: {
@@ -68,75 +74,85 @@ const NewReview = ({ productId, characteristics }) => {
       });
   };
 
-  const handleSubmit = e => {
-    e.preventDefault();
+  const handleSubmit = (data) => {
+    setReview({ ...data, characteristics: review[characteristics] });
     postReview();
   };
 
   const charArray = Object.entries(characteristics);
 
+  const validationSchema = yup.object({
+    rating: yup.number().required('Rating required').min(1, 'Rating required'),
+    summary: yup.string().max(60, 'Must be less than 60 characters'),
+    body: yup.string().required('Body required').min(50, 'Must be more than 50 characters').max(1000, 'Must be less than 1000 characters'),
+    recommend: yup.mixed().required('Must select an option'),
+    name: yup.string().required('Name required').max(60, 'Must be less than 60 characters'),
+    email: yup.string().required('Email required').email('Invalid email address').max(60, 'Must be less than 60 characters'),
+    // photos: yup.array().of(yup.string().url()),
+  });
+
   return (
     <React.Fragment>
-      <Button onClick={() => setOpen(true)}>Write New Review</Button>
+      <Button variant='outlined' onClick={() => setOpen(true)}>Write New Review</Button>
       <Modal open={open} onClose={() => setOpen(false)}>
-        <form onSubmit={e => handleSubmit(e)}>
-          <Grid className={classes.modal} container spacing={2}>
-            <Grid item xs={12}>
-              <FormRating
-                rating={review.rating}
-                handleFormChange={handleFormChange}
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <FormSummary
-                summary={review.summary}
-                handleFormChange={handleFormChange}
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <FormBody
-                body={review.body}
-                handleFormChange={handleFormChange}
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <FormRecommend
-                recommend={review.recommend}
-                handleFormChange={handleFormChange}
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <FormCharacteristics
-                charArray={charArray}
-                characteristics={review.characteristics}
-                handleFormChange={handleFormChange}
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <FormControl component='fieldset'>
-                <FormLabel component='legend'>Photos</FormLabel>
-                <UploadPhotos handleFormChange={handleFormChange} />
-              </FormControl>
-            </Grid>
-            <Grid item xs={12}>
-              <FormName
-                name={review.name}
-                handleFormChange={handleFormChange}
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <FormEmail
-                email={review.email}
-                handleFormChange={handleFormChange}
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <Button variant='outlined' type='submit'>
-                Submit Review
-              </Button>
-            </Grid>
-          </Grid>
-        </form>
+        <Grid className={classes.modal} container spacing={2}>
+          <Formik
+            validateOnChange={true}
+            initialValues={{
+              product_id: productId,
+              rating: 0,
+              summary: '',
+              body: '',
+              recommend: null,
+              name: '',
+              email: '',
+              photos: [],
+            }}
+            validationSchema={validationSchema}
+            onSubmit={data => {
+              console.log('submit: ', data);
+              handleSubmit(data);
+            }}
+          >
+            {({ submitForm, touched, values, errors, isSubmitting }) => (
+              <Form>
+                <Grid item xs={12}>
+                  <Field component={FormRating} name='rating'/>
+                </Grid>
+                <Grid item xs={12}>
+                  <Field component={FormSummary} type='text' name='summary' />
+                </Grid>
+                <Grid item xs={12}>
+                  <Field component={FormBody} type='text' name='body' />
+                </Grid>
+                <Grid item xs={12}>
+                  <Field component={FormRecommend} name='recommend' />
+                </Grid>
+                <Grid item xs={12}>
+                  <FormCharacteristics
+                    charArray={charArray}
+                    characteristics={review.characteristics}
+                    handleFormChange={handleFormChange}
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <Field component={FormPhotos} name='photos' />
+                </Grid>
+                <Grid item xs={12}>
+                  <Field component={FormName} type='text' name='name' />
+                </Grid>
+                <Grid item xs={12}>
+                  <Field component={FormEmail} type='email' name='email' />
+                </Grid>
+                <Grid item xs={12}>
+                  <Button variant='outlined' onClick={submitForm}>
+                    Submit Review
+                  </Button>
+                </Grid>
+              </Form>
+            )}
+          </Formik>
+        </Grid>
       </Modal>
     </React.Fragment>
   );

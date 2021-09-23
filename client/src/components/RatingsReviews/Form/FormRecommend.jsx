@@ -8,16 +8,9 @@ import {
   Radio
 } from '@material-ui/core';
 
-const FormRecommend = ({ recommend, handleFormChange }) => {
-  const [error, setError] = useState('Select an option');
-
-  const handleChange = (e) => {
-    setError('');
-    handleFormChange('recommend', e.target.value === 'true')
-  }
-
-  const helperText = error.length > 0 ? (
-    <FormHelperText error>{error}</FormHelperText>
+const FormRecommend = ({ field, form }) => {
+  const helperText = form.errors.recommend ? (
+    <FormHelperText error>{form.errors.recommend}</FormHelperText>
   ) : null;
 
   return (
@@ -31,8 +24,8 @@ const FormRecommend = ({ recommend, handleFormChange }) => {
         aria-label='recommend'
         name='recommend'
         row
-        value={recommend}
-        onChange={e => handleChange(e)}
+        value={field.value}
+        onChange={e => form.setFieldValue('recommend', e.target.value === 'true')}
       >
         <FormControlLabel value={true} control={<Radio />} label='Yes' />
         <FormControlLabel value={false} control={<Radio />} label='No' />
