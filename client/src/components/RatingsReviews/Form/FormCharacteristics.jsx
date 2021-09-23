@@ -5,16 +5,17 @@ import CharacteristicsRadio from '../CharacteristicsRadio.jsx';
 const FormCharacteristics = ({ charArray, characteristics, handleFormChange }) => {
   const renderedChars = charArray.map((char, index) => {
     return (
-      <CharacteristicsRadio
-        key={index}
-        char={char}
-        handleFormChange={handleFormChange}
-      />
+        <CharacteristicsRadio
+          key={index}
+          char={char}
+          handleFormChange={handleFormChange}
+        />
     );
   });
   return (
     <FormControl component='fieldset' required>
     <FormLabel component='legend'>Characteristics</FormLabel>
+    <br/>
     <RadioGroup
       aria-label='characteristics'
       name='characteristics'

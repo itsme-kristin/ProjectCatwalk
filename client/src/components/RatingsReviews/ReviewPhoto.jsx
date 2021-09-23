@@ -29,8 +29,9 @@ const ReviewPhoto = ({ photo }) => {
           onClick={() => setOpen(true)}
           style={{
             backgroundImage: `url(${photoUrl})`,
-            backgroundSize: '100% 100%',
-            backgroundRepeat: 'no-repeat'
+            backgroundSize: '50px',
+            backgroundRepeat: 'no-repeat',
+            backgroundPosition: 'center'
           }}
           elevation={3}
         ></Paper>
