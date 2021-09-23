@@ -60,6 +60,14 @@ const NewReview = ({ productId, characteristics }) => {
   const [review, setReview] = useState(reviewObj);
   const classes = useStyles();
 
+  const handleFormChange = (key, value, charKey) => {
+    if (key === 'characteristics') {
+      setReview({ ...review, [key]: { ...review[key], [charKey]: value } });
+    } else {
+      setReview({ ...review, [key]: value });
+    }
+  };
+
   const postReview = (review) => {
     axios
       .post('/api/reviews', review)

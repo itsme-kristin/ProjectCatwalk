@@ -73,7 +73,6 @@ const CharacteristicsRadio = ({ char, handleFormChange }) => {
 
   return (
     <FormControl component='fieldset' required>
-      <br/>
       <FormLabel component='legend'>{char[0]}</FormLabel>
       <Typography variant='caption'>{labels[val]}</Typography>
       <RadioGroup
@@ -114,6 +113,7 @@ const CharacteristicsRadio = ({ char, handleFormChange }) => {
           labelPlacement='bottom'
         />
       </RadioGroup>
+      <br/>
     </FormControl>
   );
 };
