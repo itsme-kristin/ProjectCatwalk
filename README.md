@@ -31,7 +31,7 @@
 
 ## About this project<a name="about"></a>
 
-![Project Overview](./client/data/gifs/projectOverview.gif)
+<img src="./client/data/gifs/projectOverview.gif" alt="project overview" width="450"/>
 
 **Description of the Project**
 
