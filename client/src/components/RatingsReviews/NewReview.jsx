@@ -36,6 +36,10 @@ const useStyles = makeStyles({
     'background-color': 'white',
     border: '2px solid #000',
     boxShadow: 24
+  },
+  button: {
+    padding: '5px',
+    margin: '5px'
   }
 });
 
@@ -93,7 +97,7 @@ const NewReview = ({ productId, characteristics }) => {
 
   return (
     <React.Fragment>
-      <Button variant='outlined' onClick={() => setOpen(true)}>Write New Review</Button>
+      <Button className={classes.button} variant='outlined' onClick={() => setOpen(true)}>Write New Review</Button>
       <Modal open={open} onClose={() => setOpen(false)}>
         <Grid className={classes.modal} container spacing={2}>
           <Formik
