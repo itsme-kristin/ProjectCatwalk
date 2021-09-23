@@ -5,8 +5,9 @@ import AverageRating from '../AverageRating.jsx';
 
 const useStyles = makeStyles({
   caption: {
-    padding: '3px 0px'
-  }
+    padding: '3px 0px',
+    'text-align': 'center'
+  },
 });
 
 const RatingsBreakdown = ({ productMeta, filterReviews }) => {
@@ -33,7 +34,6 @@ const RatingsBreakdown = ({ productMeta, filterReviews }) => {
   return (
     <Grid container direction='column'>
       <Grid item xs={12} container>
-        <Grid item xs={12}><Typography>{`${recommendPercentage}% recommend this product`}</Typography></Grid>
         <Grid item xs={12} md={3}>
           <Typography variant='h3'>{avgRating}</Typography>
         </Grid>
@@ -44,9 +44,10 @@ const RatingsBreakdown = ({ productMeta, filterReviews }) => {
             averageRatingSetter={setAvgRating}
           />
         </Grid>
+        <Grid className={classes.caption} item xs={12}><Typography variant='body2' gutterBottom>{`${recommendPercentage}% of reviews recommend this product`}</Typography></Grid>
       </Grid>
       <Grid item xs={12} container>
-        <Grid className={classes.caption} item xs={2}>
+        <Grid className={classes.caption} item xs={3}>
           <Typography variant='caption'>
             <Link
               component='button'
@@ -58,7 +59,7 @@ const RatingsBreakdown = ({ productMeta, filterReviews }) => {
             </Link>
           </Typography>
         </Grid>
-        <Grid item xs={5}>
+        <Grid item xs={7}>
           <Slider
             value={Number(productMeta.ratings['5'])}
             min={1}
@@ -71,7 +72,7 @@ const RatingsBreakdown = ({ productMeta, filterReviews }) => {
         </Grid>
       </Grid>
       <Grid item xs={12} container>
-        <Grid className={classes.caption} item xs={2}>
+        <Grid className={classes.caption} item xs={3}>
           <Typography variant='caption'>
             <Link
               component='button'
@@ -83,7 +84,7 @@ const RatingsBreakdown = ({ productMeta, filterReviews }) => {
             </Link>
           </Typography>
         </Grid>
-        <Grid item xs={5}>
+        <Grid item xs={7}>
           <Slider
             value={Number(productMeta.ratings['4'])}
             min={1}
@@ -96,7 +97,7 @@ const RatingsBreakdown = ({ productMeta, filterReviews }) => {
         </Grid>
       </Grid>
       <Grid item xs={12} container>
-        <Grid className={classes.caption} item xs={2}>
+        <Grid className={classes.caption} item xs={3}>
           <Typography variant='caption'>
             <Link
               component='button'
@@ -108,7 +109,7 @@ const RatingsBreakdown = ({ productMeta, filterReviews }) => {
             </Link>
           </Typography>
         </Grid>
-        <Grid item xs={5}>
+        <Grid item xs={7}>
           <Slider
             value={Number(productMeta.ratings['3'])}
             min={1}
@@ -121,7 +122,7 @@ const RatingsBreakdown = ({ productMeta, filterReviews }) => {
         </Grid>
       </Grid>
       <Grid item xs={12} container>
-        <Grid className={classes.caption} item xs={2}>
+        <Grid className={classes.caption} item xs={3}>
           <Typography variant='caption'>
             <Link
               component='button'
@@ -133,7 +134,7 @@ const RatingsBreakdown = ({ productMeta, filterReviews }) => {
             </Link>
           </Typography>
         </Grid>
-        <Grid item xs={5}>
+        <Grid item xs={7}>
           <Slider
             value={Number(productMeta.ratings['2'])}
             min={1}
@@ -146,7 +147,7 @@ const RatingsBreakdown = ({ productMeta, filterReviews }) => {
         </Grid>
       </Grid>
       <Grid item xs={12} container>
-        <Grid className={classes.caption} item xs={2}>
+        <Grid className={classes.caption} item xs={3}>
           <Typography variant='caption'>
             <Link
               component='button'
@@ -158,7 +159,7 @@ const RatingsBreakdown = ({ productMeta, filterReviews }) => {
             </Link>
           </Typography>
         </Grid>
-        <Grid item xs={5}>
+        <Grid item xs={7}>
           <Slider
             value={Number(productMeta.ratings['1'])}
             min={1}
