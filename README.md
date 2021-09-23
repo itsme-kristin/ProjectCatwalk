@@ -76,21 +76,25 @@ npm start
 ```
 
 ## Technologies <a name="technologies"></a>
-- NodeJS (i)
-- Axios
-- React (i)
-- Webpack
-- Babel (i)
-- Express (i)
-- Packages <a name="packages"></a>
-  - Material UI
-  - moment (link & authors name)
-  - react-inner-image-zoom (link & authors name)
-  - react-items-carousel (link & authors name)
-  - react-share (link & authors name)
+- [NodeJS](https://nodejs.org/en/)
+- [Axios](https://www.npmjs.com/package/axios)
+- [React](https://reactjs.org/)
+- [Webpack](https://webpack.js.org/)
+- [Babel](https://babeljs.io/)
+- [Express ](https://expressjs.com/)
+
+Additional Packages <a name="packages"></a>
+- [Material UI](https://mui.com/)
+- [Moment.js](https://momentjs.com/docs/)
+- [Formik](https://www.npmjs.com/package/formik)
+- [react-inner-image-zoom](https://www.npmjs.com/package/react-inner-image-zoom) by [laurenashpole](https://github.com/laurenashpole/react-inner-image-zoom)
+- [react-items-carousel](https://www.npmjs.com/package/react-items-carousel) by [kareemaly](https://github.com/kareemaly/react-items-carousel)
+- [react-share](https://www.npmjs.com/package/react-share) by [nygardk](https://github.com/nygardk/react-share)
+- [yup](https://www.npmjs.com/package/yup) by [jquense](https://github.com/jquense/yup)
 
 ## Product Overview (Don V.) <a name="overview"></a>
-<img src="https://take.ms/kWDqm" alt="overview preview" align="center">
+
 ## Related Products & Outfit List (Kristin G.) <a name="products"></a>
+
 ## Ratings and Reviews (Ben K.) <a name="reviews"></a>
 
