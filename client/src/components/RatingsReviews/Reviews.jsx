@@ -92,7 +92,7 @@ const Reviews = ({ handleClick, currentProduct, productMeta }) => {
   if (reviews.length === 0) {
     return (
       <div onClick={(e) => handleClick(e, 'Reviews')}>
-        <Typography className={classes.title} id='reviews' variant='h4' gutterBottom>Ratings & Reviews</Typography>
+        <Typography className={classes.title} id='reviews' variant='h4' gutterBottom>RATINGS & REVIEWS</Typography>
         <NewReview
           productId={currentProduct.id}
           characteristics={productMeta.characteristics}
@@ -102,7 +102,7 @@ const Reviews = ({ handleClick, currentProduct, productMeta }) => {
   } else {
     return (
       <div onClick={(e) => handleClick(e, 'Reviews')}>
-        <Typography className={classes.title} id='reviews' variant='h4' gutterBottom>Ratings & Reviews</Typography>
+        <Typography className={classes.title} id='reviews' variant='h4' gutterBottom>RATINGS & REVIEWS</Typography>
         <NewReview
           productId={currentProduct.id}
           characteristics={productMeta.characteristics}
