@@ -22,7 +22,7 @@
  - [Workflow](#workflow)
  - [Installation](#install)
  - [Technologies](#technologies)
-   - [Packages](#packages)
+ - [Packages](#packages)
  - [Product Overview (Don V.)](#overview)
  - [Related Products & Outfit List (Kristin G.)](#products)
  - [Ratings and Reviews (Ben K.)](#reviews)
@@ -83,7 +83,7 @@ npm start
 - [Babel](https://babeljs.io/)
 - [Express ](https://expressjs.com/)
 
-Additional Packages <a name="packages"></a>
+## Additional Packages <a name="packages"></a>
 - [Material UI](https://mui.com/)
 - [Moment.js](https://momentjs.com/docs/)
 - [Formik](https://www.npmjs.com/package/formik)
