@@ -32,10 +32,11 @@ const useStyles = makeStyles({
     transform: 'translate(-50%, -50%)',
     height: '75vh',
     overflow: 'auto',
-    width: '75vw',
+    width: 'auto',
     'background-color': 'white',
     border: '2px solid #000',
-    boxShadow: 24
+    boxShadow: 24,
+    padding: '10px 10px'
   },
   button: {
     padding: '5px',
@@ -67,7 +68,7 @@ const NewReview = ({ productId, characteristics }) => {
     }
   };
 
-  const postReview = () => {
+  const postReview = (review) => {
     axios
       .post('/api/reviews', review)
       .then(() => {
@@ -79,8 +80,9 @@ const NewReview = ({ productId, characteristics }) => {
   };
 
   const handleSubmit = (data) => {
-    setReview({ ...data, characteristics: review[characteristics] });
-    postReview();
+    const characteristics = review.characteristics;
+    postReview({ ...data, characteristics });
+    setOpen(false);
   };
 
   const charArray = Object.entries(characteristics);
@@ -92,14 +94,13 @@ const NewReview = ({ productId, characteristics }) => {
     recommend: yup.mixed().required('Must select an option'),
     name: yup.string().required('Name required').max(60, 'Must be less than 60 characters'),
     email: yup.string().required('Email required').email('Invalid email address').max(60, 'Must be less than 60 characters'),
-    // photos: yup.array().of(yup.string().url()),
   });
 
   return (
     <React.Fragment>
-      <Button className={classes.button} variant='outlined' onClick={() => setOpen(true)}>Write New Review</Button>
+      <Button className={classes.button} variant='outlined' onClick={() => setOpen(true)}>Write A Review</Button>
       <Modal open={open} onClose={() => setOpen(false)}>
-        <Grid className={classes.modal} container spacing={2}>
+        <Grid className={classes.modal} container spacing={3} justifyContent='center'>
           <Formik
             validateOnChange={true}
             initialValues={{
@@ -114,7 +115,6 @@ const NewReview = ({ productId, characteristics }) => {
             }}
             validationSchema={validationSchema}
             onSubmit={data => {
-              console.log('submit: ', data);
               handleSubmit(data);
             }}
           >
@@ -126,12 +126,15 @@ const NewReview = ({ productId, characteristics }) => {
                 <Grid item xs={12}>
                   <Field component={FormSummary} type='text' name='summary' />
                 </Grid>
+                <br/>
                 <Grid item xs={12}>
                   <Field component={FormBody} type='text' name='body' />
                 </Grid>
+                <br/>
                 <Grid item xs={12}>
                   <Field component={FormRecommend} name='recommend' />
                 </Grid>
+                <br/>
                 <Grid item xs={12}>
                   <FormCharacteristics
                     charArray={charArray}
@@ -139,15 +142,19 @@ const NewReview = ({ productId, characteristics }) => {
                     handleFormChange={handleFormChange}
                   />
                 </Grid>
+                <br/>
                 <Grid item xs={12}>
                   <Field component={FormPhotos} name='photos' />
                 </Grid>
                 <Grid item xs={12}>
                   <Field component={FormName} type='text' name='name' />
                 </Grid>
+                <br/>
                 <Grid item xs={12}>
                   <Field component={FormEmail} type='email' name='email' />
                 </Grid>
+                <br/>
+                <br/>
                 <Grid item xs={12}>
                   <Button variant='outlined' onClick={submitForm}>
                     Submit Review

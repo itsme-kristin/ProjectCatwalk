@@ -15,14 +15,20 @@ const Reviews = ({ handleClick, currentProduct, productMeta }) => {
   const [selected, setSelected] = useState('relevant');
 
   const useStyles = makeStyles({
-    list: {
-      maxHeight: '103vh',
-      overflow: 'auto'
+    section: {
+      minHeight: '33vh'
     },
     title: {
       fontSize: '20px',
       padding: '10px',
-      margin: '10px',
+      margin: '10px'
+    },
+    sliders: {
+      margin: 'auto'
+    },
+    message: {
+      paddingLeft: '20px',
+      marginBottom: '10px'
     }
   });
 
@@ -70,68 +76,121 @@ const Reviews = ({ handleClick, currentProduct, productMeta }) => {
 
   const removeFiltersButton =
     filters.length > 0 ? (
-      <Button variant='outlined' onClick={() => setFilters([])}>
-        Remove Filters
-      </Button>
+      <Grid item xs={12}>
+        <Button
+          variant='outlined'
+          size='small'
+          style={{ marginBottom: '10px', marginLeft: '15px' }}
+          onClick={() => setFilters([])}
+        >
+          Remove Filters
+        </Button>
+      </Grid>
     ) : null;
 
   const filterMessage =
     filters.length > 0 ? (
-      <Typography>
-        Applied filter(s){': '}
-        {filters.map((filter, index) => {
-          if (index === filters.length - 1) {
-            return `${filter}`
-          } else {
-            return `${filter}, `;
-          }
-        })}
-      </Typography>
+      <Grid className={classes.message} item xs={12}>
+        <Typography variant='body2'>
+          Applied filter(s){': '}
+          {filters.map((filter, index) => {
+            if (index === filters.length - 1) {
+              return `${filter}`;
+            } else {
+              return `${filter}, `;
+            }
+          })}
+        </Typography>
+      </Grid>
     ) : null;
 
   if (reviews.length === 0) {
     return (
-      <div onClick={(e) => handleClick(e, 'Reviews')}>
-        <Typography className={classes.title} id='reviews' variant='h4' gutterBottom>RATINGS & REVIEWS</Typography>
-        <NewReview
-          productId={currentProduct.id}
-          characteristics={productMeta.characteristics}
-        />
+      <div className={classes.section} onClick={e => handleClick(e, 'Reviews')}>
+        <Typography
+          className={classes.title}
+          id='reviews'
+          variant='h4'
+          gutterBottom
+        >
+          RATINGS & REVIEWS
+        </Typography>
+        <Grid container justifyContent='center'>
+          <NewReview
+            productId={currentProduct.id}
+            characteristics={productMeta.characteristics}
+          />
+        </Grid>
       </div>
     );
-  } else {
+  } else if (reviews.length > 0 && filteredReviews.length === 0) {
     return (
-      <div onClick={(e) => handleClick(e, 'Reviews')}>
-        <Typography className={classes.title} id='reviews' variant='h4' gutterBottom>RATINGS & REVIEWS</Typography>
-        <NewReview
-          productId={currentProduct.id}
-          characteristics={productMeta.characteristics}
-        />
+      <div className={classes.section} onClick={e => handleClick(e, 'Reviews')}>
+        <Typography
+          className={classes.title}
+          id='reviews'
+          variant='h4'
+          gutterBottom
+        >
+          RATINGS & REVIEWS
+        </Typography>
         <Grid container spacing={2}>
-          <Grid item xs={3} container spacing={1}>
+          <Grid item xs={3} container spacing={1} justifyContent='center'>
             <Grid item xs={12}>
               <RatingsBreakdown
                 productMeta={productMeta}
                 filterReviews={filterReviews}
               />
-            </Grid>
-            <Grid item xs={12}>
+              <br />
               {filterMessage}
-            </Grid>
-            <Grid item xs={12}>
               {removeFiltersButton}
-            </Grid>
-            <Grid item xs={12}>
-              <ProductBreakdown productMeta={productMeta} />
+              <Grid className={classes.productBreakdown} item xs={12}>
+                <ProductBreakdown productMeta={productMeta} />
+              </Grid>
             </Grid>
           </Grid>
-          <Grid className={classes.list} item xs={9}>
-            <SortingDropdown selected={selected} setSelected={setSelected} />
-            <ReviewList
-              reviews={filteredReviews}
-              currentProduct={currentProduct}
-              selected={selected}
-            />
+        </Grid>
+      </div>
+    );
+  } else {
+    return (
+      <div className={classes.section} onClick={e => handleClick(e, 'Reviews')}>
+        <Typography
+          className={classes.title}
+          id='reviews'
+          variant='h4'
+          gutterBottom
+        >
+          RATINGS & REVIEWS
+        </Typography>
+        <Grid container spacing={2}>
+          <Grid item xs={3} container spacing={1} justifyContent='center'>
+            <Grid item xs={12}>
+              <RatingsBreakdown
+                productMeta={productMeta}
+                filterReviews={filterReviews}
+              />
+              <br />
+              {filterMessage}
+              {removeFiltersButton}
+              <Grid className={classes.productBreakdown} item xs={12}>
+                <ProductBreakdown productMeta={productMeta} />
+              </Grid>
+            </Grid>
+          </Grid>
+          <Grid item xs={9} container justifyContent='center'>
+            <Grid item xs={12}>
+              <SortingDropdown selected={selected} setSelected={setSelected} />
+            </Grid>
+            <br />
+            <Grid item xs={12}>
+              <ReviewList
+                reviews={filteredReviews}
+                currentProduct={currentProduct}
+                selected={selected}
+                characteristics={productMeta.characteristics}
+              />
+            </Grid>
           </Grid>
         </Grid>
       </div>
