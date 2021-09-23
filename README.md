@@ -1,6 +1,6 @@
 <h1 align="center">Project Catwalk - Team Brie</h2>
 
-## Contributers
+## Contributors
 
 <img align="left" class="avatar avatar-user" src="https://avatars.githubusercontent.com/u/69761087?s=88&amp;v=4" width="44" height="44" alt="@bkern98">
 
