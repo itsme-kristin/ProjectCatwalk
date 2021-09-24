@@ -25,7 +25,13 @@ const useStyles = makeStyles((theme) => ({
   },
   title: {
     fontWeight: '700',
-  }
+  },
+  salePrice: {
+    color: 'red',
+  },
+  lineThrough: {
+    textDecoration: 'line-through',
+  },
 }));
 
 const OutfitCard = ({ handleDeleteOutfitClick, product }) => {
@@ -50,6 +56,32 @@ const OutfitCard = ({ handleDeleteOutfitClick, product }) => {
       });
   }, []);
 
+  const getOutfitSalePrice = () => {
+    if (outfitCardPhoto.sale_price) {
+      return (
+        <Grid container>
+          <Grid item align="left" xs={6} className={classes.salePrice}>
+            <Typography>
+              SALE! ${outfitCardPhoto.sale_price}
+            </Typography>
+          </Grid>
+          <Grid item align="center" xs={6} className={classes.lineThrough}>
+            <Typography>
+              ${outfitCardInfo.default_price}
+            </Typography>
+          </Grid>
+        </Grid>
+      )
+    } else {
+      return (
+        <React.Fragment>
+          <Typography>
+          ${outfitCardInfo.default_price}
+          </Typography>
+        </React.Fragment>
+      )
+    }
+  }
 
   return outfitCardPhoto && outfitCardInfo && outfitCardMeta && (
     <React.Fragment>
@@ -72,9 +104,9 @@ const OutfitCard = ({ handleDeleteOutfitClick, product }) => {
           <Typography className={classes.title} variant="h6">
             {outfitCardInfo.name}
           </Typography>
-          <Typography>
-            ${outfitCardInfo.default_price}
-          </Typography>
+          <div>
+            {getOutfitSalePrice()}
+          </div>
           <div>
             <AverageRating
                 productMeta={outfitCardMeta}
