@@ -27,8 +27,6 @@
  - [Related Products & Outfit List (Kristin G.)](#products)
  - [Ratings and Reviews (Ben K.)](#reviews)
 
-
-
 ## About this project<a name="about"></a>
 
 <img src="./client/data/gifs/ProjectOverviewFinal.gif" alt="project overview" width="450"/>
@@ -95,6 +93,14 @@ npm start
 - [yup](https://www.npmjs.com/package/yup) by [jquense](https://github.com/jquense/yup)
 
 ## Product Overview (Don V.) <a name="overview"></a>
+
+**Image Gallery Features**
+* *Default Gallery View*: A visual component that provides a way to browse the available photos for each product style. Using the arrows available on either side of the view or clicking the thumbnails indexed on the left of the gallery will allow you to peruse through the photos. Clicking on the view will open an Expanded view of the Image Gallery
+* *Expanded View*: A visual component that is opened by clicking on the default view of the Image Gallery. The component spans across the entire browser width and provides a larger view of the selected photo. Navigation controls at the top of the photo will allow you to continue browsing through photos without having to leave the view. Clicking on the larger photo will allow you to view a "zoomed-in" portion of the photo at its maximum size. Moving your mouse while zoomed in will pan the photo until the mouse leaves the photo frame, or moves over the navigation controls.
+
+**Product DetailsFeatures**
+* *Style Selector*: Each product comes in a varied amount of styles. The style selector lists visual thumbnails of each available style and allows you to click on the desired style to update the image gallery and stock selection.
+* *Add To Cart*: The Add to Cart form lists the available sizes available for the currently selected style. Selecting a Size allows you to select the available quantity of the product you'd like to order in that size, as well as enabling the Add to Cart button to finalize the sale. For Styles where there are no available stock, the Size and Quantity selection is not displayed and the disabled "Add to Cart" button displays "Out of Stock" instead.
 
 ## Related Products & Outfit List (Kristin G.) <a name="products"></a>
 **Related Products List Features**
