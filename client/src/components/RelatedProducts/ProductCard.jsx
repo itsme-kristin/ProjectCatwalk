@@ -49,7 +49,6 @@ const ProductCard = ({ currentProduct, cardId, setProductId }) => {
   const classes = useStyles();
 
   const getSalePrice = () => {
-    // productCardPhoto.sale_price = '10.00';
     if (productCardPhoto.sale_price) {
       return (
         <Grid container>
