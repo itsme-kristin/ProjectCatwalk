@@ -6,6 +6,7 @@
   "scripts": {
     "react-dev": "webpack --mode development --watch",
     "server-dev": "npx nodemon server/server.js",
+    "build": "webpack --mode production",
     "start": "node server/server.js"
   },
   "author": "Ben Kern",
