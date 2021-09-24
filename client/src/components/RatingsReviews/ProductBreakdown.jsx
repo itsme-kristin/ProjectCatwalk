@@ -18,7 +18,7 @@ const CharSliders = withStyles({
   },
   rail: {
     height: 8,
-    opacity: 0.5,
+    opacity: 0.5
   },
   mark: {
     height: 8,
@@ -34,61 +34,37 @@ const ProductBreakdown = ({ productMeta }) => {
       (char, index) => {
         let labels = [];
 
-  if (char[0] === 'Fit') {
-    labels = [
-      'None selected',
-      'Runs tight',
-      'Runs slightly tight',
-      'Perfect',
-      'Runs slightly long',
-      'Runs long'
-    ];
-  } else if (char[0] === 'Length') {
-    labels = [
-      'None selected',
-      'Runs short',
-      'Runs slightly short',
-      'Perfect',
-      'Runs slightly long',
-      'Runs long'
-    ];
-  } else if (char[0] === 'Quality') {
-    labels = [
-      'None selected',
-      'Poor',
-      'Below average',
-      'What I expected',
-      'Pretty great',
-      'Perfect'
-    ];
-  } else if (char[0] === 'Comfort') {
-    labels = [
-      'None selected',
-      'Uncomfortable',
-      'Slightly uncomfortable',
-      'Ok',
-      'Comfortable',
-      'Perfect'
-    ];
-  } else if (char[0] === 'Width') {
-    labels = [
-      'None selected',
-      'Too narrow',
-      'Slightly narrow',
-      'Perfect',
-      'Slightly wide',
-      'Too wide'
-    ];
-  } else if (char[0] === 'Size') {
-    labels = [
-      'None selected',
-      'A size too small',
-      '1/2 a size too small',
-      'Perfect',
-      '1/2 a size too big',
-      'A size too big'
-    ];
-  }
+        if (char[0] === 'Fit') {
+          labels = [
+            'Runs tight',
+            'Runs long'
+          ];
+        } else if (char[0] === 'Length') {
+          labels = [
+            'Runs short',
+            'Runs long'
+          ];
+        } else if (char[0] === 'Quality') {
+          labels = [
+            'Poor',
+            'Perfect'
+          ];
+        } else if (char[0] === 'Comfort') {
+          labels = [
+            'Uncomfortable',
+            'Perfect'
+          ];
+        } else if (char[0] === 'Width') {
+          labels = [
+            'Too narrow',
+            'Too wide'
+          ];
+        } else if (char[0] === 'Size') {
+          labels = [
+            'A size too small',
+            'A size too big'
+          ];
+        }
         const marks = [
           {
             value: 7 / 3,
@@ -122,10 +98,14 @@ const ProductBreakdown = ({ productMeta }) => {
             </Grid>
             <Grid item xs={12} container>
               <Grid item xs={6}>
-                <Typography variant='caption'>{labels[1]}</Typography>
+                <Typography variant='caption'>{labels[0]}</Typography>
               </Grid>
-              <Grid style={{textAlign: 'right', paddingRight: '47px'}} item xs={6}>
-                <Typography variant='caption'>{labels[5]}</Typography>
+              <Grid
+                style={{ textAlign: 'right', paddingRight: '47px' }}
+                item
+                xs={6}
+              >
+                <Typography variant='caption'>{labels[1]}</Typography>
               </Grid>
             </Grid>
           </Grid>
