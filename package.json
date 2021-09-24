@@ -26,6 +26,7 @@
     "@material-ui/styles": "^4.11.4",
     "@material-ui/utils": "^4.11.2",
     "axios": "^0.21.0",
+    "compression": "^1.7.4",
     "express": "^4.15.0",
     "formik": "^2.2.9",
     "formik-material-ui": "^4.0.0-alpha.1",
