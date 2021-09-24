@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Typography, Grid, Slider, Link } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles, withStyles } from '@material-ui/core/styles';
 import AverageRating from '../AverageRating.jsx';
 
 const useStyles = makeStyles({
@@ -9,6 +9,22 @@ const useStyles = makeStyles({
     'text-align': 'center'
   }
 });
+
+const RatingSlider = withStyles({
+  thumb: {
+    width: 0,
+    height: 0,
+    backgroundColor: 'transparent',
+  },
+  track: {
+    height: 8,
+    backgroundColor: 'rgb(254,186,41)'
+  },
+  rail: {
+    height: 8,
+    opacity: 0.5
+  }
+})(Slider);
 
 const RatingsBreakdown = ({ productMeta, filterReviews }) => {
   const [totalRatings, setTotalRatings] = useState(0);
@@ -68,7 +84,7 @@ const RatingsBreakdown = ({ productMeta, filterReviews }) => {
           </Typography>
         </Grid>
         <Grid item xs={7}>
-          <Slider
+          <RatingSlider
             value={Number(productMeta.ratings['5'])}
             min={1}
             max={totalRatings}
@@ -93,7 +109,7 @@ const RatingsBreakdown = ({ productMeta, filterReviews }) => {
           </Typography>
         </Grid>
         <Grid item xs={7}>
-          <Slider
+          <RatingSlider
             value={Number(productMeta.ratings['4'])}
             min={1}
             max={totalRatings}
@@ -118,7 +134,7 @@ const RatingsBreakdown = ({ productMeta, filterReviews }) => {
           </Typography>
         </Grid>
         <Grid item xs={7}>
-          <Slider
+          <RatingSlider
             value={Number(productMeta.ratings['3'])}
             min={1}
             max={totalRatings}
@@ -143,7 +159,7 @@ const RatingsBreakdown = ({ productMeta, filterReviews }) => {
           </Typography>
         </Grid>
         <Grid item xs={7}>
-          <Slider
+          <RatingSlider
             value={Number(productMeta.ratings['2'])}
             min={1}
             max={totalRatings}
@@ -168,7 +184,7 @@ const RatingsBreakdown = ({ productMeta, filterReviews }) => {
           </Typography>
         </Grid>
         <Grid item xs={7}>
-          <Slider
+          <RatingSlider
             value={Number(productMeta.ratings['1'])}
             min={1}
             max={totalRatings}
