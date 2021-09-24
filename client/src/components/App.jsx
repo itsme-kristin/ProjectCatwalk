@@ -6,6 +6,7 @@ import Reviews from './RatingsReviews/Reviews.jsx';
 import YourOutfit from './YourOutfit/YourOutfit.jsx';
 import Overview from './Overview/Overview.jsx';
 import Header from './Header.jsx';
+import Footer from './Footer.jsx';
 import Typography from '@material-ui/core/Typography';
 
 import { makeStyles } from '@material-ui/core/styles';
@@ -14,6 +15,7 @@ import { Container, CircularProgress } from '@material-ui/core';
 const useStyles = makeStyles({
   root: {
     paddingTop: '20px',
+    paddingBottom: '20px',
     backgroundColor: 'white',
   },
   subheader: {
@@ -67,6 +69,7 @@ const App = () => {
           <YourOutfit handleClick={handleClick} currentProduct={product} outfitList={outfitList} setOutfitList={setOutfitList}/>
           <Reviews handleClick={handleClick} currentProduct={product} productMeta={productMeta} />
         </Container>
+        <Footer handleClick={handleClick}/>
       </React.Fragment>
     );
   }
