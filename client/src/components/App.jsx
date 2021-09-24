@@ -61,7 +61,7 @@ const App = () => {
       <React.Fragment>
         <Header handleClick={handleClick} />
         <Container maxWidth="lg" className={classes.root}>
-          <Typography className={classes.subheader} >Orders over $100 get FREE SHIPPING!</Typography>
+          <Typography className={classes.subheader} >FREE SHIPPING for orders over $100</Typography>
           <Overview handleClick={handleClick} product={product} productMeta={productMeta}/>
           <RelatedProducts handleClick={handleClick} currentProduct={product} setProductId={setProductId} />
           <YourOutfit handleClick={handleClick} currentProduct={product} outfitList={outfitList} setOutfitList={setOutfitList}/>
