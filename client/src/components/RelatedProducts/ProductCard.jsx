@@ -32,6 +32,12 @@ const useStyles = makeStyles((theme) => ({
   title: {
     fontWeight: '700',
   },
+  salePrice: {
+    color: 'red',
+  },
+  lineThrough: {
+    textDecoration: 'line-through',
+  },
 }));
 
 const ProductCard = ({ currentProduct, cardId, setProductId }) => {
@@ -42,6 +48,33 @@ const ProductCard = ({ currentProduct, cardId, setProductId }) => {
   const [featureData, setFeatureData] = useState(null);
   const classes = useStyles();
 
+  const getSalePrice = () => {
+    // productCardPhoto.sale_price = '10.00';
+    if (productCardPhoto.sale_price) {
+      return (
+        <Grid container>
+          <Grid item align="left" xs={6} className={classes.salePrice}>
+            <Typography>
+              SALE! ${productCardPhoto.sale_price}
+            </Typography>
+          </Grid>
+          <Grid item align="center" xs={6} className={classes.lineThrough}>
+            <Typography>
+              ${productCardInfo.default_price}
+            </Typography>
+          </Grid>
+        </Grid>
+      )
+    } else {
+      return (
+        <React.Fragment>
+          <Typography>
+          ${productCardInfo.default_price}
+          </Typography>
+        </React.Fragment>
+      )
+    }
+  }
 
   const getFeatureData = () => {
     const featureData = {};
@@ -131,9 +164,9 @@ const ProductCard = ({ currentProduct, cardId, setProductId }) => {
           <Typography className={classes.title} variant="h6">
             {productCardInfo.name}
           </Typography>
-          <Typography>
-            ${productCardInfo.default_price}
-          </Typography>
+          <div>
+            {getSalePrice()}
+          </div>
           <div>
             <AverageRating
               productMeta={productCardMeta}
