@@ -44,7 +44,7 @@ const ImageGallery = ({ photos }) => {
     let showRight = imgIndex !== photos.length - 1 ? true : false;
     let iconSize = 32;
     let iconColor = '#3f51b5';
-    let iconOpacity = 0.6;
+    let iconOpacity = 1;
 
     if (imgIndex > photos.length - 1) {
       setImgIndex(photos.length - 1)
@@ -69,12 +69,14 @@ const ImageGallery = ({ photos }) => {
       },
 
       media: {
-        backgroundImage: `url(${photos[imgIndex].url})`
+        backgroundImage: `url(${photos[imgIndex].url})`,
+        backgroundRepeat: 'no-repeat',
+        backgroundSize: 'cover'
       },
 
       rightButton: {
         position: 'absolute',
-        top: '50%',
+        top: '47%',
         right: '-20px',
         visibility: showRight ? 'visible' : 'hidden',
         fontSize: iconSize,
@@ -86,7 +88,7 @@ const ImageGallery = ({ photos }) => {
 
       leftButton: {
         position: 'absolute',
-        top: '50%',
+        top: '47%',
         left: '-20px',
         visibility: showLeft ? 'visible' : 'hidden',
         fontSize: iconSize,

@@ -39,7 +39,7 @@ const Thumbs = ({ photos, imgIndex, setImgIndex }) => {
         let styleBG = {
           backgroundImage: `url(${image.thumbnail_url})`,
           backgroundRepeat: 'no-repeat',
-          backgroundSize: '50px',
+          backgroundSize: 'cover',
           backgroundPosition: 'center'
         }
         if (index === imgIndex) {
