@@ -15,7 +15,7 @@ const useStyles = makeStyles({
     'text-align': 'right'
   },
   response: {
-    'background-color': 'grey'
+    'background-color': 'rgb(232,232,232)'
   },
   feedback: {
     padding: '9px 0px'
