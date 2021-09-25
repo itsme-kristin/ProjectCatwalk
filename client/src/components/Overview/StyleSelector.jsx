@@ -32,7 +32,7 @@ const StyleSelector = ({ styles, styleIndex, setStyleIndex }) => {
         var styleBG = {
           backgroundImage: `url(${productStyle["photos"][0]["thumbnail_url"]})`,
           backgroundRepeat: 'no-repeat',
-          backgroundSize: '50px',
+          backgroundSize: 'cover',
           backgroundPosition: 'center',
         }
 

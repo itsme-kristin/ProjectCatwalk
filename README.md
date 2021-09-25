@@ -29,7 +29,7 @@
 
 ## About this project<a name="about"></a>
 
-<img src="./client/data/gifs/ProjectOverviewFinal.gif" alt="project overview" width="450"/>
+<img src="./client/data/gifs/FinalProjectOverview.gif" alt="project overview" width="450"/>
 
 **Description of the Project**
 
@@ -70,7 +70,7 @@ module.exports = {
 ```
 * Note, this file is ignored in .gitignore but is required in order to pull data from the API.
 
-4. Run the compiler
+4. Run the Webpack compiler
 ```
 npm run build
 ```
@@ -92,6 +92,7 @@ npm start
 - [Material UI](https://mui.com/)
 - [Moment.js](https://momentjs.com/docs/)
 - [Formik](https://www.npmjs.com/package/formik)
+- [Compression](https://www.npmjs.com/package/compression)
 - [react-inner-image-zoom](https://www.npmjs.com/package/react-inner-image-zoom) by [laurenashpole](https://github.com/laurenashpole/react-inner-image-zoom)
 - [react-items-carousel](https://www.npmjs.com/package/react-items-carousel) by [kareemaly](https://github.com/kareemaly/react-items-carousel)
 - [react-share](https://www.npmjs.com/package/react-share) by [nygardk](https://github.com/nygardk/react-share)
