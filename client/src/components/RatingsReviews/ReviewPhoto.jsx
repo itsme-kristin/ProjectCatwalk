@@ -23,7 +23,7 @@ const ReviewPhoto = ({ photo }) => {
 
   return (
     <React.Fragment>
-      <Grid item xs={2}>
+      <Grid item xs={1}>
         <Paper
           className={classes.thumb}
           onClick={() => setOpen(true)}
