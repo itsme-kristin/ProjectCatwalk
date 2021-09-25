@@ -29,7 +29,7 @@
 
 ## About this project<a name="about"></a>
 
-<img src="./client/data/gifs/ProjectOverviewFinal.gif" alt="project overview" width="450"/>
+<img src="./client/data/gifs/FinalProjectOverview.gif" alt="project overview" width="450"/>
 
 **Description of the Project**
 
