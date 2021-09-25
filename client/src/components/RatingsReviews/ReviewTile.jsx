@@ -96,8 +96,10 @@ const ReviewTile = ({ review }) => {
       <Grid item xs={12}>
         <Typography className={classes.summary}>{review.summary}</Typography>
       </Grid>
-      <Grid item xs={12}>
+      <Grid item xs={12} container>
         {renderedPhotos}
+      </Grid>
+      <Grid item xs={12}>
         {body}
       </Grid>
       <Grid item xs={12} container>
