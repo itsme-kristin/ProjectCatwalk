@@ -120,6 +120,7 @@ npm start
 * *Add Outfit Button*: Clicking on this button will add an outfit card for the main product into your outfit list carousel.
 
 ## Ratings and Reviews (Ben K.) <a name="reviews"></a>
+**Ratings and Reviews Features**
 * *Review List*: A list that displays two review tiles at a time. Clicking the More Reviews button will cause an additional two tiles to display until all reviews have been rendered. Once the list reaches a specified height, the user will be able to scroll through the list without moving down the entire webpage. The list can also be sorted by most relevant, most recent, or most helpful.
 * *Ratings Breakdown*: For each product, the reviews are broken down by the rating given on a scale between one and five stars. The number of reviews for a each rating is displayed next to a sliding bar that visually represents the percentage of reviews of that rating. Clicking on one of the ratings will filter the review list to show only the reviews with that rating. Clicking on additional ratings will add on to the filters and clicking on one of the added filters will remove it. Once a filter is added, there will be a button to remove all filters rather than having to remove them one at a time.
 * *Product Breakdown*: Each product has a set of characteristics with average ratings from all of the reviews. A bar displays what that average rating is on a scale from one to five with the meaning of the highest and lowest ratings displayed below.
