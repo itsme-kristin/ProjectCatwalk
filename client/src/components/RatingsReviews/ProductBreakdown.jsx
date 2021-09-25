@@ -35,35 +35,17 @@ const ProductBreakdown = ({ productMeta }) => {
         let labels = [];
 
         if (char[0] === 'Fit') {
-          labels = [
-            'Runs tight',
-            'Runs long'
-          ];
+          labels = ['Runs tight', 'Runs long'];
         } else if (char[0] === 'Length') {
-          labels = [
-            'Runs short',
-            'Runs long'
-          ];
+          labels = ['Runs short', 'Runs long'];
         } else if (char[0] === 'Quality') {
-          labels = [
-            'Poor',
-            'Perfect'
-          ];
+          labels = ['Poor', 'Perfect'];
         } else if (char[0] === 'Comfort') {
-          labels = [
-            'Uncomfortable',
-            'Perfect'
-          ];
+          labels = ['Uncomfortable', 'Perfect'];
         } else if (char[0] === 'Width') {
-          labels = [
-            'Too narrow',
-            'Too wide'
-          ];
+          labels = ['Too narrow', 'Too wide'];
         } else if (char[0] === 'Size') {
-          labels = [
-            'A size too small',
-            'A size too big'
-          ];
+          labels = ['A size too small', 'A size too big'];
         }
         const marks = [
           {
@@ -75,6 +57,17 @@ const ProductBreakdown = ({ productMeta }) => {
             label: ''
           }
         ];
+
+        const getValue = () => {
+          let value;
+          if (!char[1].value) {
+            value = 0;
+          } else {
+            value = Number(char[1].value);
+          }
+          return value;
+        };
+
         return (
           <Grid
             key={index}
@@ -89,7 +82,7 @@ const ProductBreakdown = ({ productMeta }) => {
             </Grid>
             <Grid item xs={10}>
               <CharSliders
-                value={Number(char[1].value)}
+                value={getValue()}
                 marks={marks}
                 min={1}
                 max={5}
