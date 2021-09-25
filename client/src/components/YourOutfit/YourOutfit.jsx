@@ -19,11 +19,33 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
+var inline = {
+  leftButton: {
+    position: 'absolute',
+    top: '50%',
+    left: '2px',
+    fontSize: 32,
+    color: '#3f51b5',
+    userSelect: 'none',
+    cursor: 'pointer'
+  },
+
+  rightButton: {
+    position: 'absolute',
+    top: '50%',
+    right: '-5px',
+    fontSize: 32,
+    color: '#3f51b5',
+    userSelect: 'none',
+    cursor: 'pointer'
+  }
+}
+
 const YourOutfit = ({ handleClick, currentProduct, outfitList, setOutfitList }) => {
   const classes = useStyles();
   const [isDeleting, setIsDeleting] = useState(false);
   const [activeItemIndex, setActiveItemIndex] = useState(0);
-  const chevronWidth = 60;
+  const chevronWidth = 40;
 
   useEffect(() => {
     setIsDeleting(true);
@@ -75,8 +97,8 @@ const YourOutfit = ({ handleClick, currentProduct, outfitList, setOutfitList }) 
                 activeItemIndex={activeItemIndex}
                 numberOfCards={3}
                 gutter={20}
-                leftChevron={<button className={classes.button}>{'<'}</button>}
-                rightChevron={<button className={classes.button}>{'>'}</button>}
+                leftChevron={<i className="material-icons" style={inline.   leftButton}>arrow_circle_left</i>}
+                rightChevron={<i className="material-icons" style={inline.rightButton}>arrow_circle_right</i>}
                 outsideChevron
                 chevronWidth={chevronWidth}
               >

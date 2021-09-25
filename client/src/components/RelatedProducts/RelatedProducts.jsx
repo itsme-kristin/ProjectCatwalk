@@ -25,15 +25,38 @@ const useStyles = makeStyles((theme) => ({
     color: "white",
     cursor: "pointer",
     backgroundColor: "rgb(63, 81, 181)",
-  }
+  },
+
 }));
+
+var inline = {
+  leftButton: {
+    position: 'absolute',
+    top: '50%',
+    left: '-5px',
+    fontSize: 32,
+    color: '#3f51b5',
+    userSelect: 'none',
+    cursor: 'pointer'
+  },
+
+  rightButton: {
+    position: 'absolute',
+    top: '50%',
+    right: '-5px',
+    fontSize: 32,
+    color: '#3f51b5',
+    userSelect: 'none',
+    cursor: 'pointer'
+  }
+}
 
 const RelatedProducts = ({ handleClick, currentProduct, setProductId }) => {
   const classes = useStyles();
   const [relatedProductsList, setRelatedProductsList] = useState(null);
   const [doneSearching, setDoneSearching] = useState(false);
   const [activeItemIndex, setActiveItemIndex] = useState(0);
-  const chevronWidth = 60;
+  const chevronWidth = 50;
 
   useEffect(() => {
     setDoneSearching(false);
@@ -60,8 +83,8 @@ const RelatedProducts = ({ handleClick, currentProduct, setProductId }) => {
           activeItemIndex={activeItemIndex}
           numberOfCards={4}
           gutter={20}
-          leftChevron={<button className={classes.button}>{'<'}</button>}
-          rightChevron={<button className={classes.button}>{'>'}</button>}
+          leftChevron={<i className="material-icons" style={inline.leftButton}>arrow_circle_left</i>}
+          rightChevron={<i className="material-icons" style={inline.rightButton}>arrow_circle_right</i>}
           outsideChevron
           chevronWidth={chevronWidth}
           >
