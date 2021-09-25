@@ -139,8 +139,8 @@ const ProductDetails = ({product, productMeta, styles, styleIndex, setStyleIndex
     }
     if (skuIndex === '') {
       return (
-        <Select labelId="qty" id="selectQty" value="" displayEmpty={true} variant="outlined" fullWidth disabled>
-          <MenuItem value="">-</MenuItem>
+        <Select labelId="qty" id="selectQty" value={skuIndex} displayEmpty={true} variant="outlined" fullWidth disabled>
+          <MenuItem value=''>-</MenuItem>
         </Select>
       )
     } else {
@@ -164,6 +164,9 @@ const ProductDetails = ({product, productMeta, styles, styleIndex, setStyleIndex
     axios.post('/api/cart', data)
     .then(() => {
       console.log('Successfully added product to the cart')
+      setSkuIndex('');
+      setSelectedQty(null)
+      setSelectedSku(null);
     }).catch((err) => {
       console.log('Could not add product to the cart.')
     });
