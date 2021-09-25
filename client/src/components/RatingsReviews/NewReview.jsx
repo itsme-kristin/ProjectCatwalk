@@ -41,13 +41,16 @@ const useStyles = makeStyles({
   button: {
     padding: '5px',
     margin: '5px'
+  },
+  title: {
+    width: 'min-content'
   }
 });
 
-const NewReview = ({ productId, characteristics }) => {
+const NewReview = ({ product, characteristics }) => {
   const [open, setOpen] = useState(false);
   const reviewObj = {
-    product_id: productId,
+    product_id: product.id,
     rating: 0,
     summary: '',
     body: '',
@@ -100,11 +103,15 @@ const NewReview = ({ productId, characteristics }) => {
     <React.Fragment>
       <Button className={classes.button} variant='outlined' onClick={() => setOpen(true)}>Write A Review</Button>
       <Modal open={open} onClose={() => setOpen(false)}>
-        <Grid className={classes.modal} container spacing={3} justifyContent='center'>
+        <Grid className={classes.modal} container spacing={3}>
+        <Grid className={classes.title} item xs={12}>
+          <Typography variant='h5'>Write Your Review For: {product.name}</Typography>
+        </Grid>
+        <Grid item xs={12}>
           <Formik
             validateOnChange={true}
             initialValues={{
-              product_id: productId,
+              product_id: product.id,
               rating: 0,
               summary: '',
               body: '',
@@ -163,6 +170,7 @@ const NewReview = ({ productId, characteristics }) => {
               </Form>
             )}
           </Formik>
+          </Grid>
         </Grid>
       </Modal>
     </React.Fragment>

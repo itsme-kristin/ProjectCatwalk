@@ -117,7 +117,7 @@ const Reviews = ({ handleClick, currentProduct, productMeta }) => {
         </Typography>
         <Grid container justifyContent='center'>
           <NewReview
-            productId={currentProduct.id}
+            product={currentProduct}
             characteristics={productMeta.characteristics}
           />
         </Grid>

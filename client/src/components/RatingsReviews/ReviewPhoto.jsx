@@ -29,7 +29,7 @@ const ReviewPhoto = ({ photo }) => {
           onClick={() => setOpen(true)}
           style={{
             backgroundImage: `url(${photoUrl})`,
-            backgroundSize: '50px',
+            backgroundSize: 'cover',
             backgroundRepeat: 'no-repeat',
             backgroundPosition: 'center'
           }}
