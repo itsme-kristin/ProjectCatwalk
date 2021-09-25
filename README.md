@@ -70,7 +70,12 @@ module.exports = {
 ```
 * Note, this file is ignored in .gitignore but is required in order to pull data from the API.
 
-4. Run the App
+4. Run the compiler
+```
+npm run build
+```
+
+5. Run the App
 ```
 npm start
 ```
