@@ -42,7 +42,7 @@ const ReviewList = ({ reviews, currentProduct, selected, characteristics }) => {
       <div>
         {showButton}
         <NewReview
-          productId={currentProduct.id}
+          product={currentProduct}
           characteristics={characteristics}
         />
       </div>
