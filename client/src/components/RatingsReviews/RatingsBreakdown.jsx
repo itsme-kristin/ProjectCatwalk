@@ -14,7 +14,7 @@ const RatingSlider = withStyles({
   thumb: {
     width: 0,
     height: 0,
-    backgroundColor: 'transparent',
+    backgroundColor: 'transparent'
   },
   track: {
     height: 8,
@@ -33,6 +33,17 @@ const RatingsBreakdown = ({ productMeta, filterReviews }) => {
 
   const handleClick = rating => {
     filterReviews(rating);
+  };
+
+  const getValueAtRating = rating => {
+    let value;
+    if (!productMeta.ratings[rating]) {
+      value = 0;
+    } else {
+      value = Number(productMeta.ratings[rating]);
+    }
+
+    return value;
   };
 
   const recommendPercentage =
@@ -85,8 +96,8 @@ const RatingsBreakdown = ({ productMeta, filterReviews }) => {
         </Grid>
         <Grid item xs={7}>
           <RatingSlider
-            value={Number(productMeta.ratings['5'])}
-            min={1}
+            value={getValueAtRating('5')}
+            min={0}
             max={totalRatings}
             disabled
           />
@@ -110,8 +121,8 @@ const RatingsBreakdown = ({ productMeta, filterReviews }) => {
         </Grid>
         <Grid item xs={7}>
           <RatingSlider
-            value={Number(productMeta.ratings['4'])}
-            min={1}
+            value={getValueAtRating('4')}
+            min={0}
             max={totalRatings}
             disabled
           />
@@ -135,8 +146,8 @@ const RatingsBreakdown = ({ productMeta, filterReviews }) => {
         </Grid>
         <Grid item xs={7}>
           <RatingSlider
-            value={Number(productMeta.ratings['3'])}
-            min={1}
+            value={getValueAtRating('3')}
+            min={0}
             max={totalRatings}
             disabled
           />
@@ -160,8 +171,8 @@ const RatingsBreakdown = ({ productMeta, filterReviews }) => {
         </Grid>
         <Grid item xs={7}>
           <RatingSlider
-            value={Number(productMeta.ratings['2'])}
-            min={1}
+            value={getValueAtRating('2')}
+            min={0}
             max={totalRatings}
             disabled
           />
@@ -185,8 +196,8 @@ const RatingsBreakdown = ({ productMeta, filterReviews }) => {
         </Grid>
         <Grid item xs={7}>
           <RatingSlider
-            value={Number(productMeta.ratings['1'])}
-            min={1}
+            value={getValueAtRating('1')}
+            min={0}
             max={totalRatings}
             disabled
           />
