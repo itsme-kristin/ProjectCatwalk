@@ -1,4 +1,4 @@
-<h1 align="center">Project Catwalk - Team Brie</h2>
+<h1 align="center">BDKloset</h2>
 
 ## Contributors
 
@@ -33,7 +33,7 @@
 
 **Description of the Project**
 
->Our Front End Capstone project was designed to emulate real life development work in a team. This project is a foray into **real development work** - building key components of a complex whole and integrating those with the rest of the system. The project offers exposure to new technical and project management challenges alongside shifting team dynamics and fewer clear-cut answers.
+>Our team of software engineers was tasked with building a product detail page for a fashion website, BDKloset. We were given three weeks to implement our client's user story, laid out to us in a business document. The product detail page is comprised of three main widgets - further details can be found below.
 
 
 **Objectives**
