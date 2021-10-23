@@ -1,4 +1,4 @@
-<h1 align="center">Project Catwalk</h2>
+<h1 align="center">BDKloset</h2>
 
 ## Contributors
 
